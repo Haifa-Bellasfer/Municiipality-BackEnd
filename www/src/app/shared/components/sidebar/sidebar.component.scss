@@ -6,11 +6,8 @@
   .profile-card {
     text-align: center;
     padding: 0 20px 10px 20px;
-    img {
-      width: 70px;
-      height: 90px;
-      object-fit: cover;
-      border-radius: 50%;
-    }
   }
+}
+.list-group-item:hover {
+  color: #385f45;
 }

@@ -42,6 +42,15 @@ router.get("/afficheById/:reclamID", async (req, res) => {
     res.json({ message: err });
   }
 });
+//Affiche reclamation by etat
+router.get("/afficheByState/:state", async (req, res) => {
+  try {
+    const reclam = await Reclam.find({ etat: req.params.state });
+    res.json(reclam);
+  } catch (err) {
+    res.json({ message: err });
+  }
+});
 
 //Delete reclamation
 router.delete("/deleteReclam/:reclamID", async (req, res) => {

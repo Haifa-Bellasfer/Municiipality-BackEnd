@@ -1,0 +1,15 @@
+table {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  min-width: 500px;
+}
+th.mat-header-cell {
+  text-align: left;
+  max-width: 300px;
+}
+mat-tab.md-default-theme md-ink-bar,
+mat-tab md-ink-bar {
+  color: red !important;
+  background-color: red !important;
+}

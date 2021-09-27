@@ -26,8 +26,8 @@ const reclamationSchema = new mongoose.Schema(
     },
     etat: {
       type: String,
-      enum: ["encours", "traite"],
-      default: "",
+      enum: ["Inprogress", "Pending", "Done"],
+      default: "Inprogress",
     },
     imageURL: {
       type: String,

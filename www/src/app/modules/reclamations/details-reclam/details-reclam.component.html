@@ -1,0 +1,35 @@
+<mat-card class="example-card">
+  <mat-card-header>
+    <div mat-card-avatar class="example-header-image"></div>
+    <mat-card-title>Nettoyage</mat-card-title>
+    <mat-card-subtitle>En cours</mat-card-subtitle>
+  </mat-card-header>
+  <img
+    mat-card-image
+    src="https://material.angular.io/assets/img/examples/shiba2.jpg"
+    style="width: 300px"
+    class="center"
+    alt="Photo of a Shiba Inu"
+  />
+  <h3>Descprition</h3>
+  <p>
+    There are many variations of passages of Lorem Ipsum available, but the
+    majority have suffered alteration in some form, by injected humour, or
+    randomised words which don't look even slightly believable. If you are going
+    to use a passage of Lorem Ipsum,
+  </p>
+
+  <mat-card-content>
+    <mat-form-field appearance="fill">
+      <mat-label>Fournisseur</mat-label>
+      <mat-select>
+        <mat-option *ngFor="let food of foods" [value]="food.value">
+          {{ food.viewValue }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button mat-button color="warn" style="color: teal">Valider</button>
+    <button mat-button color="warn">Archiver</button>
+  </mat-card-content>
+  <mat-card-actions> </mat-card-actions>
+</mat-card>
