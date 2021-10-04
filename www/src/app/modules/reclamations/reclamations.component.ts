@@ -11,20 +11,36 @@ import { MatTableDataSource } from '@angular/material/table';
 export class reclamationsComponent implements OnInit {
   student: Reclamation[] = [];
   // columns we will show on the table
-  public displayedColumns = ['_id', 'categorie', 'location', 'etat', 'email'];
+  public displayedColumns = [
+    '_id',
+    'categorie',
+    'location',
+    'etat',
+    'date',
+    'action',
+  ];
   //the source where we will get the data
   public dataSource = new MatTableDataSource<Reclamation>();
+  public PendigSourceState = new MatTableDataSource<Reclamation>();
 
   constructor(public reclamationService: ReclamationService) {}
 
   ngOnInit(): void {
     this.getReclamationAll();
+    this.getReclamationsByState();
   }
+
   getReclamationAll() {
-    //let reclam: PeriodicElement;
     this.reclamationService.getReclamations().subscribe((res) => {
       console.log(res);
       this.dataSource.data = res;
+    });
+  }
+
+  getReclamationsByState() {
+    this.reclamationService.getReclamationsByState().subscribe((res) => {
+      console.log(res);
+      this.PendigSourceState.data = res;
     });
   }
 }

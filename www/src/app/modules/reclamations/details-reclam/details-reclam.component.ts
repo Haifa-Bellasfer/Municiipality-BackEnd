@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Reclamation } from 'src/app/entity/reclamation';
 import { ReclamationService } from '../reclamation.service';
 
@@ -19,18 +20,30 @@ export class DetailsReclamComponent implements OnInit {
     { value: 'tacos-2', viewValue: 'Fournisseur 3' },
   ];
 
-  reclamation: Reclamation[] = [];
+  reclamationState: Reclamation | undefined;
 
-  constructor(public reclamationService: ReclamationService) {}
+  constructor(
+    public reclamationService: ReclamationService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
-    this.getReclamationAll();
+    this.getReclamationByID();
   }
-  getReclamationAll() {
-    //let reclam: PeriodicElement;
-    this.reclamationService.getReclamations().subscribe((res) => {
-      this.reclamation = res;
-      console.log(this.reclamation);
+
+  getReclamationByID() {
+    let id = this.route.snapshot.params.id;
+
+    this.reclamationService.getReclamationByID(id).subscribe((res) => {
+      console.log(res);
+      this.reclamationState = res;
     });
+  }
+
+  updateReclamation() {
+    let id = this.route.snapshot.params.id;
+    this.reclamationService.updateReclamation(id).subscribe();
+    this.router.navigateByUrl('/reclamations');
   }
 }

@@ -8,8 +8,7 @@ th.mat-header-cell {
   text-align: left;
   max-width: 300px;
 }
-mat-tab.md-default-theme md-ink-bar,
-mat-tab md-ink-bar {
-  color: red !important;
-  background-color: red !important;
+.container {
+  display: flex;
+  justify-content: center;
 }

@@ -6,4 +6,5 @@ export interface Reclamation {
   imageURL: string;
   email: string;
   description: string;
+  date: Date;
 }
