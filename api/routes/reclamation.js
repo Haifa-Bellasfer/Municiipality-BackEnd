@@ -23,16 +23,6 @@ router.post("/add", async (req, res) => {
     res.json({ message: err });
   }
 });
-
-//Afiiche  all reclamation
-router.get("/afficheAll", async (req, res) => {
-  try {
-    const reclam = await Reclam.find({});
-    res.json(reclam);
-  } catch (err) {
-    res.json({ message: err });
-  }
-});
 //Affiche reclamation by id
 router.get("/afficheById/:reclamID", async (req, res) => {
   try {
@@ -42,11 +32,31 @@ router.get("/afficheById/:reclamID", async (req, res) => {
     res.json({ message: err });
   }
 });
-//Affiche reclamation by etat
-router.get("/afficheByState/:state", async (req, res) => {
+
+//Afiiche  all reclamation
+router.get("/affiche", async (req, res) => {
   try {
-    const reclam = await Reclam.find({ etat: req.params.state });
+    const reclam = await Reclam.find();
     res.json(reclam);
+  } catch (err) {
+    res.json({ message: err });
+  }
+});
+//Afiiche  reclamation Stata Progress
+router.get("/afficheAll", async (req, res) => {
+  try {
+    const reclam = await Reclam.find({ etat: "Inprogress" });
+    res.json(reclam);
+  } catch (err) {
+    res.json({ message: err });
+  }
+});
+
+//Affiche reclamation by etat
+router.get("/afficheByState", async (req, res) => {
+  try {
+    const reclamStat = await Reclam.find({ etat: "Pending" });
+    res.json(reclamStat);
   } catch (err) {
     res.json({ message: err });
   }
@@ -57,6 +67,22 @@ router.delete("/deleteReclam/:reclamID", async (req, res) => {
   try {
     const reclam = await Reclam.remove({ _id: req.params.reclamID });
     res.json({ message: "successfully deleted" });
+  } catch (err) {
+    res.json({ message: err });
+  }
+});
+//Update reclamation state
+router.put("/updateStat/:reclamID", async (req, res) => {
+  try {
+    const reclam = await Reclam.updateOne(
+      {
+        _id: req.params.reclamID,
+      },
+
+      { etat: "Inprogress" },
+    );
+
+    res.json(reclam);
   } catch (err) {
     res.json({ message: err });
   }
