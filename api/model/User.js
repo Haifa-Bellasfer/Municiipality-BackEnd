@@ -20,6 +20,18 @@ const userSchema = new mongoose.Schema(
       min: 4,
       max: 200,
     },
+    role: {
+      type: String,
+      enum: ["Citoyen", "Fournisseur"],
+    },
+    filedFournisseur: {
+      type: String,
+      default: "null",
+    },
+    listeReclamation: {
+      type: [mongoose.Schema.Types.ObjectId],
+      ref: "Reclamation",
+    },
   },
   {
     timestamps: true,

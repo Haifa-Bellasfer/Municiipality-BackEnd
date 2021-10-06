@@ -74,12 +74,15 @@ router.delete("/deleteReclam/:reclamID", async (req, res) => {
 //Update reclamation state
 router.put("/updateStat/:reclamID", async (req, res) => {
   try {
-    const reclam = await Reclam.updateOne(
-      {
-        _id: req.params.reclamID,
-      },
+    const id = req.params.reclamID;
+    const options = { new: true };
 
-      { etat: "Inprogress" },
+    const reclam = await Reclam.findByIdAndUpdate(
+      id,
+      {
+        $set: { etat: "Inprogress" },
+      },
+      options,
     );
 
     res.json(reclam);

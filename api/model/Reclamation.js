@@ -34,6 +34,14 @@ const reclamationSchema = new mongoose.Schema(
       required: true,
       default: "",
     },
+    fournisseur: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
+    citoyen: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
   },
   {
     timestamps: true,

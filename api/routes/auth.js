@@ -48,4 +48,14 @@ router.post("/login", async (req, res) => {
 //forgot password
 router.put("/forgotPassword", (req, res) => {});
 
+//Afiiche  Frounisseur
+router.get("/afficheFr", async (req, res) => {
+  try {
+    const fournisseur = await User.find({ role: "Fournisseur" });
+    res.json(fournisseur);
+  } catch (err) {
+    res.json({ message: err });
+  }
+});
+
 module.exports = router;
