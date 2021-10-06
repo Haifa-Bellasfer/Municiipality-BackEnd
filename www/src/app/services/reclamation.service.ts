@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { catchError, map, tap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { Reclamation } from 'src/app/entity/reclamation';
@@ -8,6 +8,10 @@ import { Reclamation } from 'src/app/entity/reclamation';
   providedIn: 'root',
 })
 export class ReclamationService {
+  httpOption = {
+    headers: new HttpHeaders({ 'content-Type': 'application/json' }),
+  };
+
   constructor(private http: HttpClient) {}
 
   reclamations: any = [];
@@ -35,9 +39,11 @@ export class ReclamationService {
 
   //Update REclamation State
   updateReclamation(id: string): Observable<Reclamation> {
-    console.log(id);
     return this.http
-      .get<any>(' http://localhost:3000/api/reclam/updateStat/' + id)
-      .pipe(tap((result) => console.log('resultUpdate-->', result)));
+      .put<any>(
+        ' http://localhost:3000/api/reclam/updateStat/' + id,
+        this.httpOption
+      )
+      .pipe(tap((result) => console.log('resultUPdate-->', result)));
   }
 }

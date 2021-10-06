@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DefaultModule } from './layouts/default/default.module';
 import { HttpClientModule } from '@angular/common/http';
-import { ReclamationService } from './modules/reclamations/reclamation.service';
+import { ReclamationService } from './services/reclamation.service';
 import { LoginComponent } from './authentification/login/login.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
@@ -20,6 +20,8 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { routes } from './app-routing.module';
+import { UserService } from './services/user.service';
+
 @NgModule({
   declarations: [AppComponent, LoginComponent],
   imports: [
@@ -41,7 +43,7 @@ import { routes } from './app-routing.module';
     RouterModule.forRoot(routes),
   ],
   exports: [RouterModule],
-  providers: [ReclamationService],
+  providers: [ReclamationService, UserService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

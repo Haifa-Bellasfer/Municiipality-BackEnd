@@ -12,6 +12,7 @@ import { MatTableModule } from '@angular/material/table';
 import { DetailsReclamComponent } from 'src/app/modules/reclamations/details-reclam/details-reclam.component';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTabsModule } from '@angular/material/tabs';
+import { FournisseurComponent } from 'src/app/modules/fournisseur/fournisseur.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { MatTabsModule } from '@angular/material/tabs';
     DashboardComponent,
     reclamationsComponent,
     DetailsReclamComponent,
+    FournisseurComponent,
   ],
   imports: [
     CommonModule,

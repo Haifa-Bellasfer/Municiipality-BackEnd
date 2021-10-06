@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { Reclamation } from 'src/app/entity/reclamation';
-import { ReclamationService } from './reclamation.service';
+import { ReclamationService } from '../../services/reclamation.service';
 import { MatTableDataSource } from '@angular/material/table';
 
 @Component({

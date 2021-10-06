@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Reclamation } from 'src/app/entity/reclamation';
-import { ReclamationService } from '../reclamation.service';
+import { ReclamationService } from '../../../services/reclamation.service';
 
 interface Food {
   value: string;
@@ -43,7 +43,9 @@ export class DetailsReclamComponent implements OnInit {
 
   updateReclamation() {
     let id = this.route.snapshot.params.id;
-    this.reclamationService.updateReclamation(id).subscribe();
+    this.reclamationService.updateReclamation(id).subscribe((res) => {
+      console.log(res);
+    });
     this.router.navigateByUrl('/reclamations');
   }
 }
