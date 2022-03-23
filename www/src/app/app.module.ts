@@ -16,7 +16,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { routes } from './app-routing.module';
@@ -39,6 +39,7 @@ import { UserService } from './services/user.service';
     MatButtonModule,
     MatTableModule,
     FormsModule,
+    ReactiveFormsModule,
     CommonModule,
     RouterModule.forRoot(routes),
   ],

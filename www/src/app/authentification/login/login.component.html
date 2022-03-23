@@ -3,15 +3,14 @@
     <mat-tab-group mat-stretch-tabs class="example-stretched-tabs">
       <mat-tab label="Sign In">
         <mat-card-content>
-          <form action="">
+          <form action="" [formGroup]="formGroup" (ngSubmit)="loginSubmit()">
             <mat-form-field>
               <input
                 matInput
                 placeholder="Email"
+                formControlName="email"
                 required
                 name="email"
-                ngModel
-                #email="ngModel"
               />
               <mat-error *ngIf="email.invalid">Email is required</mat-error>
               <mat-icon matSuffix>email</mat-icon>
@@ -20,27 +19,24 @@
               <input
                 matInput
                 placeholder="Password"
+                formControlName="password"
                 type="password"
                 required
-                minlength="6"
+                minlength="4"
                 name="password"
-                ngModel
-                #password="ngModel"
               />
               <mat-error *ngIf="password.errors && password.errors.required">
                 Password is required
               </mat-error>
               <mat-error *ngIf="password.errors && password.errors.minlength">
-                Password must be of length 6
+                Password must be of length 4
               </mat-error>
               <mat-icon matSuffix>lock</mat-icon>
             </mat-form-field>
             <mat-checkbox>Remember Me!</mat-checkbox>
-            <a routerLink="/dashboard" routerLinkActive="active">
-              <button mat-raised-button color="primary" class="login-button">
-                Sign In
-              </button></a
-            >
+            <button mat-raised-button color="primary" class="login-button">
+              Sign In
+            </button>
           </form>
         </mat-card-content>
       </mat-tab>

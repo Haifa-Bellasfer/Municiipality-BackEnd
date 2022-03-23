@@ -7,6 +7,7 @@ const bodyParser = require("body-parser");
 //Import Routes
 const authRoute = require("./routes/auth");
 const reclamRoute = require("./routes/reclamation");
+const uploadRoute = require("./routes/upload");
 
 /*app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin : *"); // update to match the domain you will make the request from
@@ -41,5 +42,6 @@ app.use(bodyParser.json());
 //Route Middleware
 app.use("/api/user", authRoute);
 app.use("/api/reclam", reclamRoute);
+app.use("/api/uploadphoto", uploadRoute);
 
 app.listen(3000, () => console.log(" server running at 3000"));

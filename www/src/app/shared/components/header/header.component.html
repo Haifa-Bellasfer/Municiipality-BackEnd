@@ -29,6 +29,17 @@
             </button>
           </mat-menu>
         </li>
+        <li>
+          <h1>Upload Image</h1>
+          <form
+            action=" http://localhost:3000/api/uploadphoto/upload"
+            enctype="multipart/form-data"
+            method="POST"
+          >
+            <input type="file" name="myImage" accept="image/*" />
+            <input type="submit" value="Upload Photo" />
+          </form>
+        </li>
       </ul>
     </div>
   </mat-toolbar-row>
