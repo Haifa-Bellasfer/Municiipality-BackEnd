@@ -25,15 +25,26 @@ router.post("/upload", upload.single("myImage"), (req, res) => {
     contentType: req.file.mimetype,
     image: Buffer.from(encode_img, "base64"),
   };
-  imageModel.create({ final_img, name: "aaaaa" }, function (err, result) {
-    if (err) {
-      console.log(err);
-    } else {
-      console.log(final_img);
-      console.log("Saved To database");
-      res.contentType(final_img.contentType);
-      res.send(final_img.image);
-    }
-  });
+  imageModel.create(
+    { final_img, name: "aaaaa", desc: encode_img },
+    function (err, result) {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log(result);
+        fs.writeFile(
+          __dirname + "/uploads/upload.png",
+          final_img.image,
+          function (err) {
+            console.log(err);
+          },
+        );
+
+        console.log("Saved To database");
+        res.contentType(final_img.contentType);
+        res.status(200);
+      }
+    },
+  );
 });
 module.exports = router;
