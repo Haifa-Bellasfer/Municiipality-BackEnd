@@ -22,17 +22,19 @@
           <button mat-button [matMenuTriggerFor]="menu">
             <mat-icon>person_outline</mat-icon>
           </button>
-          <mat-menu #menu="matMenu">
-            <button mat-menu-item>
-              <mat-icon>exit_to_app</mat-icon>
-              Sign out
-            </button>
-          </mat-menu>
+          <form action="">
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item type="submit" (click)="logOut()">
+                <mat-icon>exit_to_app</mat-icon>
+                Sign out
+              </button>
+            </mat-menu>
+          </form>
         </li>
         <li>
           <h1>Upload Image</h1>
           <form
-            action=" http://localhost:3000/api/uploadphoto/upload"
+            action=" http://localhost:3000/api/upload/upload"
             enctype="multipart/form-data"
             method="POST"
           >
