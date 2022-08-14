@@ -33,10 +33,15 @@
               </mat-error>
               <mat-icon matSuffix>lock</mat-icon>
             </mat-form-field>
-            <mat-checkbox>Remember Me!</mat-checkbox>
             <button mat-raised-button color="primary" class="login-button">
               Sign In
             </button>
+            <mat-error
+              style="text-align: center"
+              *ngIf="password.errors && password.errors.required"
+            >
+              {{ error }}
+            </mat-error>
           </form>
         </mat-card-content>
       </mat-tab>

@@ -13,6 +13,7 @@ export class LoginComponent implements OnInit {
     email: new FormControl('', [Validators.required]),
     password: new FormControl('', [Validators.required]),
   });
+  error = '';
   constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {}
@@ -22,9 +23,14 @@ export class LoginComponent implements OnInit {
     }
 
     this.authService.login(this.formGroup.value).subscribe((res) => {
-      console.log('token', res);
-      alert(res.message);
-      this.router.navigate(['/dashboard']);
+      console.log(res);
+      if (res.user) {
+        localStorage.setItem('accessToken', res.accessToken);
+        localStorage.setItem('userId', res.user._id);
+        this.router.navigate(['/dashboard']);
+      } else {
+        this.error = res.message;
+      }
     });
   }
 }

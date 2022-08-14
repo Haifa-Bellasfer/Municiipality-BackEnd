@@ -6,11 +6,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./default.component.scss'],
 })
 export class DefaultComponent implements OnInit {
+  loggedIn = false;
   sideBarOpen = true;
 
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if (localStorage.getItem('userId')) {
+      this.loggedIn = true;
+    }
+  }
 
   sideBarToggler() {
     this.sideBarOpen = !this.sideBarOpen;

@@ -18,7 +18,7 @@ export class UserService {
   // Liste fournisseur
   getFournisseurs(): Observable<User[]> {
     this.users = this.http
-      .get<any>(' http://localhost:3000/api/user/afficheFr')
+      .get<any>(' http://localhost:3000/api/user/list/fournisseur')
       .pipe(tap((result) => console.log('result-->', result)));
     return this.users;
   }

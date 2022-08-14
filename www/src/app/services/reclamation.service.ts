@@ -20,20 +20,20 @@ export class ReclamationService {
   // Reclamations State InProgress
   getReclamations(): Observable<Reclamation[]> {
     this.reclamations = this.http
-      .get<any>(' http://localhost:3000/api/reclam/afficheAll')
+      .get<any>(' http://localhost:3000/api/reclamation/list')
       .pipe(tap((result) => console.log('result-->', result)));
     return this.reclamations;
   }
   // Reclamations By state Pending
   getReclamationsByState(): Observable<Reclamation[]> {
     return this.http
-      .get<any>(' http://localhost:3000/api/reclam/afficheByState')
+      .get<any>(' http://localhost:3000/api/reclamation/listByState')
       .pipe(tap((result) => console.log('result-->', result)));
   }
   //Reclamation By Id
   getReclamationByID(id: string): Observable<Reclamation> {
     return this.http
-      .get<any>(' http://localhost:3000/api/reclam/afficheById/' + id)
+      .get<any>(' http://localhost:3000/api/reclamation/getById/' + id)
       .pipe(tap((result) => console.log('result-->', result)));
   }
 
@@ -41,7 +41,7 @@ export class ReclamationService {
   updateReclamation(id: string): Observable<Reclamation> {
     return this.http
       .put<any>(
-        ' http://localhost:3000/api/reclam/updateStat/' + id,
+        ' http://localhost:3000/api/reclamation/update/' + id,
         this.httpOption
       )
       .pipe(tap((result) => console.log('resultUPdate-->', result)));
