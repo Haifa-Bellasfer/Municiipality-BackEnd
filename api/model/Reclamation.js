@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const reclamationSchema = new mongoose.Schema(
   {
@@ -16,36 +16,38 @@ const reclamationSchema = new mongoose.Schema(
     },
     categorie: {
       type: String,
-      enum: ["eclairage", "nettoyage", "batiment", "autre"],
-      default: "nettoyage",
+      enum: ['Eclairage', 'Nettoyage', 'Batiment', 'Autre'],
     },
-    location: {
+    localisation: {
       type: String,
       required: true,
-      default: "",
+      default: '',
     },
     etat: {
       type: String,
-      enum: ["Inprogress", "Pending", "Done"],
-      default: "Inprogress",
+      enum: ['Inprogress', 'Pending', 'Done'],
     },
     imageURL: {
       type: String,
       required: true,
-      default: "",
+      default: '',
     },
     fournisseur: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
+      ref: 'User',
+    },
+    municipality: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Municipality',
     },
     citoyen: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
+      ref: 'User',
     },
   },
   {
     timestamps: true,
-  },
+  }
 );
 
-module.exports = mongoose.model("Reclamation", reclamationSchema);
+module.exports = mongoose.model('Reclamation', reclamationSchema);

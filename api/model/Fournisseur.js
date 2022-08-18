@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 
-const userSchema = new mongoose.Schema(
+const fournisseurSchema = new mongoose.Schema(
   {
-    username: {
+    slug: {
       type: String,
       required: true,
       min: 4,
@@ -14,15 +14,24 @@ const userSchema = new mongoose.Schema(
       min: 4,
       max: 200,
     },
+    addresse: {
+      type: String,
+      required: true,
+    },
+    phone: {
+      type: String,
+      required: true,
+    },
     password: {
       type: String,
       required: true,
       min: 4,
       max: 200,
     },
-    role: {
+    categorie: {
       type: String,
-      enum: ['Citoyen', 'Responsable'],
+      enum: ['Eclairage', 'Nettoyage', 'Batiment', 'Autre'],
+      default: 'Eclairage',
     },
     listeReclamation: {
       type: [mongoose.Schema.Types.ObjectId],
@@ -34,4 +43,4 @@ const userSchema = new mongoose.Schema(
   }
 );
 
-module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.model('Fournisseur', fournisseurSchema);

@@ -9,6 +9,8 @@ const authRoute = require('./routes/authRouter');
 const userRoute = require('./routes/userRouter');
 const reclamationRoute = require('./routes/reclamationRouter');
 const uploadRoute = require('./routes/uploadRouter');
+const muncipalityRoute = require('./routes/municipalityRouter');
+const fournisseurRouter = require('./routes/fournisseurRouter');
 
 const cors = require('cors');
 app.use(
@@ -37,5 +39,7 @@ app.use('/api/user', userRoute);
 app.use('/api/auth', authRoute);
 app.use('/api/reclamation', reclamationRoute);
 app.use('/api/upload', uploadRoute);
+app.use('/api/municipality', muncipalityRoute);
+app.use('/api/fournisseur', fournisseurRouter);
 
 app.listen(3000, () => console.log(' server running at 3000'));
