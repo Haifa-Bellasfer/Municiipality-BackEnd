@@ -5,15 +5,19 @@ Content-Type: application/json
 
 {
     "slug": "steg",
-    "email":"Medamin@gmail.com",
+    "email":"haifadab3@gmail.com",
     "password" : "1234",
     "addresse" : "BenArous",
     "phone":"1234",
-    "categorie" : "Eclairage"
+    "categorie" : "Batiment"
 }
 
 
 ### List all fournisseur 
 GET http://localhost:3000/api/fournisseur/list
+
+### Update Fournisseur
+PUT http://localhost:3000/api/fournisseur/update/password/62fec68af7d43a186887a637/12345
+
 
 
