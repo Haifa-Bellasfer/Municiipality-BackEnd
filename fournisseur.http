@@ -1,0 +1,19 @@
+
+### Add a new fournisseur
+POST http://localhost:3000/api/fournisseur/add
+Content-Type: application/json
+
+{
+    "slug": "steg",
+    "email":"Medamin@gmail.com",
+    "password" : "1234",
+    "addresse" : "BenArous",
+    "phone":"1234",
+    "categorie" : "Eclairage"
+}
+
+
+### List all fournisseur 
+GET http://localhost:3000/api/fournisseur/list
+
+

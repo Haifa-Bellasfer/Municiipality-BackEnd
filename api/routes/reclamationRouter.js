@@ -20,9 +20,9 @@ router.post('/add', async (req, res) => {
 });
 
 // Get reclamation by id
-router.get('/getReclamationById/:reclamID', async (req, res) => {
+router.get('/getReclamationById/:id', async (req, res) => {
   try {
-    const reclamation = await Reclamation.findById(req.params.reclamID);
+    const reclamation = await Reclamation.findById(req.params.id);
     res.json(reclamation);
   } catch (err) {
     res.json({ message: err });

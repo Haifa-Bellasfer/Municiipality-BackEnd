@@ -14,8 +14,9 @@ router.post('/signUp', async (req, res) => {
   const hashedPassword = await bcrypt.hash(req.body.password, salt);
 
   const user = new User({
-    name: req.body.name,
+    username: req.body.username,
     email: req.body.email,
+    role: req.body.role,
     password: hashedPassword,
   });
   try {
@@ -26,11 +27,11 @@ router.post('/signUp', async (req, res) => {
   }
 });
 
-// List fournisseur
-router.get('/list/fournisseur', authenticateToken, async (req, res) => {
+// List all users
+router.get('/list', async (req, res) => {
   try {
-    const fournisseur = await User.find({ role: 'Fournisseur' });
-    res.json(fournisseur);
+    const users = await User.find();
+    res.json(users);
   } catch (err) {
     res.json({ message: err });
   }
