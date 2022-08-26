@@ -1,0 +1,12 @@
+### Get all reclamations
+GET  http://localhost:3000/api/reclamation/list
+
+### Update reclamation by status
+PUT http://localhost:3000/api/reclamation/update/614dfe099530931728154cdf
+Content-Type: application/json
+
+{
+    "id" : "62fec68af7d43a186887a637"
+}
+
+

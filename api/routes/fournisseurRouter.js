@@ -1,35 +1,13 @@
 const router = require('express').Router();
 const Fournisseur = require('../model/Fournisseur');
-const nodemailer = require('nodemailer');
 const bcrypt = require('bcryptjs');
+const sendMail = require('../utils/sendMail');
 
 // Add frournisseur
 router.post('/add', async (req, res) => {
-  // create reusable transporter object using the default SMTP transport
-  let transporter = nodemailer.createTransport({
-    service: 'hotmail',
-    auth: {
-      user: process.env.EMAIL, // generated ethereal user
-      pass: process.env.PASSWORD, // generated ethereal password
-    },
-  });
-
-  // send mail with defined transport object
-
-  await transporter.sendMail(
-    {
-      from: process.env.EMAIL, // sender address
-      to: req.body.email, // list of receivers
-      subject: 'Athentification a Baladiti ✔', // Subject line
-      html: `<p> Pour Authentifier a Baladiti </p> <br> <p> Login : ${req.body.email}</p><br> <p> Votre mot de passe : ${req.body.password} </p>`, // plain text body
-    },
-    function (err, info) {
-      if (err) {
-        console.log(err);
-        return;
-      }
-      console.log(info);
-    }
+  sendMail(
+    req.body.email,
+    `<p> Pour Authentifier a Baladiti </p> <br> <p> Login : ${req.body.email}</p><br> <p> Votre mot de passe : ${req.body.password} </p>`
   );
 
   const fournisseur = new Fournisseur({

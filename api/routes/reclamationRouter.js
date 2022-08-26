@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const Fournisseur = require('../model/Fournisseur');
 const Reclamation = require('../model/Reclamation');
 
 // Add Reclamation
@@ -69,16 +70,17 @@ router.delete('/delete:id', async (req, res) => {
   }
 });
 
-// Update reclamation by state
+// Update reclamation by status
 router.put('/update/:id', async (req, res) => {
   try {
     const id = req.params.id;
     const options = { new: true };
+    const fournisseur = await Fournisseur.findById(req.body.id);
 
     const reclamation = await Reclamation.findByIdAndUpdate(
       id,
       {
-        $set: { etat: 'Inprogress' },
+        $set: { etat: 'Inprogress', fournisseur: fournisseur },
       },
       options
     );
