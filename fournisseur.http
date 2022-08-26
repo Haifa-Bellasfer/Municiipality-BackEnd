@@ -1,15 +1,14 @@
-
 ### Add a new fournisseur
 POST http://localhost:3000/api/fournisseur/add
 Content-Type: application/json
 
 {
-    "slug": "steg",
+    "slug": "soned",
     "email":"haifadab3@gmail.com",
     "password" : "1234",
-    "addresse" : "BenArous",
+    "addresse" : "HamemLif",
     "phone":"1234",
-    "categorie" : "Batiment"
+    "categorie" : "Eclairage"
 }
 
 
