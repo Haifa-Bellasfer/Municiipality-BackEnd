@@ -41,7 +41,7 @@ router.get('/list', async (req, res) => {
 });
 
 // Get in progress reclamations
-router.get('/inProgress', async (req, res) => {
+router.get('/list/inprogress', async (req, res) => {
   try {
     const reclamation = await Reclamation.find({ etat: 'Inprogress' });
     res.json(reclamation);
@@ -51,9 +51,19 @@ router.get('/inProgress', async (req, res) => {
 });
 
 // Get pennding reclamations
-router.get('/pennding', async (req, res) => {
+router.get('/list/pending', async (req, res) => {
   try {
     const reclamation = await Reclamation.find({ etat: 'Pending' });
+    res.json(reclamation);
+  } catch (err) {
+    res.json({ message: err });
+  }
+});
+
+// Get Done reclamation
+router.get('/list/done', async (req, res) => {
+  try {
+    const reclamation = await Reclamation.find({ etat: 'Done' });
     res.json(reclamation);
   } catch (err) {
     res.json({ message: err });
