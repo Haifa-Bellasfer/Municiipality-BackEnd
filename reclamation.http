@@ -9,4 +9,6 @@ Content-Type: application/json
     "id" : "62fec68af7d43a186887a637"
 }
 
+### Get  reclamations in progress status
+GET  http://localhost:3000/api/reclamation/list/inprogress
 
