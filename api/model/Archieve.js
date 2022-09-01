@@ -2,10 +2,6 @@ const mongoose = require('mongoose');
 
 const archieveSchema = new mongoose.Schema(
   {
-    date: {
-      type: Date,
-      required: true,
-    },
     description: {
       type: String,
       required: true,

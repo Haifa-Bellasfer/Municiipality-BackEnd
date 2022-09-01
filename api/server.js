@@ -11,6 +11,7 @@ const reclamationRoute = require('./routes/reclamationRouter');
 const uploadRoute = require('./routes/uploadRouter');
 const muncipalityRoute = require('./routes/municipalityRouter');
 const fournisseurRouter = require('./routes/fournisseurRouter');
+const archieveRouter = require('./routes/archieveRouter');
 
 const cors = require('cors');
 app.use(
@@ -41,5 +42,6 @@ app.use('/api/reclamation', reclamationRoute);
 app.use('/api/upload', uploadRoute);
 app.use('/api/municipality', muncipalityRoute);
 app.use('/api/fournisseur', fournisseurRouter);
+app.use('/api/archieve', archieveRouter);
 
 app.listen(3000, () => console.log(' server running at 3000'));
