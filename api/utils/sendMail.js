@@ -9,9 +9,6 @@ async function sendMail(reciever, template) {
       pass: process.env.PASSWORD, // generated ethereal password
     },
   });
-  console.log('receiver', reciever);
-  console.log('template', template);
-  console.log('transporter', transporter);
 
   // send mail with defined transport object
   await transporter.sendMail(

@@ -1,5 +1,8 @@
 const router = require('express').Router();
 const Fournisseur = require('../model/Fournisseur');
+const Reclamation = require('../model/Reclamation');
+const Archieve = require('../model/Archieve');
+const User = require('../model/User');
 const bcrypt = require('bcryptjs');
 const sendMail = require('../utils/sendMail');
 
@@ -39,7 +42,7 @@ router.get('/list', async (req, res) => {
   }
 });
 
-// Update Password
+// Update fournisseur Password
 router.put('/update/password/:id/:pass', async (req, res) => {
   console.log(req.params.id);
   try {
@@ -57,6 +60,42 @@ router.put('/update/password/:id/:pass', async (req, res) => {
     );
 
     res.json(fournisseur);
+  } catch (err) {
+    res.json({ message: err });
+  }
+});
+
+// Update reclamation done by fournisseur
+router.put('/update/done/:id', async (req, res) => {
+  try {
+    const id = req.params.id;
+    const options = { new: true };
+
+    const reclamation = await Reclamation.findByIdAndUpdate(
+      id,
+      {
+        $set: { etat: 'Done' },
+      },
+      options
+    );
+    const archieve = new Archieve({
+      description: 'Cette reclamation a été traité',
+      reclamation: reclamation,
+    });
+    const user = await User.findOne(reclamation.citoyen);
+
+    sendMail(
+      user.email,
+
+      `<p>  Cette reclamation a été traité: </p>`
+    );
+    try {
+      const savedArchieve = await archieve.save();
+      res.json(savedArchieve);
+    } catch (err) {
+      res.json({ message: err });
+    }
+    res.json(reclamation);
   } catch (err) {
     res.json({ message: err });
   }
