@@ -15,8 +15,15 @@ Content-Type: application/json
 ### List all fournisseur 
 GET http://localhost:3000/api/fournisseur/list
 
-### Update Fournisseur
+### Update fournisseur password
 PUT http://localhost:3000/api/fournisseur/update/password/62fec68af7d43a186887a637/12345
 
+### Update reclamation don by fournisseur
+PUT http://localhost:3000/api/fournisseur/update/done/614dfe099530931728154cdf
+Content-Type: application/json
+
+{
+    "id" : "614dfe099530931728154cdf"
+}
 
 
