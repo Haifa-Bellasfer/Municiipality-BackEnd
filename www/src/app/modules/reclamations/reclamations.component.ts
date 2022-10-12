@@ -9,7 +9,7 @@ import { MatTableDataSource } from '@angular/material/table';
   styleUrls: ['./reclamations.component.scss'],
 })
 export class reclamationsComponent implements OnInit {
-  student: Reclamation[] = [];
+  reclamation: Reclamation[] = [];
   // columns we will show on the table
   public displayedColumns = [
     '_id',
@@ -26,19 +26,19 @@ export class reclamationsComponent implements OnInit {
   constructor(public reclamationService: ReclamationService) {}
 
   ngOnInit(): void {
-    this.getReclamationAll();
-    this.getReclamationsByState();
+    this.getReclamationsPending();
+    this.getReclamationsInprogress();
   }
 
-  getReclamationAll() {
-    this.reclamationService.getReclamations().subscribe((res) => {
+  getReclamationsPending() {
+    this.reclamationService.getReclamationsPending().subscribe((res) => {
       console.log(res);
       this.dataSource.data = res;
     });
   }
 
-  getReclamationsByState() {
-    this.reclamationService.getReclamationsByState().subscribe((res) => {
+  getReclamationsInprogress() {
+    this.reclamationService.getReclamationsInprogress().subscribe((res) => {
       console.log(res);
       this.PendigSourceState.data = res;
     });
