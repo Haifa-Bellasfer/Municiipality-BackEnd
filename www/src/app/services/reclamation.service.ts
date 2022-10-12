@@ -18,16 +18,16 @@ export class ReclamationService {
   reclamtionState: any = [];
 
   // Reclamations State InProgress
-  getReclamations(): Observable<Reclamation[]> {
+  getReclamationsInprogress(): Observable<Reclamation[]> {
     this.reclamations = this.http
-      .get<any>(' http://localhost:3000/api/reclamation/list')
+      .get<any>(' http://localhost:3000/api/reclamation/list/inprogress')
       .pipe(tap((result) => console.log('result-->', result)));
     return this.reclamations;
   }
   // Reclamations By state Pending
-  getReclamationsByState(): Observable<Reclamation[]> {
+  getReclamationsPending(): Observable<Reclamation[]> {
     return this.http
-      .get<any>(' http://localhost:3000/api/reclamation/listByState')
+      .get<any>(' http://localhost:3000/api/reclamation/list/pending')
       .pipe(tap((result) => console.log('result-->', result)));
   }
   //Reclamation By Id

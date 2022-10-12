@@ -10,7 +10,7 @@ Content-Type: application/json
 
 {
     "username": "houssem",
-    "email":"houssem@gmail.com",
+    "email":"haifa.bellasfer@esprit.tn",
     "role" : "Responsable",
     "password":"1234"
 }
