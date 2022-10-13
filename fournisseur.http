@@ -3,11 +3,11 @@ POST http://localhost:3000/api/fournisseur/add
 Content-Type: application/json
 
 {
-    "slug": "soned",
-    "email":"haifadab3@gmail.com",
+    "slug": "Steg",
+    "email":"firasAmous@gmail.com",
     "password" : "1234",
-    "addresse" : "HamemLif",
-    "phone":"1234",
+    "addresse" : "Lafayette",
+    "phone":"56249538",
     "categorie" : "Eclairage"
 }
 
