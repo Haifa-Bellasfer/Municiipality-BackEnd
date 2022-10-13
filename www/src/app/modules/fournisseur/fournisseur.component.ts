@@ -1,6 +1,7 @@
+import { FournisseurService } from './../../services/fournisseur.service';
+import { Fournisseur } from './../../entity/fournisseur';
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { User } from 'src/app/entity/user';
 import { UserService } from '../../services/user.service';
 
 @Component({
@@ -10,19 +11,19 @@ import { UserService } from '../../services/user.service';
 })
 export class FournisseurComponent implements OnInit {
   // columns we will show on the table
-  public displayedColumns = ['_id', 'name', 'email', 'action'];
+  public displayedColumns = ['_id', 'slug', 'email', 'phone', 'action'];
 
   //the source where we will get the data
-  public dataSource = new MatTableDataSource<User>();
+  public dataSource = new MatTableDataSource<Fournisseur>();
 
-  constructor(public userService: UserService) {}
+  constructor(public fournisseurService: FournisseurService) {}
 
   ngOnInit(): void {
     this.getFournisseurs();
   }
 
   getFournisseurs() {
-    this.userService.getFournisseurs().subscribe((res) => {
+    this.fournisseurService.getFournisseurs().subscribe((res) => {
       console.log(res);
       this.dataSource.data = res;
     });

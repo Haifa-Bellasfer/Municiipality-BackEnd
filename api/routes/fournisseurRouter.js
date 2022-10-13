@@ -12,11 +12,14 @@ router.post('/add', async (req, res) => {
     req.body.email,
     `<p> Pour Authentifier a Baladiti </p> <br> <p> Login : ${req.body.email}</p><br> <p> Votre mot de passe : ${req.body.password} </p>`
   );
+  //hash password
+  const salt = await bcrypt.genSalt(10);
+  const hashedPassword = await bcrypt.hash(req.body.password, salt);
 
   const fournisseur = new Fournisseur({
     slug: req.body.slug,
     email: req.body.email,
-    password: req.body.password,
+    password: hashedPassword,
     addresse: req.body.addresse,
     phone: req.body.phone,
     categorie: req.body.categorie,
@@ -35,7 +38,7 @@ router.post('/add', async (req, res) => {
 // List fournisseur
 router.get('/list', async (req, res) => {
   try {
-    const fournisseur = await Fournisseur.find();
+    const fournisseur = await Fournisseur.find({});
     res.json(fournisseur);
   } catch (err) {
     res.json({ message: err });
