@@ -1,3 +1,4 @@
+import { ArchiveComponent } from './../../modules/archive/archive.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DefaultComponent } from './default.component';
@@ -21,6 +22,7 @@ import { FournisseurComponent } from 'src/app/modules/fournisseur/fournisseur.co
     reclamationsComponent,
     DetailsReclamComponent,
     FournisseurComponent,
+    ArchiveComponent,
   ],
   imports: [
     CommonModule,
