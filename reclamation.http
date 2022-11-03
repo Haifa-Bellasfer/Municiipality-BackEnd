@@ -5,10 +5,10 @@ Content-Type: application/json
 {
     "email": "dorsaf.ferchichi@esprit.tn",
     "description":"eclairage manqué",
-    "categorie" : "Batiment",
+    "categorie" : "Nettoyage",
     "imageURL" : "image.png",
-    "localisation":"Tunis",
-    "etat" : "Pending",
+    "localisation":"Ben Arous",
+    "etat" : "Inprogress",
     "fournisseur" : "62fec68af7d43a186887a637",
     "citoyen" :"6356b4870c29b128b45c8e9c",
     "municipality" : "62f93509e835472fac78fb4a"

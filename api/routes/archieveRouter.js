@@ -37,4 +37,18 @@ router.get('/list', async (req, res) => {
   }
 });
 
+// Delete archive
+router.delete('/delete/:id', async (req, res) => {
+  try {
+    const archive = await Archieve.findOne({ _id: req.params.id });
+    console.log(archive);
+    await Archieve.remove({ _id: req.params.id });
+    await Reclamation.remove({ _id: archive.reclamation._id });
+
+    res.json({ message: 'successfully deleted' });
+  } catch (err) {
+    res.json({ message: err });
+  }
+});
+
 module.exports = router;

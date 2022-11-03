@@ -38,7 +38,11 @@
       <h4 style="font-weight: bolder">Action</h4>
     </th>
     <td mat-cell *matCellDef="let element">
-      <button mat-flat-button style="color: #385f45">
+      <button
+        mat-flat-button
+        style="color: #385f45"
+        (click)="delete(element._id)"
+      >
         <img src="../../../assets/smile.png" style="width: 40px" />
       </button>
     </td>

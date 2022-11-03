@@ -7,7 +7,11 @@ Content-Type: application/json
 
 {
     "description" : "Unvalid reclamation by user",
-    "id" :"6356b623e9849b08107473a0"
+    "id" :"6356b2270c29b128b45c8e85"
 }
+
+### Delete Archive
+DELETE http://localhost:3000/api/archieve/delete/6363cf10ba57511f1c869977
+
 
 
