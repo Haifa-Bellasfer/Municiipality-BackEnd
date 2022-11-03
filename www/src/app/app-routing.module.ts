@@ -1,3 +1,4 @@
+import { ArchiveComponent } from './modules/archive/archive.component';
 import { Component, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './authentification/login/login.component';
@@ -27,6 +28,10 @@ export const routes: Routes = [
       {
         path: 'fournisseur',
         component: FournisseurComponent,
+      },
+      {
+        path: 'archive',
+        component: ArchiveComponent,
       },
     ],
   },

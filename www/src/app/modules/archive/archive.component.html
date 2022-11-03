@@ -1,0 +1,48 @@
+<table mat-table [dataSource]="dataSource">
+  <ng-container matColumnDef="_id">
+    <th mat-header-cell *matHeaderCellDef>
+      <h4 style="font-weight: bolder">Reclamation</h4>
+    </th>
+    <td mat-cell *matCellDef="let element">
+      <img src="../../../assets/reclamation.png" style="width: 40px" />
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="description">
+    <th mat-header-cell *matHeaderCellDef>
+      <h4 style="font-weight: bolder">description</h4>
+    </th>
+    <td mat-cell *matCellDef="let element">
+      {{ element.description }}
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="reclamation">
+    <th mat-header-cell *matHeaderCellDef>
+      <h4 style="font-weight: bolder">localisation</h4>
+    </th>
+    <td mat-cell *matCellDef="let element">
+      {{ element.reclamation.localisation }}
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="fournisseur">
+    <th mat-header-cell *matHeaderCellDef>
+      <h4 style="font-weight: bolder">fournisseur</h4>
+    </th>
+    <td mat-cell *matCellDef="let element">
+      {{ element.reclamation.categorie }}
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="action">
+    <th mat-header-cell *matHeaderCellDef>
+      <h4 style="font-weight: bolder">Action</h4>
+    </th>
+    <td mat-cell *matCellDef="let element">
+      <button mat-flat-button style="color: #385f45">
+        <img src="../../../assets/smile.png" style="width: 40px" />
+      </button>
+    </td>
+  </ng-container>
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>

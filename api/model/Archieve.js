@@ -6,7 +6,7 @@ const archieveSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    reclamations: {
+    reclamation: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Reclamation',
     },

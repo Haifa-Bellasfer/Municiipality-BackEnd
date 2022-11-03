@@ -24,10 +24,6 @@ const userSchema = new mongoose.Schema(
       type: String,
       enum: ['Citoyen', 'Responsable'],
     },
-    listeReclamation: {
-      type: [mongoose.Schema.Types.ObjectId],
-      ref: 'Reclamation',
-    },
   },
   {
     timestamps: true,

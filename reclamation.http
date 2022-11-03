@@ -1,3 +1,19 @@
+### Add a new reclamation
+POST http://localhost:3000/api/reclamation/add
+Content-Type: application/json
+
+{
+    "email": "dorsaf.ferchichi@esprit.tn",
+    "description":"eclairage manqué",
+    "categorie" : "Batiment",
+    "imageURL" : "image.png",
+    "localisation":"Tunis",
+    "etat" : "Pending",
+    "fournisseur" : "62fec68af7d43a186887a637",
+    "citoyen" :"6356b4870c29b128b45c8e9c",
+    "municipality" : "62f93509e835472fac78fb4a"
+}
+
 ### Get all reclamations
 GET  http://localhost:3000/api/reclamation/list
 
