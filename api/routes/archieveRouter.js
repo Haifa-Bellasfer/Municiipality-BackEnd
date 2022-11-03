@@ -3,34 +3,36 @@ const Archieve = require('../model/Archieve');
 const Reclamation = require('../model/Reclamation');
 
 // Add Archieve
-router.post('/add/:id', async (req, res) => {
+router.post('/add', async (req, res) => {
   const options = { new: true };
-  const reclamation = await Reclamation.findByIdAndUpdate(
-    req.params.id,
-    {
-      $set: { etat: 'Done' },
-    },
-    options
-  );
+  const id = req.body.id;
 
-  const archieve = new Archieve({
-    description: req.body.description,
-    reclamation: reclamation,
-  });
   try {
+    const reclamation = await Reclamation.findByIdAndUpdate(
+      id,
+      {
+        $set: { etat: 'Done' },
+      },
+      options
+    );
+    const archieve = new Archieve({
+      description: req.body.description,
+      reclamation: reclamation,
+    });
     const savedArchieve = await archieve.save();
     res.json(savedArchieve);
-  } catch (err) {
-    res.json({ message: err });
+  } catch (error) {
+    console.log(error);
   }
 });
 
 // List archieve
 router.get('/list', async (req, res) => {
   try {
-    const archieve = await Archieve.find();
+    const archieve = await Archieve.find().populate('reclamation');
     res.json(archieve);
   } catch (err) {
+    console.log(err);
     res.json({ message: err });
   }
 });

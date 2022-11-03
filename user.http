@@ -7,9 +7,9 @@ POST http://localhost:3000/api/user/signUp
 Content-Type: application/json
 
 {
-    "username": "houssem",
-    "email":"haifa.bellasfer@esprit.tn",
-    "role" : "Responsable",
+    "username": "dorsaf",
+    "email":"dorsaf.ferchichiesprit.tn",
+    "role" : "Citoyen",
     "password":"1234"
 }
 

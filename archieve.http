@@ -1,13 +1,13 @@
 ### Get all Archieves
-GET  http://localhost:3000/api/reclamation/list
+GET  http://localhost:3000/api/archieve/list
 
 ### Add archieve
-POST http://localhost:3000/api/archieve/add/6151e0c4d0fe7f1a10fec21e
+POST http://localhost:3000/api/archieve/add
 Content-Type: application/json
 
 {
     "description" : "Unvalid reclamation by user",
-    "id" :"6151e0c4d0fe7f1a10fec21e"
+    "id" :"6356b623e9849b08107473a0"
 }
 
 

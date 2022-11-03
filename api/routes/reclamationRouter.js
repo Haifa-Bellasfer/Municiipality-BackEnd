@@ -1,16 +1,25 @@
 const router = require('express').Router();
 const Fournisseur = require('../model/Fournisseur');
 const Reclamation = require('../model/Reclamation');
+const User = require('../model/User');
+const Municipality = require('../model/Municipality');
 
 // Add Reclamation
 router.post('/add', async (req, res) => {
+  const fournisseur = await Fournisseur.findById(req.body.fournisseur);
+  const citoyen = await User.findById(req.body.citoyen);
+  const municipality = await Municipality.findById(req.body.municipality);
+
   const reclamation = new Reclamation({
     email: req.body.email,
     description: req.body.description,
     categorie: req.body.categorie,
-    location: req.body.location,
+    localisation: req.body.localisation,
     etat: req.body.etat,
     imageURL: req.body.imageURL,
+    fournisseur: fournisseur,
+    citoyen: citoyen,
+    municipality: municipality,
   });
   try {
     const savedReclamation = await reclamation.save();

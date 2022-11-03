@@ -13,9 +13,9 @@ export class ArchiveComponent implements OnInit {
   // columns we will show on the table
   public displayedColumns = [
     '_id',
-    'categorie',
-    'slug',
     'description',
+    'reclamation',
+    'fournisseur',
     'action',
   ];
   //the source where we will get the data
@@ -24,13 +24,13 @@ export class ArchiveComponent implements OnInit {
   constructor(public archiveService: ArchiveService) {}
 
   ngOnInit(): void {
-    this.getArchives();
+    console.log(this.getArchives());
   }
 
   getArchives() {
     this.archiveService.getArchives().subscribe((res) => {
-      console.log(res);
       this.dataSource.data = res;
+      console.log('archiiivee : ', res);
     });
   }
 }

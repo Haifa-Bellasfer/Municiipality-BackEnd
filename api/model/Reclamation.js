@@ -34,7 +34,7 @@ const reclamationSchema = new mongoose.Schema(
     },
     fournisseur: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'User',
+      ref: 'Fournisseur',
     },
     municipality: {
       type: mongoose.Schema.Types.ObjectId,

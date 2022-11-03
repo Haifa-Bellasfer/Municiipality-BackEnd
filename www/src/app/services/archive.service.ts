@@ -17,9 +17,8 @@ export class ArchiveService {
 
   // Liste archive
   getArchives(): Observable<Archive[]> {
-    this.archives = this.http
+    return (this.archives = this.http
       .get<any>(' http://localhost:3000/api/archieve/list')
-      .pipe(tap((result) => console.log('result-->', result)));
-    return this.archives;
+      .pipe(tap((result) => console.log('archived list', result))));
   }
 }
