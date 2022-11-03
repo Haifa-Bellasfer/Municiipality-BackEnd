@@ -24,13 +24,21 @@ export class ArchiveComponent implements OnInit {
   constructor(public archiveService: ArchiveService) {}
 
   ngOnInit(): void {
-    console.log(this.getArchives());
+    this.getArchives();
   }
 
   getArchives() {
     this.archiveService.getArchives().subscribe((res) => {
       this.dataSource.data = res;
       console.log('archiiivee : ', res);
+    });
+  }
+
+  delete(id: string) {
+    console.log('id archieve', id);
+    this.archiveService.deleteArchiveReclamation(id).subscribe((res) => {
+      this.dataSource.data = res;
+      console.log('deleted : ', res);
     });
   }
 }

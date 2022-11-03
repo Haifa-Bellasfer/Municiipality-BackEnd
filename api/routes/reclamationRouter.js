@@ -79,10 +79,10 @@ router.get('/list/done', async (req, res) => {
   }
 });
 
-// Delete reclamation by ID
+// Delete reclamation
 router.delete('/delete:id', async (req, res) => {
   try {
-    const reclamation = await Reclamation.remove({ _id: req.params.id });
+    await Reclamation.remove({ _id: req.params.id });
     res.json({ message: 'successfully deleted' });
   } catch (err) {
     res.json({ message: err });
