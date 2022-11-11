@@ -9,15 +9,10 @@ import { Router } from '@angular/router';
 export class HeaderComponent implements OnInit {
   @Output() toggleSideBarForMe: EventEmitter<any> = new EventEmitter();
 
-  constructor(private router: Router) {}
+  constructor() {}
 
   ngOnInit(): void {}
   toggleSideBar() {
     this.toggleSideBarForMe.emit();
-  }
-  logOut() {
-    console.log('heee');
-    localStorage.clear();
-    this.router.navigate(['/login']);
   }
 }

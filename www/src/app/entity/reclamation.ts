@@ -1,7 +1,7 @@
 export interface Reclamation {
   _id: string;
   categorie: string;
-  location: string;
+  localisation: string;
   etat: string;
   imageURL: string;
   email: string;

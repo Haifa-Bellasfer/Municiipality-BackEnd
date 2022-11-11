@@ -1,3 +1,5 @@
+import { Fournisseur } from './../../../entity/fournisseur';
+import { FournisseurService } from './../../../services/fournisseur.service';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Reclamation } from 'src/app/entity/reclamation';
@@ -14,38 +16,42 @@ interface Food {
   styleUrls: ['./details-reclam.component.scss'],
 })
 export class DetailsReclamComponent implements OnInit {
-  foods: Food[] = [
-    { value: 'steak-0', viewValue: 'Fournisseur 1' },
-    { value: 'pizza-1', viewValue: 'Fournisseur 2' },
-    { value: 'tacos-2', viewValue: 'Fournisseur 3' },
-  ];
-
-  reclamationState: Reclamation | undefined;
+  reclamation: any;
+  fournisseurs: any;
+  selectedValue: any = '';
 
   constructor(
     public reclamationService: ReclamationService,
+    public fournisseurService: FournisseurService,
     private route: ActivatedRoute,
     private router: Router
   ) {}
 
   ngOnInit(): void {
-    this.getReclamationByID();
+    this.getReclamationByID(this.route.snapshot.params.id);
+    this.getFournisseurs();
   }
-
-  getReclamationByID() {
-    let id = this.route.snapshot.params.id;
-
-    this.reclamationService.getReclamationByID(id).subscribe((res) => {
-      console.log(res);
-      this.reclamationState = res;
+  getFournisseurs() {
+    this.fournisseurService.getFournisseurs().subscribe((res) => {
+      console.log('fournisseur', res);
+      this.fournisseurs = res;
     });
   }
-
+  getReclamationByID(id: string): any {
+    this.reclamationService.getReclamationByID(id).subscribe((res) => {
+      console.log('GETRECLAM', res);
+      this.reclamation = res;
+    });
+  }
   updateReclamation() {
     let id = this.route.snapshot.params.id;
-    this.reclamationService.updateReclamation(id).subscribe((res) => {
-      console.log(res);
-    });
-    this.router.navigateByUrl('/reclamations');
+    this.reclamationService
+      .updateReclamation(id, this.selectedValue)
+      .subscribe((res) => {
+        console.log(res);
+      });
+    setTimeout(() => {
+      this.router.navigateByUrl('/reclamations');
+    }, 2000);
   }
 }

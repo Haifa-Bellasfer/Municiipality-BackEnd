@@ -21,6 +21,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { routes } from './app-routing.module';
 import { UserService } from './services/user.service';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [AppComponent, LoginComponent],
@@ -38,6 +39,7 @@ import { UserService } from './services/user.service';
     MatCardModule,
     MatButtonModule,
     MatTableModule,
+    MatSelectModule,
     FormsModule,
     ReactiveFormsModule,
     CommonModule,

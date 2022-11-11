@@ -57,117 +57,59 @@
 <div
   style="
     display: flex !important;
-    flex-wrap: wrap;
+    flex-direction: row !important;
     flex-grow: 0;
     width: 100%;
-    gap: 30px;
-    align-items: flex-start;
     justify-content: center;
   "
 >
   <div
+    *ngFor="let reclam of reclamations"
     style="
       width: 35%;
       height: 15rem;
       padding: 1rem;
-
+      margin: auto;
       border-width: 2px;
       box-shadow: 5px 5px 5px 5px rgb(175, 163, 163);
       border-radius: 3%;
       display: flex;
       flex-direction: column;
-      background-color: white;
     "
-    *ngFor="let reclam of reclamations"
   >
-    <div
+    <img
+      src="https://cdn-icons-png.flaticon.com/512/147/147133.png"
       style="
-        display: flex;
-        flex-direction: row;
-        border-bottom: 1px solid #639745;
+        height: 100px;
+        width: 100px;
+        margin-bottom: 1rem;
+        border-radius: 50%;
+        align-self: center;
       "
-    >
-      <img
-        src="../../../assets/utilisateur.png"
-        style="
-          height: 50px;
-          width: 50px;
-          margin-bottom: 1rem;
-          border-radius: 50%;
+    />
 
-          border: 1px solid #639745;
-          padding: 2px;
-        "
-      />
-      <h3 style="margin-left: 20px; padding-top: 1rem">{{ reclam.citoyen }}</h3>
-    </div>
-    <div style="height: 60%; position: relative; flex-grow: 1">
-      <div style="padding: 1rem">
-        <span
-          style="
-            display: flex;
-            flex-direction: row;
-            align-content: center;
-            padding-bottom: 1rem;
-          "
-        >
-          <mat-icon aria-hidden="false" aria-label="format_list_bulleted"
-            >account_circle</mat-icon
-          >
-          <p style="margin-bottom: 0; padding-top: 2px; padding-left: 8px">
-            {{ reclam.localisation }}
-          </p></span
-        >
-        <span
-          style="
-            display: flex;
-            flex-direction: row;
-            align-content: center;
-            padding-bottom: 1rem;
-          "
-        >
-          <mat-icon aria-hidden="false" aria-label="format_list_bulleted"
-            >account_circle</mat-icon
-          >
-          <p style="margin-bottom: 0; padding-top: 2px; padding-left: 8px">
-            {{ reclam.categorie }}
-          </p></span
-        >
-        <span style="display: flex; flex-direction: row; align-content: center">
-          <mat-icon aria-hidden="false" aria-label="format_list_bulleted"
-            >account_circle</mat-icon
-          >
-
-          <p style="margin-bottom: 0; padding-top: 2px; padding-left: 8px">
-            {{ reclam.createdAt | date: "yyyy-MM-dd" }}
-          </p></span
-        >
-      </div>
+    <div style="height: 60%; position: relative">
       <div style="position: absolute; bottom: 0px; right: 0">
-        <a [routerLink]="['/details', reclam._id]" routerLinkActive="active">
-          <button mat-stroked-button style="background-color: #639745">
-            <p
-              style="
-                color: white;
-                margin-bottom: 0;
-                padding-left: 4px;
-                padding-right: 4px;
-                border: 1px solid #639745;
-              "
-            >
-              Verifier
-            </p>
-          </button></a
-        >
-        <a [routerLink]="['/archive', reclam._id]" routerLinkActive="active">
-          <button
-            mat-flat-button
-            color="green"
-            style="margin-left: 3px; border: 1px solid #639745"
+        <button mat-stroked-button style="background-color: #639745">
+          <p
+            style="
+              color: white;
+              margin-bottom: 0;
+              padding-left: 4px;
+              padding-right: 4px;
+              border: 1px solid #639745;
+            "
           >
-            <p style="color: #639745; margin-bottom: 0">Archiver</p>
-          </button></a
+            Traiter
+          </p>
+        </button>
+        <button
+          mat-flat-button
+          color="green"
+          style="margin-left: 3px; border: 1px solid #639745"
         >
+          <p style="color: #639745; margin-bottom: 0">Archiver</p>
+        </button>
       </div>
     </div>
   </div>

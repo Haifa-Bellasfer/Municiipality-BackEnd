@@ -32,7 +32,9 @@ router.post('/add', async (req, res) => {
 // Get reclamation by id
 router.get('/getReclamationById/:id', async (req, res) => {
   try {
-    const reclamation = await Reclamation.findById(req.params.id);
+    const reclamation = await Reclamation.findById(req.params.id).populate(
+      'citoyen'
+    );
     res.json(reclamation);
   } catch (err) {
     res.json({ message: err });
@@ -42,7 +44,7 @@ router.get('/getReclamationById/:id', async (req, res) => {
 // List all reclamations
 router.get('/list', async (req, res) => {
   try {
-    const reclamations = await Reclamation.find();
+    const reclamations = await Reclamation.find().populate('citoyen');
     res.json(reclamations);
   } catch (err) {
     res.json({ message: err });
@@ -94,7 +96,7 @@ router.put('/update/:id', async (req, res) => {
   try {
     const id = req.params.id;
     const options = { new: true };
-    const fournisseur = await Fournisseur.findById(req.body.id);
+    const fournisseur = await Fournisseur.findById(req.body.fournisseur);
 
     const reclamation = await Reclamation.findByIdAndUpdate(
       id,
