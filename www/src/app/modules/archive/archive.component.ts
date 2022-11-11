@@ -35,7 +35,6 @@ export class ArchiveComponent implements OnInit {
   }
 
   delete(id: string) {
-    console.log('id archieve', id);
     this.archiveService.deleteArchiveReclamation(id).subscribe((res) => {
       this.dataSource.data = res;
       console.log('deleted : ', res);

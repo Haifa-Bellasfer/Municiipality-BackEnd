@@ -21,6 +21,16 @@ export class ArchiveService {
       .get<any>(' http://localhost:3000/api/archieve/list')
       .pipe(tap((result) => console.log('archived list', result))));
   }
+  // Add archive
+  addArchive(id: string, description: string): Observable<Archive[]> {
+    return (this.archives = this.http
+      .post<any>(' http://localhost:3000/api/archieve/add', {
+        id: id,
+        description: description,
+      })
+      .pipe(tap((result) => console.log('added archieve', result))));
+  }
+
   // Delete archive/reclamation
   deleteArchiveReclamation(id: string): Observable<Archive[]> {
     return (this.archives = this.http

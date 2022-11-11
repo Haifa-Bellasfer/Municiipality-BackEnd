@@ -15,6 +15,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatTabsModule } from '@angular/material/tabs';
 import { FournisseurComponent } from 'src/app/modules/fournisseur/fournisseur.component';
 import { MatIconModule } from '@angular/material/icon';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { MatIconModule } from '@angular/material/icon';
     MatSelectModule,
     MatTabsModule,
     MatIconModule,
+    MatDialogModule,
   ],
 })
 export class DefaultModule {}
