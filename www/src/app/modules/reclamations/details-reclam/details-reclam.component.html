@@ -1,40 +1,134 @@
-<mat-card
-  class="example-card"
-  style="margin-bottom: 50px; padding-bottom: 70px"
->
-  <mat-card-header>
-    <div mat-card-avatar class="example-header-image"></div>
-    <mat-card-title>{{ reclamationState!.categorie }}</mat-card-title>
-    <mat-card-subtitle>{{ reclamationState!.etat }}</mat-card-subtitle>
-  </mat-card-header>
-  <img
-    class="center"
-    mat-card-image
-    src="https://material.angular.io/assets/img/examples/shiba2.jpg"
-    alt="Photo of a Shiba Inu"
-  />
-  <mat-card-content>
-    <p>
-      {{ reclamationState!.description }}
-    </p>
-    <mat-form-field appearance="fill">
-      <mat-label>Fournisseur</mat-label>
-      <mat-select>
-        <mat-option *ngFor="let food of foods" [value]="food.value">
-          {{ food.viewValue }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-  </mat-card-content>
-  <mat-card-actions style="float: right">
-    <button
-      (click)="updateReclamation()"
-      mat-raised-button
-      style="background-color: #385f45; color: aliceblue"
-    >
-      Traiter
-    </button>
+<div
+  style="
+    width: 90%;
+    padding: 1rem;
 
-    <button mat-raised-button color="warn">Archiver</button>
-  </mat-card-actions>
-</mat-card>
+    border-width: 2px;
+    box-shadow: 5px 5px 5px 5px rgb(175, 163, 163);
+    border-radius: 3%;
+    display: flex;
+    margin: auto;
+    flex-direction: column;
+    background-color: white;
+  "
+>
+  <div
+    style="display: flex; flex-direction: row; border-bottom: 1px solid #639745"
+  >
+    <img
+      src="../../../assets/utilisateur.png"
+      style="
+        height: 50px;
+        width: 50px;
+        margin-bottom: 1rem;
+        border-radius: 50%;
+
+        border: 1px solid #639745;
+        padding: 2px;
+      "
+    />
+    <h3 style="margin-left: 20px; padding-top: 1rem">
+      {{ reclamation.citoyen.username }}
+    </h3>
+  </div>
+
+  <div style="position: relative; flex-grow: 1">
+    <div style="display: flex; flex-direction: row; margin-top: 1rem">
+      <img
+        src="../../../../assets/7ofraa.jpg"
+        style="
+          height: 50%;
+
+          width: 40%;
+          margin-bottom: 1rem;
+          border-radius: 2%;
+
+          border: 0.5px solid #639745;
+          padding: 2px;
+          margin-right: 2rem;
+        "
+      />
+      <div style="flex-grow: 1">
+        <h3>Description</h3>
+        <p>
+          {{ reclamation.description }}
+        </p>
+        <mat-form-field appearance="fill" style="width: 90%">
+          <mat-label>Select an option</mat-label>
+          <mat-select [(value)]="selectedValue">
+            <mat-option
+              *ngFor="let fournisseur of fournisseurs"
+              [value]="fournisseur._id"
+              >{{ fournisseur.slug }}</mat-option
+            >
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+    <div style="padding: 1rem">
+      <span
+        style="
+          display: flex;
+          flex-direction: row;
+          align-content: center;
+          padding-bottom: 1rem;
+        "
+      >
+        <mat-icon aria-hidden="false" aria-label="format_list_bulleted"
+          >account_circle</mat-icon
+        >
+        <p style="margin-bottom: 0; padding-top: 2px; padding-left: 8px">
+          {{ reclamation.localisation }}
+        </p></span
+      >
+      <span
+        style="
+          display: flex;
+          flex-direction: row;
+          align-content: center;
+          padding-bottom: 1rem;
+        "
+      >
+        <mat-icon aria-hidden="false" aria-label="format_list_bulleted"
+          >account_circle</mat-icon
+        >
+        <p style="margin-bottom: 0; padding-top: 2px; padding-left: 8px">
+          {{ reclamation.categorie }}
+        </p></span
+      >
+      <span style="display: flex; flex-direction: row; align-content: center">
+        <mat-icon aria-hidden="false" aria-label="format_list_bulleted"
+          >account_circle</mat-icon
+        >
+
+        <p style="margin-bottom: 0; padding-top: 2px; padding-left: 8px">
+          {{ reclamation.createdAt | date: "yyyy-MM-dd" }}
+        </p></span
+      >
+    </div>
+    <div style="position: absolute; bottom: 0px; right: 0">
+      <button mat-stroked-button style="background-color: #639745">
+        <p
+          style="
+            color: white;
+            margin-bottom: 0;
+            padding-left: 4px;
+            padding-right: 4px;
+            border: 1px solid #639745;
+          "
+          (click)="updateReclamation()"
+        >
+          Traiter
+        </p>
+      </button>
+
+      <button
+        mat-flat-button
+        color="green"
+        style="margin-left: 3px; border: 1px solid #639745"
+      >
+        <p style="color: #639745; margin-bottom: 0">Archiver</p>
+      </button>
+    </div>
+  </div>
+</div>

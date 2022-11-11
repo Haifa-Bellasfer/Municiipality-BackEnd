@@ -33,15 +33,21 @@ export class ReclamationService {
   //Reclamation By Id
   getReclamationByID(id: string): Observable<Reclamation> {
     return this.http
-      .get<any>(' http://localhost:3000/api/reclamation/getById/' + id)
+      .get<any>(
+        ' http://localhost:3000/api/reclamation/getReclamationById/' + id
+      )
       .pipe(tap((result) => console.log('result-->', result)));
   }
 
   //Update REclamation State
-  updateReclamation(id: string): Observable<Reclamation> {
+  updateReclamation(
+    id: string,
+    idFournisseur: string
+  ): Observable<Reclamation> {
     return this.http
       .put<any>(
         ' http://localhost:3000/api/reclamation/update/' + id,
+        { fournisseur: idFournisseur },
         this.httpOption
       )
       .pipe(tap((result) => console.log('resultUPdate-->', result)));

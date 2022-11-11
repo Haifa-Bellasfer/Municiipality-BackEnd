@@ -14,6 +14,7 @@ import { DetailsReclamComponent } from 'src/app/modules/reclamations/details-rec
 import { MatSelectModule } from '@angular/material/select';
 import { MatTabsModule } from '@angular/material/tabs';
 import { FournisseurComponent } from 'src/app/modules/fournisseur/fournisseur.component';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { FournisseurComponent } from 'src/app/modules/fournisseur/fournisseur.co
     MatTableModule,
     MatSelectModule,
     MatTabsModule,
+    MatIconModule,
   ],
 })
 export class DefaultModule {}
