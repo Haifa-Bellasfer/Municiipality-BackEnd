@@ -22,9 +22,11 @@ import { CommonModule } from '@angular/common';
 import { routes } from './app-routing.module';
 import { UserService } from './services/user.service';
 import { MatSelectModule } from '@angular/material/select';
+import { MatDialogModule } from '@angular/material/dialog';
+import { DialogComponent } from './modules/dialog/dialog.component';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent],
+  declarations: [AppComponent, LoginComponent, DialogComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -42,11 +44,13 @@ import { MatSelectModule } from '@angular/material/select';
     MatSelectModule,
     FormsModule,
     ReactiveFormsModule,
+    MatDialogModule,
     CommonModule,
     RouterModule.forRoot(routes),
   ],
   exports: [RouterModule],
   providers: [ReclamationService, UserService],
   bootstrap: [AppComponent],
+  entryComponents: [DialogComponent],
 })
 export class AppModule {}

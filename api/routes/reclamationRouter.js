@@ -3,6 +3,7 @@ const Fournisseur = require('../model/Fournisseur');
 const Reclamation = require('../model/Reclamation');
 const User = require('../model/User');
 const Municipality = require('../model/Municipality');
+const { ObjectId } = require('mongodb');
 
 // Add Reclamation
 router.post('/add', async (req, res) => {
@@ -11,7 +12,6 @@ router.post('/add', async (req, res) => {
   const municipality = await Municipality.findById(req.body.municipality);
 
   const reclamation = new Reclamation({
-    email: req.body.email,
     description: req.body.description,
     categorie: req.body.categorie,
     localisation: req.body.localisation,
@@ -64,7 +64,9 @@ router.get('/list/inprogress', async (req, res) => {
 // Get pennding reclamations
 router.get('/list/pending', async (req, res) => {
   try {
-    const reclamation = await Reclamation.find({ etat: 'Pending' });
+    const reclamation = await Reclamation.find({ etat: 'Pending' }).populate(
+      'citoyen'
+    );
     res.json(reclamation);
   } catch (err) {
     res.json({ message: err });
@@ -107,6 +109,17 @@ router.put('/update/:id', async (req, res) => {
     );
 
     res.json(reclamation);
+  } catch (err) {
+    res.json({ message: err });
+  }
+});
+// Get reclamation fournisseur
+router.get('/listfournisseurReclamation/:id', async (req, res) => {
+  try {
+    const reclamations = await Reclamation.find({
+      fournisseur: ObjectId(req.params.id),
+    });
+    res.json(reclamations);
   } catch (err) {
     res.json({ message: err });
   }

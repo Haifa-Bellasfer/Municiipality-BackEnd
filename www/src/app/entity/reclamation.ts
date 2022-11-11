@@ -4,7 +4,6 @@ export interface Reclamation {
   localisation: string;
   etat: string;
   imageURL: string;
-  email: string;
   description: string;
   date: Date;
 }

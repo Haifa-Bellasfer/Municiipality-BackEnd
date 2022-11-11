@@ -2,12 +2,6 @@ const mongoose = require('mongoose');
 
 const reclamationSchema = new mongoose.Schema(
   {
-    email: {
-      type: String,
-      required: true,
-      min: 4,
-      max: 200,
-    },
     description: {
       type: String,
       required: true,

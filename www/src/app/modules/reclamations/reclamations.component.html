@@ -1,59 +1,3 @@
-<!--  <table mat-table [dataSource]="dataSource">
-      <ng-container matColumnDef="_id">
-        <th mat-header-cell *matHeaderCellDef>
-          <h4 style="font-weight: bolder">User</h4>
-        </th>
-        <td mat-cell *matCellDef="let element">
-          <img
-            src="https://cdn-icons-png.flaticon.com/512/3048/3048122.png"
-            style="width: 50px"
-          />
-        </td>
-      </ng-container>
-      <ng-container matColumnDef="categorie">
-        <th mat-header-cell *matHeaderCellDef>
-          <h4 style="font-weight: bolder">categorie</h4>
-        </th>
-        <td mat-cell *matCellDef="let element">{{ element.categorie }}</td>
-      </ng-container>
-      <ng-container matColumnDef="etat">
-        <th mat-header-cell *matHeaderCellDef>
-          <h4 style="font-weight: bolder">etat</h4>
-        </th>
-        <td mat-cell *matCellDef="let element">{{ element.etat }}</td>
-      </ng-container>
-
-      <ng-container matColumnDef="localisation">
-        <th mat-header-cell *matHeaderCellDef>
-          <h4 style="font-weight: bolder">location</h4>
-        </th>
-        <td mat-cell *matCellDef="let element">{{ element.localisation }}</td>
-      </ng-container>
-      <ng-container matColumnDef="date">
-        <th mat-header-cell *matHeaderCellDef>
-          <h4 style="font-weight: bolder">date</h4>
-        </th>
-        <td mat-cell *matCellDef="let element">
-          {{ element.createdAt | date: "yyyy-MM-dd" }}
-        </td>
-      </ng-container>
-      <ng-container matColumnDef="action">
-        <th mat-header-cell *matHeaderCellDef>
-          <h4 style="font-weight: bolder">Action</h4>
-        </th>
-        <td mat-cell *matCellDef="let element">
-          <a [routerLink]="['/details', element._id]" routerLinkActive="active">
-            <button mat-stroked-button style="color: #385f45">
-              Vérifier
-            </button></a
-          >
-          <button mat-stroked-button color="warn">Archiver</button>
-        </td>
-      </ng-container>
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-    </table>-->
-
 <div
   style="
     display: flex !important;
@@ -99,7 +43,9 @@
           padding: 2px;
         "
       />
-      <h3 style="margin-left: 20px; padding-top: 1rem">{{ reclam.citoyen }}</h3>
+      <h3 style="margin-left: 20px; padding-top: 1rem">
+        {{ reclam.citoyen.username }}
+      </h3>
     </div>
     <div style="height: 60%; position: relative; flex-grow: 1">
       <div style="padding: 1rem">
@@ -111,9 +57,7 @@
             padding-bottom: 1rem;
           "
         >
-          <mat-icon aria-hidden="false" aria-label="format_list_bulleted"
-            >account_circle</mat-icon
-          >
+          <mat-icon> location_on</mat-icon>
           <p style="margin-bottom: 0; padding-top: 2px; padding-left: 8px">
             {{ reclam.localisation }}
           </p></span
@@ -126,17 +70,13 @@
             padding-bottom: 1rem;
           "
         >
-          <mat-icon aria-hidden="false" aria-label="format_list_bulleted"
-            >account_circle</mat-icon
-          >
+          <mat-icon> category</mat-icon>
           <p style="margin-bottom: 0; padding-top: 2px; padding-left: 8px">
             {{ reclam.categorie }}
           </p></span
         >
         <span style="display: flex; flex-direction: row; align-content: center">
-          <mat-icon aria-hidden="false" aria-label="format_list_bulleted"
-            >account_circle</mat-icon
-          >
+          <mat-icon>date_range</mat-icon>
 
           <p style="margin-bottom: 0; padding-top: 2px; padding-left: 8px">
             {{ reclam.createdAt | date: "yyyy-MM-dd" }}
@@ -145,81 +85,15 @@
       </div>
       <div style="position: absolute; bottom: 0px; right: 0">
         <a [routerLink]="['/details', reclam._id]" routerLinkActive="active">
-          <button mat-stroked-button style="background-color: #639745">
-            <p
-              style="
-                color: white;
-                margin-bottom: 0;
-                padding-left: 4px;
-                padding-right: 4px;
-                border: 1px solid #639745;
-              "
-            >
-              Verifier
-            </p>
-          </button></a
-        >
-        <a [routerLink]="['/archive', reclam._id]" routerLinkActive="active">
           <button
             mat-flat-button
             color="green"
             style="margin-left: 3px; border: 1px solid #639745"
           >
-            <p style="color: #639745; margin-bottom: 0">Archiver</p>
+            <p style="color: #639745; margin-bottom: 0">Consulter</p>
           </button></a
         >
       </div>
     </div>
   </div>
 </div>
-
-<!--<table mat-table [dataSource]="PendigSourceState">
-      <ng-container matColumnDef="_id">
-        <th mat-header-cell *matHeaderCellDef>
-          <h4 style="font-weight: bolder">User</h4>
-        </th>
-        <td mat-cell *matCellDef="let element">
-          <img
-            src="https://cdn-icons-png.flaticon.com/512/3048/3048122.png"
-            style="width: 50px"
-          />
-        </td>
-      </ng-container>
-      <ng-container matColumnDef="categorie">
-        <th mat-header-cell *matHeaderCellDef>
-          <h4 style="font-weight: bolder">categorie</h4>
-        </th>
-        <td mat-cell *matCellDef="let element">{{ element.categorie }}</td>
-      </ng-container>
-      <ng-container matColumnDef="etat">
-        <th mat-header-cell *matHeaderCellDef>
-          <h4 style="font-weight: bolder">etat</h4>
-        </th>
-        <td mat-cell *matCellDef="let element">{{ element.etat }}</td>
-      </ng-container>
-
-      <ng-container matColumnDef="localisation">
-        <th mat-header-cell *matHeaderCellDef>
-          <h4 style="font-weight: bolder">location</h4>
-        </th>
-        <td mat-cell *matCellDef="let element">{{ element.localisation }}</td>
-      </ng-container>
-      <ng-container matColumnDef="date">
-        <th mat-header-cell *matHeaderCellDef>
-          <h4 style="font-weight: bolder">date</h4>
-        </th>
-        <td mat-cell *matCellDef="let element">
-          {{ element.updatedAt | date: "yyyy-MM-dd" }}
-        </td>
-      </ng-container>
-      <ng-container matColumnDef="action">
-        <th mat-header-cell *matHeaderCellDef>
-          <h4 style="font-weight: bolder">Action</h4>
-        </th>
-        <td mat-cell *matCellDef="let element">
-          <button mat-stroked-button color="warn">Archiver</button>
-        </td>
-      </ng-container>
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-    </table>-->
