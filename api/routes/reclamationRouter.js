@@ -54,7 +54,9 @@ router.get('/list', async (req, res) => {
 // Get in progress reclamations
 router.get('/list/inprogress', async (req, res) => {
   try {
-    const reclamation = await Reclamation.find({ etat: 'Inprogress' });
+    const reclamation = await Reclamation.find({ etat: 'Inprogress' }).populate(
+      'citoyen'
+    );
     res.json(reclamation);
   } catch (err) {
     res.json({ message: err });
@@ -118,7 +120,7 @@ router.get('/listfournisseurReclamation/:id', async (req, res) => {
   try {
     const reclamations = await Reclamation.find({
       fournisseur: ObjectId(req.params.id),
-    });
+    }).populate(['fournisseur', 'citoyen']);
     res.json(reclamations);
   } catch (err) {
     res.json({ message: err });

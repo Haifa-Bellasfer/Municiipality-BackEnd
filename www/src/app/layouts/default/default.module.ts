@@ -16,6 +16,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { FournisseurComponent } from 'src/app/modules/fournisseur/fournisseur.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
+import { DetailsFournisseurComponent } from 'src/app/modules/fournisseur/details-fournisseur/details-fournisseur.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     reclamationsComponent,
     DetailsReclamComponent,
     FournisseurComponent,
+    DetailsFournisseurComponent,
     ArchiveComponent,
   ],
   imports: [

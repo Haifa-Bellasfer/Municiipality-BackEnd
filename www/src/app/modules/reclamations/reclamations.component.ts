@@ -10,18 +10,7 @@ import { MatTableDataSource } from '@angular/material/table';
 })
 export class reclamationsComponent implements OnInit {
   reclamations: any;
-  // columns we will show on the table
-  public displayedColumns = [
-    '_id',
-    'categorie',
-    'localisation',
-    'etat',
-    'date',
-    'action',
-  ];
-  //the source where we will get the data
-  public dataSource = new MatTableDataSource<Reclamation>();
-  public PendigSourceState = new MatTableDataSource<Reclamation>();
+  reclamationsInprogress: any;
 
   constructor(public reclamationService: ReclamationService) {}
 
@@ -32,15 +21,15 @@ export class reclamationsComponent implements OnInit {
 
   getReclamationsPending() {
     this.reclamationService.getReclamationsPending().subscribe((res) => {
-      console.log(res);
+      console.log('pending', res);
       this.reclamations = res;
     });
   }
 
   getReclamationsInprogress() {
     this.reclamationService.getReclamationsInprogress().subscribe((res) => {
-      console.log(res);
-      this.PendigSourceState.data = res;
+      console.log('progress', res);
+      this.reclamationsInprogress = res;
     });
   }
 }

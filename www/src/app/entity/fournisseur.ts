@@ -8,4 +8,5 @@ export interface Fournisseur {
   password: string;
   listeReclamation: [Reclamation];
   categorie: string;
+  active: boolean;
 }

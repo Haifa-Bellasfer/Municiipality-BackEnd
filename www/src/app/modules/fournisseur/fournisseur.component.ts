@@ -2,7 +2,6 @@ import { FournisseurService } from './../../services/fournisseur.service';
 import { Fournisseur } from './../../entity/fournisseur';
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-fournisseur',
