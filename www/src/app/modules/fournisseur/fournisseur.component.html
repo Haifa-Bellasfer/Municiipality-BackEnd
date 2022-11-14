@@ -33,12 +33,25 @@
     </ng-container>
 
     <ng-container matColumnDef="action">
-      <th mat-header-cell *matHeaderCellDef>
-        <h4 style="font-weight: bolder">Action</h4>
-      </th>
+      <th mat-header-cell *matHeaderCellDef></th>
       <td mat-cell *matCellDef="let element">
-        <a [routerLink]="['/details', element._id]" routerLinkActive="active">
-          <button mat-stroked-button style="color: #385f45">Modifier</button></a
+        <a
+          [routerLink]="['/details-fournisseur', element._id]"
+          routerLinkActive="active"
+        >
+          <button mat-stroked-button style="background-color: #639745">
+            <p
+              style="
+                color: white;
+                margin-bottom: 0;
+                padding-left: 4px;
+                padding-right: 4px;
+                border: 1px solid #639745;
+              "
+            >
+              Voir plus
+            </p>
+          </button></a
         >
       </td></ng-container
     >

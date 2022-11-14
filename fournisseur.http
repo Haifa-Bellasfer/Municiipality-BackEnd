@@ -3,12 +3,12 @@ POST http://localhost:3000/api/fournisseur/add
 Content-Type: application/json
 
 {
-    "slug": "Soned",
-    "email":"iheb@gmail.com",
+    "slug": "Steg",
+    "email":"houssem@gmail.com",
     "password" : "1234",
     "addresse" : "hamem lif",
     "phone":"56249538",
-    "categorie" : "Nettoyage"
+    "categorie" : "Eclairage"
 }
 
 
@@ -26,4 +26,5 @@ Content-Type: application/json
     "id" : "614dfe099530931728154cdf"
 }
 
-
+### desactive fournisseur
+PUT http://localhost:3000/api/fournisseur/active/63722eee5176512b9867a12f

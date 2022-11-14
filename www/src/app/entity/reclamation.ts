@@ -6,4 +6,7 @@ export interface Reclamation {
   imageURL: string;
   description: string;
   date: Date;
+  fournisseur: {
+    slug: string;
+  };
 }

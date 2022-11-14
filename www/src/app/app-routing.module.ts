@@ -1,3 +1,4 @@
+import { DetailsFournisseurComponent } from './modules/fournisseur/details-fournisseur/details-fournisseur.component';
 import { ArchiveComponent } from './modules/archive/archive.component';
 import { Component, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -28,6 +29,10 @@ export const routes: Routes = [
       {
         path: 'fournisseur',
         component: FournisseurComponent,
+      },
+      {
+        path: 'details-fournisseur/:id',
+        component: DetailsFournisseurComponent,
       },
       {
         path: 'archive',

@@ -1,99 +1,216 @@
-<div
-  style="
-    display: flex !important;
-    flex-wrap: wrap;
-    flex-grow: 0;
-    width: 100%;
-    gap: 30px;
-    align-items: flex-start;
-    justify-content: center;
-  "
->
-  <div
-    style="
-      width: 35%;
-      height: 15rem;
-      padding: 1rem;
-
-      border-width: 2px;
-      box-shadow: 5px 5px 5px 5px rgb(175, 163, 163);
-      border-radius: 3%;
-      display: flex;
-      flex-direction: column;
-      background-color: white;
-    "
-    *ngFor="let reclam of reclamations"
-  >
+<mat-tab-group animationDuration="0ms" style="padding-bottom: 4rem">
+  <mat-tab label="En attente">
     <div
       style="
-        display: flex;
-        flex-direction: row;
-        border-bottom: 1px solid #639745;
+        display: flex !important;
+        flex-wrap: wrap;
+        flex-grow: 0;
+        width: 100%;
+        gap: 30px;
+        align-items: flex-start;
+        justify-content: center;
+        padding-bottom: 10px;
       "
     >
-      <img
-        src="../../../assets/utilisateur.png"
+      <div
         style="
-          height: 50px;
-          width: 50px;
-          margin-bottom: 1rem;
-          border-radius: 50%;
-
-          border: 1px solid #639745;
-          padding: 2px;
+          width: 35%;
+          height: 15rem;
+          padding: 1rem;
+          margin-top: 1rem;
+          border-width: 2px;
+          box-shadow: 5px 5px 5px 5px rgb(175, 163, 163);
+          border-radius: 3%;
+          display: flex;
+          flex-direction: column;
+          background-color: white;
         "
-      />
-      <h3 style="margin-left: 20px; padding-top: 1rem">
-        {{ reclam.citoyen.username }}
-      </h3>
-    </div>
-    <div style="height: 60%; position: relative; flex-grow: 1">
-      <div style="padding: 1rem">
-        <span
+        *ngFor="let reclam of reclamations"
+      >
+        <div
           style="
             display: flex;
             flex-direction: row;
-            align-content: center;
-            padding-bottom: 1rem;
+            border-bottom: 1px solid #639745;
           "
         >
-          <mat-icon> location_on</mat-icon>
-          <p style="margin-bottom: 0; padding-top: 2px; padding-left: 8px">
-            {{ reclam.localisation }}
-          </p></span
-        >
-        <span
-          style="
-            display: flex;
-            flex-direction: row;
-            align-content: center;
-            padding-bottom: 1rem;
-          "
-        >
-          <mat-icon> category</mat-icon>
-          <p style="margin-bottom: 0; padding-top: 2px; padding-left: 8px">
-            {{ reclam.categorie }}
-          </p></span
-        >
-        <span style="display: flex; flex-direction: row; align-content: center">
-          <mat-icon>date_range</mat-icon>
+          <img
+            src="../../../assets/utilisateur.png"
+            style="
+              height: 50px;
+              width: 50px;
+              margin-bottom: 1rem;
+              border-radius: 50%;
 
-          <p style="margin-bottom: 0; padding-top: 2px; padding-left: 8px">
-            {{ reclam.createdAt | date: "yyyy-MM-dd" }}
-          </p></span
-        >
-      </div>
-      <div style="position: absolute; bottom: 0px; right: 0">
-        <a [routerLink]="['/details', reclam._id]" routerLinkActive="active">
-          <button
-            mat-flat-button
-            color="green"
-            style="margin-left: 3px; border: 1px solid #639745"
-          >
-            <p style="color: #639745; margin-bottom: 0">Consulter</p>
-          </button></a
-        >
+              border: 1px solid #639745;
+              padding: 2px;
+            "
+          />
+          <h3 style="margin-left: 20px; padding-top: 1rem">
+            {{ reclam.citoyen.username }}
+          </h3>
+        </div>
+        <div style="height: 60%; position: relative; flex-grow: 1">
+          <div style="padding: 1rem">
+            <span
+              style="
+                display: flex;
+                flex-direction: row;
+                align-content: center;
+                padding-bottom: 1rem;
+              "
+            >
+              <mat-icon> location_on</mat-icon>
+              <p style="margin-bottom: 0; padding-top: 2px; padding-left: 8px">
+                {{ reclam.localisation }}
+              </p></span
+            >
+            <span
+              style="
+                display: flex;
+                flex-direction: row;
+                align-content: center;
+                padding-bottom: 1rem;
+              "
+            >
+              <mat-icon> category</mat-icon>
+              <p style="margin-bottom: 0; padding-top: 2px; padding-left: 8px">
+                {{ reclam.categorie }}
+              </p></span
+            >
+            <span
+              style="display: flex; flex-direction: row; align-content: center"
+            >
+              <mat-icon>date_range</mat-icon>
+
+              <p style="margin-bottom: 0; padding-top: 2px; padding-left: 8px">
+                {{ reclam.createdAt | date: "yyyy-MM-dd" }}
+              </p></span
+            >
+          </div>
+          <div style="position: absolute; bottom: 0px; right: 0">
+            <a
+              [routerLink]="['/details', reclam._id]"
+              routerLinkActive="active"
+            >
+              <button
+                mat-flat-button
+                color="green"
+                style="margin-left: 3px; border: 1px solid #639745"
+              >
+                <p style="color: #639745; margin-bottom: 0">Consulter</p>
+              </button></a
+            >
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
+  </mat-tab>
+  <mat-tab label="En cours">
+    <div
+      style="
+        display: flex !important;
+        flex-wrap: wrap;
+        flex-grow: 0;
+        width: 100%;
+        gap: 30px;
+        align-items: flex-start;
+        justify-content: center;
+        padding-bottom: 10px;
+      "
+    >
+      <div
+        style="
+          width: 35%;
+          height: 15rem;
+          padding: 1rem;
+          margin-top: 1rem;
+          border-width: 2px;
+          box-shadow: 5px 5px 5px 5px rgb(175, 163, 163);
+          border-radius: 3%;
+          display: flex;
+          flex-direction: column;
+          background-color: white;
+        "
+        *ngFor="let reclamProgress of reclamationsInprogress"
+      >
+        <div
+          style="
+            display: flex;
+            flex-direction: row;
+            border-bottom: 1px solid #639745;
+          "
+        >
+          <img
+            src="../../../assets/utilisateur.png"
+            style="
+              height: 50px;
+              width: 50px;
+              margin-bottom: 1rem;
+              border-radius: 50%;
+
+              border: 1px solid #639745;
+              padding: 2px;
+            "
+          />
+          <h3 style="margin-left: 20px; padding-top: 1rem">
+            {{ reclamProgress.citoyen.username }}
+          </h3>
+        </div>
+        <div style="height: 60%; position: relative; flex-grow: 1">
+          <div style="padding: 1rem">
+            <span
+              style="
+                display: flex;
+                flex-direction: row;
+                align-content: center;
+                padding-bottom: 1rem;
+              "
+            >
+              <mat-icon> location_on</mat-icon>
+              <p style="margin-bottom: 0; padding-top: 2px; padding-left: 8px">
+                {{ reclamProgress.localisation }}
+              </p></span
+            >
+            <span
+              style="
+                display: flex;
+                flex-direction: row;
+                align-content: center;
+                padding-bottom: 1rem;
+              "
+            >
+              <mat-icon> category</mat-icon>
+              <p style="margin-bottom: 0; padding-top: 2px; padding-left: 8px">
+                {{ reclamProgress.categorie }}
+              </p></span
+            >
+            <span
+              style="display: flex; flex-direction: row; align-content: center"
+            >
+              <mat-icon>date_range</mat-icon>
+
+              <p style="margin-bottom: 0; padding-top: 2px; padding-left: 8px">
+                {{ reclamProgress.createdAt | date: "yyyy-MM-dd" }}
+              </p></span
+            >
+          </div>
+          <div style="position: absolute; bottom: 0px; right: 0">
+            <a
+              [routerLink]="['/details', reclamProgress._id]"
+              routerLinkActive="active"
+            >
+              <button
+                mat-flat-button
+                color="green"
+                style="margin-left: 3px; border: 1px solid #639745"
+              >
+                <p style="color: #639745; margin-bottom: 0">Consulter</p>
+              </button></a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-tab>
+</mat-tab-group>

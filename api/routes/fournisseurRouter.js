@@ -22,6 +22,7 @@ router.post('/add', async (req, res) => {
     password: hashedPassword,
     addresse: req.body.addresse,
     phone: req.body.phone,
+    active: req.body.active,
     categorie: req.body.categorie,
   });
   try {
@@ -99,6 +100,34 @@ router.put('/update/done/:id', async (req, res) => {
       res.json({ message: err });
     }
     res.json(reclamation);
+  } catch (err) {
+    res.json({ message: err });
+  }
+});
+// Delete fournisseur
+router.delete('/delete/:id', async (req, res) => {
+  try {
+    await Reclamation.remove({ _id: req.params.id });
+    res.json({ message: 'successfully deleted' });
+  } catch (err) {
+    res.json({ message: err });
+  }
+});
+//Update active fournisseur
+router.put('/active/:id', async (req, res) => {
+  try {
+    const id = req.params.id;
+    const options = { new: true };
+
+    const fournisseur = await Fournisseur.findByIdAndUpdate(
+      id,
+      {
+        $set: { active: true },
+      },
+      options
+    );
+
+    res.json({ message: 'fournisseur desactive', fournisseur });
   } catch (err) {
     res.json({ message: err });
   }
