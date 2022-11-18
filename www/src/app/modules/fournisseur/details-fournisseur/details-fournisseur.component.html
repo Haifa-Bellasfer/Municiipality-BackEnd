@@ -82,8 +82,16 @@
             mat-flat-button
             color="green"
             style="margin-left: 3px; border: 1px solid #639745"
+            (click)="
+              desactiveForunisseur(
+                element.fournisseur._id,
+                element.fournisseur.active
+              )
+            "
           >
-            <p style="color: #639745; margin-bottom: 0">Supprimer</p>
+            <p style="color: #639745; margin-bottom: 0">
+              {{ element.fournisseur.active ? "Desactiver" : "Activer" }}
+            </p>
           </button>
         </td></ng-container
       >
