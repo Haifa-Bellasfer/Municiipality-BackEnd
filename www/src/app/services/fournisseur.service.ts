@@ -17,9 +17,20 @@ export class FournisseurService {
 
   // Liste fournisseur
   getFournisseurs(): Observable<Fournisseur[]> {
-    this.fournisseurs = this.http
+    return this.http
       .get<any>(' http://localhost:3000/api/fournisseur/list')
       .pipe(tap((result) => console.log('result-->', result)));
-    return this.fournisseurs;
+  }
+  // Desactive fournisseur
+  desactiveFournisseur(id: string, state: boolean): Observable<Fournisseur> {
+    console.log(id);
+    console.log(state);
+    return this.http
+      .put<any>(
+        ' http://localhost:3000/api/fournisseur/active/' + id,
+        { state: state },
+        this.httpOption
+      )
+      .pipe(tap((result) => console.log('desactive-->', result)));
   }
 }

@@ -59,6 +59,7 @@
             <mat-option
               *ngFor="let fournisseur of fournisseurs"
               [value]="fournisseur._id"
+              [disabled]="fournisseur.active === true"
               >{{ fournisseur.slug }}</mat-option
             >
           </mat-select>

@@ -27,4 +27,9 @@ Content-Type: application/json
 }
 
 ### desactive fournisseur
-PUT http://localhost:3000/api/fournisseur/active/63722eee5176512b9867a12f
+PUT http://localhost:3000/api/fournisseur/active/62fec68af7d43a186887a637
+Content-Type: application/json
+
+{
+    "state" : true
+}

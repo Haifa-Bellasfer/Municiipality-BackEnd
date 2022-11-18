@@ -117,17 +117,16 @@ router.delete('/delete/:id', async (req, res) => {
 router.put('/active/:id', async (req, res) => {
   try {
     const id = req.params.id;
+    const newState = req.body.state;
     const options = { new: true };
-
-    const fournisseur = await Fournisseur.findByIdAndUpdate(
+    const activeFrounisseur = await Fournisseur.findByIdAndUpdate(
       id,
       {
-        $set: { active: true },
+        $set: { active: newState },
       },
       options
     );
-
-    res.json({ message: 'fournisseur desactive', fournisseur });
+    res.json({ message: 'fournisseur a ete modifier', activeFrounisseur });
   } catch (err) {
     res.json({ message: err });
   }

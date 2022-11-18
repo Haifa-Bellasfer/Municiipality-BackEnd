@@ -10,7 +10,14 @@ import { MatTableDataSource } from '@angular/material/table';
 })
 export class FournisseurComponent implements OnInit {
   // columns we will show on the table
-  public displayedColumns = ['_id', 'slug', 'email', 'phone', 'action'];
+  public displayedColumns = [
+    '_id',
+    'slug',
+    'email',
+    'active',
+    'phone',
+    'action',
+  ];
 
   //the source where we will get the data
   public dataSource = new MatTableDataSource<Fournisseur>();
