@@ -24,9 +24,15 @@ import { UserService } from './services/user.service';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDialogModule } from '@angular/material/dialog';
 import { DialogComponent } from './modules/dialog/dialog.component';
+import { DialogFournisseurComponent } from './modules/dialog-fournisseur/dialog-fournisseur.component';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, DialogComponent],
+  declarations: [
+    AppComponent,
+    LoginComponent,
+    DialogComponent,
+    DialogFournisseurComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -51,6 +57,6 @@ import { DialogComponent } from './modules/dialog/dialog.component';
   exports: [RouterModule],
   providers: [ReclamationService, UserService],
   bootstrap: [AppComponent],
-  entryComponents: [DialogComponent],
+  entryComponents: [DialogComponent, DialogFournisseurComponent],
 })
 export class AppModule {}

@@ -1,0 +1,77 @@
+<div
+  style="
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 30rem;
+    height: 30rem;
+    justify-content: center;
+    align-items: center;
+  "
+>
+  <mat-form-field appearance="fill" style="width: 25rem">
+    <mat-label>Slug</mat-label>
+    <input matInput (change)="getSlug($event)" required />
+  </mat-form-field>
+  <mat-form-field appearance="fill" style="width: 25rem">
+    <mat-label>Email</mat-label>
+    <input matInput (change)="getEmail($event)" required />
+  </mat-form-field>
+  <mat-form-field appearance="fill" style="width: 25rem">
+    <mat-label>Mot de passe</mat-label>
+    <input matInput (change)="getPassword($event)" required />
+  </mat-form-field>
+  <mat-form-field appearance="fill" style="width: 25rem">
+    <mat-label>Categorie</mat-label>
+    <mat-select [(value)]="categorie">
+      <mat-option value="Nettoyage">Nettoyage</mat-option>
+      <mat-option value="Eclairage">Eclairage</mat-option>
+      <mat-option value="Batiment">Batiment</mat-option>
+      <mat-option value="Autre">Autre</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field appearance="fill" style="width: 25rem">
+    <mat-label>Adresse</mat-label>
+    <input matInput (change)="getAdresse($event)" required />
+  </mat-form-field>
+  <mat-form-field appearance="fill" style="width: 25rem">
+    <mat-label>Telephone</mat-label>
+    <input matInput (change)="getPhone($event)" required />
+  </mat-form-field>
+  <div
+    style="
+      margin-bottom: 0;
+      margin-right: 2px;
+
+      width: 100%;
+    "
+  >
+    <button
+      mat-stroked-button
+      style="background-color: #639745; margin-right: 4px; margin-left: 270px"
+      (click)="ajoutFournisseur()"
+      mat-dialog-close
+    >
+      <p
+        style="
+          color: white;
+          margin-bottom: 0;
+          padding-left: 4px;
+          padding-right: 4px;
+          border: 1px solid #639745;
+        "
+      >
+        Ajouter
+      </p>
+    </button>
+    <button
+      mat-flat-button
+      color="green"
+      style="margin-left: 3px; border: 1px solid #639745"
+      mat-dialog-close
+      style="color: #639745; margin-bottom: 0; border: solid 1px #639745"
+    >
+      <p style="color: #639745; margin-bottom: 0">Annuler</p>
+    </button>
+  </div>
+</div>
