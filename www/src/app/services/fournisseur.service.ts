@@ -1,8 +1,8 @@
+import { Fournisseur } from './../entity/fournisseur';
 import { tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Fournisseur } from '../entity/fournisseur';
 
 @Injectable({
   providedIn: 'root',
@@ -23,8 +23,6 @@ export class FournisseurService {
   }
   // Desactive fournisseur
   desactiveFournisseur(id: string, state: boolean): Observable<Fournisseur> {
-    console.log(id);
-    console.log(state);
     return this.http
       .put<any>(
         ' http://localhost:3000/api/fournisseur/active/' + id,
@@ -32,5 +30,25 @@ export class FournisseurService {
         this.httpOption
       )
       .pipe(tap((result) => console.log('desactive-->', result)));
+  }
+  // Ajout fournisseur
+  addFournisseur(
+    slug: string,
+    email: string,
+    password: string,
+    categorie: string,
+    addresse: string,
+    phone: string
+  ): Observable<Fournisseur[]> {
+    return this.http
+      .post<any>(' http://localhost:3000/api/fournisseur/add', {
+        slug: slug,
+        email: email,
+        password: password,
+        categorie: categorie,
+        addresse: addresse,
+        phone: phone,
+      })
+      .pipe(tap((result) => console.log('result-->', result)));
   }
 }

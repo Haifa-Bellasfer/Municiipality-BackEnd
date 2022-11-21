@@ -29,7 +29,6 @@ export class DialogComponent implements OnInit {
         console.log('deleted : ', res);
       });
     localStorage.removeItem('idReclamation');
-
     setTimeout(() => {
       this.router.navigateByUrl('/reclamations');
     }, 2000);

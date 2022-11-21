@@ -17,6 +17,7 @@ import { FournisseurComponent } from 'src/app/modules/fournisseur/fournisseur.co
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
 import { DetailsFournisseurComponent } from 'src/app/modules/fournisseur/details-fournisseur/details-fournisseur.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { DetailsFournisseurComponent } from 'src/app/modules/fournisseur/details
     MatTabsModule,
     MatIconModule,
     MatDialogModule,
+    MatFormFieldModule,
   ],
 })
 export class DefaultModule {}

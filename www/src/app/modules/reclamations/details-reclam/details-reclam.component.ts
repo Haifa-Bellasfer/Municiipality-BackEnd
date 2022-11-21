@@ -8,11 +8,6 @@ import { Archive } from 'src/app/entity/archive';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from '../../dialog/dialog.component';
 
-interface Food {
-  value: string;
-  viewValue: string;
-}
-
 @Component({
   selector: 'app-details-reclam',
   templateUrl: './details-reclam.component.html',
