@@ -40,7 +40,6 @@ router.get('/getReclamationById/:id', async (req, res) => {
     res.json({ message: err });
   }
 });
-
 // List all reclamations
 router.get('/list', async (req, res) => {
   try {

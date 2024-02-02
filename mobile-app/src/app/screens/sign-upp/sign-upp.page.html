@@ -1,0 +1,77 @@
+<ion-content>
+  <h1 style="padding-left: 10px; margin-top: 20px">Créer un nouveau compte,</h1>
+  <h3>S'inscrire à Baladiti'!</h3>
+  <form
+    #myForm="ngForm"
+    (ngSubmit)="registrationSubmit()"
+    style="margin-top: 30px"
+  >
+    <div class="form-field">
+      <ion-label [ngClass]="focused ? 'label-focused' : ''"
+        >Nom utilisateur</ion-label
+      >
+      <ion-input
+        (focus)="focused = true"
+        (blur)="onBlur($event)"
+        name="username"
+        [(ngModel)]="formData.username"
+        type="text"
+        required
+      ></ion-input>
+    </div>
+    <div class="form-field">
+      <ion-label [ngClass]="focused ? 'label-focused' : ''">Email</ion-label>
+      <ion-input
+        (focus)="focused = true"
+        (blur)="onBlur($event)"
+        name="email"
+        [(ngModel)]="formData.email"
+        type="text"
+        required
+      ></ion-input>
+    </div>
+    <div class="form-field">
+      <ion-label [ngClass]="focused ? 'label-focused' : ''"
+        >Mot de passe</ion-label
+      >
+      <ion-input
+        (focus)="focused = true"
+        (blur)="onBlur($event)"
+        name="password"
+        [(ngModel)]="formData.password"
+        type="password"
+        required
+      ></ion-input>
+    </div>
+    <div class="form-field">
+      <ion-label [ngClass]="focused ? 'label-focused' : ''"
+        >Adresse postale</ion-label
+      >
+      <ion-input
+        (focus)="focused = true"
+        (blur)="onBlur($event)"
+        name="addresse"
+        [(ngModel)]="formData.addresse"
+        type="text"
+        required
+      ></ion-input>
+    </div>
+    <div class="form-field">
+      <ion-label [ngClass]="focused ? 'label-focused' : ''"
+        >Téléphone</ion-label
+      >
+      <ion-input
+        (focus)="focused = true"
+        (blur)="onBlur($event)"
+        name="phone"
+        [(ngModel)]="formData.phone"
+        type="text"
+        required
+      ></ion-input>
+    </div>
+    <ion-button type="submit">Créer un compte</ion-button>
+  </form>
+  <p class="footer-text" style="margin-top: 20px">
+    Je suis un utilisateur, <a [routerLink]="['/login']">Se connecter</a>
+  </p>
+</ion-content>

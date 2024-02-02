@@ -36,9 +36,9 @@ router.post('/upload', upload.single('myImage'), (req, res) => {
       if (err) {
         console.log(err);
       } else {
-        console.log(result);
+        console.log(result._id);
         fs.writeFile(
-          `${process.cwd()}/uploads/image-${Date.now()}.png`,
+          `${process.cwd()}/uploads/img-${result._id}.png`,
           final_img.image,
           function (err) {
             console.log(err);
@@ -46,7 +46,7 @@ router.post('/upload', upload.single('myImage'), (req, res) => {
         );
 
         console.log('Saved To database');
-        res.send({ message: 'telechargement terminer' });
+        res.send({ success: true, name: `img-${result._id}.png` });
         res.status(200);
       }
     }

@@ -19,7 +19,13 @@ export class UserService {
   getFournisseurs(): Observable<User[]> {
     this.users = this.http
       .get<any>(' http://localhost:3000/api/user/list/fournisseur')
-      .pipe(tap((result) => console.log('result-->', result)));
+      .pipe(tap((result) => console.log('fournisseurs-->', result)));
     return this.users;
+  }
+  // Liste responsable
+  getResponable(): Observable<User[]> {
+    return this.http
+      .get<any>(' http://localhost:3000/api/user/list/responsable')
+      .pipe(tap((result) => console.log('responsable-->', result)));
   }
 }
