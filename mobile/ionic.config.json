@@ -1,7 +1,5 @@
 {
-  "name": "photo-gallery",
-  "integrations": {
-    "capacitor": {}
-  },
+  "name": "mobile",
+  "integrations": {},
   "type": "angular"
 }

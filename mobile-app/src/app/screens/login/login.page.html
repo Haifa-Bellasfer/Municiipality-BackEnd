@@ -1,0 +1,37 @@
+<ion-content class="ion-padding">
+  <h1>Welcome,</h1>
+  <h3>Se connecter à Baladiti!</h3>
+
+  <form #myForm="ngForm" (ngSubmit)="loginSubmit()">
+    <div class="form-field">
+      <ion-label [ngClass]="focused ? 'label-focused' : ''">Email ID</ion-label>
+      <ion-input
+        (focus)="focused = true"
+        (blur)="onBlur($event)"
+        type="text"
+        [(ngModel)]="formData.email"
+        name="email"
+        required
+      ></ion-input>
+    </div>
+    <div class="form-field">
+      <ion-label [ngClass]="focused ? 'label-focused' : ''"
+        >Mot de passe</ion-label
+      >
+      <ion-input
+        (focus)="focused"
+        (blur)="onBlur($event)"
+        type="password"
+        [(ngModel)]="formData.password"
+        name="password"
+        required
+      ></ion-input>
+    </div>
+
+    <ion-button type="submit">Se connecter</ion-button>
+  </form>
+
+  <p class="footer-text">
+    Créer un nouveau compte, <a [routerLink]="['/sign-up']">S'inscrire</a>
+  </p>
+</ion-content>

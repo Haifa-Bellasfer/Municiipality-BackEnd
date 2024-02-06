@@ -1,5 +1,5 @@
 ### Get all users
-GET  http://localhost:3000/api/user/list
+GET  http://localhost:3000/api/user/list/citoyen
 
 
 ### Add a new user
@@ -7,18 +7,20 @@ POST http://localhost:3000/api/user/signUp
 Content-Type: application/json
 
 {
-    "username": "haifa",
-    "email":"haifa.ferchichi@esprit.tn",
+    "username": "fatma",
+    "email":"fatmaben@gmail.com",
     "role" : "Citoyen",
-    "password":"1234"
-}
+    "password":"1234",
+    "addresse" : "14 rue istanbul ben arous",
+    "phone": "56249538"
+    }
 
 ### Login to the application
 POST http://localhost:3000/api/auth/login
 Content-Type: application/json
 
 {
-    "email":"haifa2@gmail.com",
+    "email":"haifa.ferchichi@esprit.tn",
     "password":"1234"
 }
 
@@ -26,4 +28,6 @@ Content-Type: application/json
 GET http://localhost:3000/api/user/list/fournisseur
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmY4NDAyZjdlNDUxMjE5OWM3ZmI3YmMiLCJpYXQiOjE2NjA0MzY5MTd9.H2HrDscYRw7nmO9V5aAufxWn2bUqR6OphbtdU1cHerU
 
+### List responsable
+GET http://localhost:3000/api/user/list/responsable
 

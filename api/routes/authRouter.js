@@ -7,10 +7,10 @@ const jwt = require('jsonwebtoken');
 router.post('/login', async (req, res) => {
   //checking if email already exists
   const user = await User.findOne({ email: req.body.email });
-  if (!user) return res.send({ message: "Email doesn't exist" });
+  if (!user) return res.send({ message: "Email n'existe pas" });
   //chekin password
   const validPass = await bcrypt.compare(req.body.password, user.password);
-  if (!validPass) return res.send({ message: 'Invalid password' });
+  if (!validPass) return res.send({ message: 'Mot de passe invalide' });
 
   //create and assign a token
   const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET);

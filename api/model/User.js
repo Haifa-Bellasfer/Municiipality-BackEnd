@@ -14,15 +14,23 @@ const userSchema = new mongoose.Schema(
       min: 4,
       max: 200,
     },
+    role: {
+      type: String,
+      enum: ['Citoyen', 'Responsable'],
+    },
     password: {
       type: String,
       required: true,
       min: 4,
       max: 200,
     },
-    role: {
+    addresse: {
       type: String,
-      enum: ['Citoyen', 'Responsable'],
+      required: true,
+    },
+    phone: {
+      type: String,
+      required: true,
     },
   },
   {

@@ -1,3 +1,5 @@
+import { UserService } from './../../../services/user.service';
+import { User } from './../../../entity/user';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -7,11 +9,24 @@ import { Router } from '@angular/router';
   styleUrls: ['./sidebar.component.scss'],
 })
 export class SidebarComponent implements OnInit {
-  constructor(private router: Router) {}
+  responsable: any;
+  responsables: any;
 
-  ngOnInit(): void {}
+  constructor(private router: Router, public userService: UserService) {}
+
+  ngOnInit(): void {
+    this.getResponsable();
+  }
+
+  getResponsable() {
+    this.userService.getResponable().subscribe((res) => {
+      console.log('respon', res);
+      this.responsable = res;
+      this.responsables = this.responsable[0].username;
+    });
+  }
+
   logOut() {
-    console.log('heee');
     localStorage.clear();
     this.router.navigate(['/login']);
   }
