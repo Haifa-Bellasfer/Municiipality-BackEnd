@@ -23,7 +23,6 @@ const reclamationSchema = new mongoose.Schema(
     },
     imageURL: {
       type: String,
-      required: true,
       default: '',
     },
     fournisseur: {

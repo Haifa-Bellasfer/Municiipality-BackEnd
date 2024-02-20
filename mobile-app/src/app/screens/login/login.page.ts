@@ -28,7 +28,7 @@ export class LoginPage implements OnInit {
     console.log('ahawa login', this.formData);
     this.loginService.login(this.formData).subscribe((res) => {
       console.log(res);
-      this.router.navigate(['/reclamation']);
+      this.router.navigate(['/reclamation/add-reclamation']);
     });
   }
 }
