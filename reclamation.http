@@ -3,12 +3,12 @@ POST http://localhost:3000/api/reclamation/add
 Content-Type: application/json
 
 {
-    "description":"  j’ai pu constater l’état d'eclairage dans lequel se trouve la rue . Cette situation constitue un risque tant pour la sécurité que pour la salubrité des personnes qui empruntent cette voie. ",
+    "description":" Il y'a un probleme de nettoyage dans la rue 02 istambul ben arous. ",
     "imageURL" : "https://images.ladepeche.fr/api/v1/images/view/5c33f1df8fe56f79e25aa38b/large/image.jpg",
-    "localisation":"borg cedria",
-    "categorie" :"Eclairage",
+    "localisation":"ben arous",
+    "categorie" :"Batiment",
     "etat" : "Pending",
-    "citoyen" :"6768761631c026191ca37bf2",
+    "citoyen" :"676887bf4e50630becfc9613",
     "municipality" : "676885d54e50630becfc95fe"
 }
 
@@ -21,22 +21,51 @@ Content-Type: application/json
 
 }
 
+### Get reclamation by id citoyen
+GET  http://localhost:3000/api/reclamation/getReclamationByIdCitoyen/676887bf4e50630becfc9613
+
 ### Get all reclamations
 GET  http://localhost:3000/api/reclamation/list
 
-### Update reclamation by status
-PUT http://localhost:3000/api/reclamation/update/614dfe099530931728154cdf
+### Update reclamation info
+PUT http://localhost:3000/api/reclamation/updateReclamation/677aa8349d78ae6fd0d1fe85
 Content-Type: application/json
 
 {
-    "id" : "62fec68af7d43a186887a637"
+    "description": "j’ai pu constater l’état d'eclairage dans lequel se trouve la rue ",
+    "imageURL" : "https://images.ladepeche.fr/api/v1/images/view/5c33f1df8fe56f79e25aa38b/large/image.jpg",
+    "localisation":"rades",
+    "categorie" :"Eclairage"
+
+}
+
+### Update reclamation by status
+PUT http://localhost:3000/api/reclamation/update/677aa8349d78ae6fd0d1fe85
+Content-Type: application/json
+
+{
+    "id" : "62fec68af7d43a186887a637",
+    "noteFournisseur": "notee fournisseur",
+    "etat": "Done"
 }
 
 ### Get  reclamations in progress status
 GET  http://localhost:3000/api/reclamation/list/inprogress
 
+### Get  reclamations pending status
+GET  http://localhost:3000/api/reclamation/list/pending
+
+### Get  reclamations done  status
+GET  http://localhost:3000/api/reclamation/list/done
+
+### Get  reclamations verified status
+GET  http://localhost:3000/api/reclamation/list/verified
+
+### Get  reclamations discarded status
+GET  http://localhost:3000/api/reclamation/list/discarded
+
 ### Get reclamation by id
-GET  http://localhost:3000/api/reclamation/getReclamationById/6768761631c026191ca37bf2
+GET  http://localhost:3000/api/reclamation/getReclamationById/677aa8019d78ae6fd0d1fe7c
 
 ### Get reclamation fournisseur
 GET  http://localhost:3000/api/reclamation/listfournisseurReclamation/62fec68af7d43a186887a637

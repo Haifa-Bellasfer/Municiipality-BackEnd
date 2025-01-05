@@ -29,6 +29,38 @@ router.post('/add', async (req, res) => {
   }
 });
 
+// Get reclamation by id citoyen
+router.get('/getReclamationByIdCitoyen/:id', async (req, res) => {
+  try {
+    const reclamations = await Reclamation.find({
+      citoyen: req.params.id,
+    }).populate('citoyen');
+
+    res.json(reclamations);
+  } catch (err) {
+    res.json({ message: err });
+  }
+});
+// Update reclamation Info
+router.put('/updateReclamation/:id', async (req, res) => {
+  try {
+    const updateData = {};
+
+    if (req.body.description) updateData.description = req.body.description;
+    if (req.body.categorie) updateData.categorie = req.body.categorie;
+    if (req.body.localisation) updateData.localisation = req.body.localisation;
+    if (req.body.imageURL) updateData.imageURL = req.body.imageURL;
+
+    const updatedReclamation = await Reclamation.findByIdAndUpdate(
+      req.params.id,
+      updateData,
+      { new: true }
+    );
+    res.json(updatedReclamation);
+  } catch (err) {
+    res.json({ message: err });
+  }
+});
 // Get reclamation by id
 router.get('/getReclamationById/:id', async (req, res) => {
   try {
@@ -40,6 +72,7 @@ router.get('/getReclamationById/:id', async (req, res) => {
     res.json({ message: err });
   }
 });
+
 // List all reclamations
 router.get('/list', async (req, res) => {
   try {
@@ -77,7 +110,31 @@ router.get('/list/pending', async (req, res) => {
 // Get Done reclamation
 router.get('/list/done', async (req, res) => {
   try {
-    const reclamation = await Reclamation.find({ etat: 'Done' });
+    const reclamation = await Reclamation.find({ etat: 'Done' }).populate(
+      'citoyen'
+    );
+    res.json(reclamation);
+  } catch (err) {
+    res.json({ message: err });
+  }
+});
+// Get verified reclamation
+router.get('/list/verified', async (req, res) => {
+  try {
+    const reclamation = await Reclamation.find({ etat: 'Verified' }).populate(
+      'citoyen'
+    );
+    res.json(reclamation);
+  } catch (err) {
+    res.json({ message: err });
+  }
+});
+// Get discarded reclamation
+router.get('/list/discarded', async (req, res) => {
+  try {
+    const reclamation = await Reclamation.find({ etat: 'Discarded' }).populate(
+      'citoyen'
+    );
     res.json(reclamation);
   } catch (err) {
     res.json({ message: err });
@@ -98,13 +155,22 @@ router.delete('/delete:id', async (req, res) => {
 router.put('/update/:id', async (req, res) => {
   try {
     const id = req.params.id;
+    const { etat } = req.body;
+    const { noteFournisseur } = req.body;
+    const { noteResponsable } = req.body;
+
     const options = { new: true };
     const fournisseur = await Fournisseur.findById(req.body.fournisseur);
 
     const reclamation = await Reclamation.findByIdAndUpdate(
       id,
       {
-        $set: { etat: 'Inprogress', fournisseur: fournisseur },
+        $set: {
+          etat,
+          fournisseur: fournisseur,
+          noteFournisseur,
+          noteResponsable,
+        },
       },
       options
     );

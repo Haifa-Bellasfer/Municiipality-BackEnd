@@ -19,7 +19,7 @@ const reclamationSchema = new mongoose.Schema(
     },
     etat: {
       type: String,
-      enum: ['Inprogress', 'Pending', 'Done'],
+      enum: ['Inprogress', 'Pending', 'Done', 'Verified', 'Discarded'],
     },
     imageURL: {
       type: String,
@@ -36,6 +36,18 @@ const reclamationSchema = new mongoose.Schema(
     citoyen: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
+    },
+    noteFournisseur: {
+      type: String,
+      required: false,
+      min: 4,
+      max: 200,
+    },
+    noteResponsable: {
+      type: String,
+      required: false,
+      min: 4,
+      max: 200,
     },
   },
   {
