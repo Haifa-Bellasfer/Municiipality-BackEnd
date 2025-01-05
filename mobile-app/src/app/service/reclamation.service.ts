@@ -12,9 +12,9 @@ export class ReclamationService {
     return this.http.post('http://localhost:3000/api/reclamation/add', {
       description: data.description,
       categorie: data.categorie,
-      localisation: data.localisation,
+      localisation: data.adresse,
       etat: data.etat,
-      imageURL: data.imageURL,
+      imageURL: data.myImage,
       citoyen: data.citoyenId,
     });
   }
@@ -23,7 +23,6 @@ export class ReclamationService {
       'Content-Type',
       'multipart/form-data'
     );
-
     return this.http.post('http://localhost:3000/api/upload/upload', data);
   }
 }

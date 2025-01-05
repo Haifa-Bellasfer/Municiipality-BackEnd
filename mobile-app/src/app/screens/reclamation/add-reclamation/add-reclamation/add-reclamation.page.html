@@ -1,49 +1,31 @@
 <ion-content>
   <h1 style="text-align: center">Reclamation</h1>
-  <!-- <h3>S'inscrire à Baladiti'!</h3> -->
   <form
     #myForm="ngForm"
     (ngSubmit)="addReclamation()"
     style="margin-top: 30px"
     enctype="multipart/form-data"
   >
-    <div class="form-field">
-      <ion-label [ngClass]="focused ? 'label-focused' : ''"
-        >Description</ion-label
-      >
-      <ion-textarea
-        labelPlacement="floating"
-        (focus)="focused = true"
-        (blur)="onBlur($event)"
-        name="description"
-        [(ngModel)]="formData.description"
-        required
-      ></ion-textarea>
-    </div>
-    <div class="form-field">
-      <ion-label [ngClass]="focused ? 'label-focused' : ''"
-        >Localisation</ion-label
-      >
+    <div class="form-field" style="padding: 28px">
+      <ion-label [ngClass]="focused ? 'label-focused' : ''">Adresse</ion-label>
       <ion-input
         (focus)="focused = true"
         (blur)="onBlur($event)"
-        name="localisation"
-        [(ngModel)]="formData.localisation"
+        name="Adresse"
+        [(ngModel)]="formData.adresse"
         type="text"
+        style="padding-right: 10px"
         required
       ></ion-input>
     </div>
-    <div class="form-field">
-      <!-- <ion-label [ngClass]="focused ? 'label-focused' : ''"
-        >Catégorie</ion-label
+    <div class="form-field" style="margin-top: 20px">
+      <ion-label [ngClass]="focused ? 'label-focused' : ''"
+        >Categorie</ion-label
       >
-      <ion-select aria-placeholder="categorie" >
-        *Ng
-        <ion-select-option name="categorie">1</ion-select-option>
-      </ion-select> -->
       <ion-select
         [(ngModel)]="categories"
-        placeholder="Choisir une  catégorie"
+        label="            "
+        label-placement="stacked"
         (ionChange)="onChangee($event)"
       >
         <ion-select-option
@@ -55,26 +37,43 @@
         </ion-select-option>
       </ion-select>
     </div>
-    <img *ngIf="selectedFile" [src]="selectedFile" alt="Uploaded File" />
-    <input
-      name="myImage"
-      type="file"
-      (change)="onFileSelected($event)"
-      accept="image/*"
-    />
 
-    <!-- Upload Button -->
-    <ion-button
-      fill="outline"
-      style="
-        max-width: 100px;
-        margin-top: 10px;
-        margin-left: 20px;
-        background-color: aliceblue;
-      "
-      (click)="uploadFile()"
-      >Upload</ion-button
-    >
-    <ion-button class="myButton" type="submit">Confirmer</ion-button>
+    <label class="custom-file-upload">
+      <input
+        name="myImage"
+        type="file"
+        (change)="onFileSelected($event)"
+        accept="image/*"
+        class="file-input"
+      />
+      Choisir une photo
+    </label>
+
+    <div class="form-field" style="margin-top: 20px">
+      <ion-label [ngClass]="focused ? 'label-focused' : ''"
+        >Description</ion-label
+      >
+      <ion-textarea
+        class="custom-textarea"
+        (focus)="focused = true"
+        (blur)="onBlur($event)"
+        name="description"
+        [(ngModel)]="formData.description"
+        [rows]="4"
+        required
+      ></ion-textarea>
+    </div>
+    <div style="margin-top: 60px">
+      <img
+        *ngIf="selectedFile"
+        [src]="selectedFile"
+        alt="Uploaded File"
+        style="max-width: 350px; max-height: 300px; object-fit: contain"
+      />
+    </div>
+
+    <div style="margin-top: 70px">
+      <ion-button class="myButton" type="submit">Confirmer</ion-button>
+    </div>
   </form>
 </ion-content>
