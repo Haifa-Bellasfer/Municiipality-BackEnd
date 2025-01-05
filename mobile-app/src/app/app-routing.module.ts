@@ -18,13 +18,6 @@ const routes: Routes = [
       import('./screens/login/login.module').then((m) => m.LoginPageModule),
   },
   {
-    path: 'registration',
-    loadChildren: () =>
-      import('./screens/registration/registration.module').then(
-        (m) => m.RegistrationPageModule
-      ),
-  },
-  {
     path: 'reclamation',
     loadChildren: () =>
       import('./screens/reclamation/reclamation.module').then(
@@ -34,7 +27,7 @@ const routes: Routes = [
   {
     path: 'sign-up',
     loadChildren: () =>
-      import('./screens/sign-upp/sign-upp.module').then(
+      import('./screens/sign-up/sign-upp.module').then(
         (m) => m.SignUppPageModule
       ),
   },

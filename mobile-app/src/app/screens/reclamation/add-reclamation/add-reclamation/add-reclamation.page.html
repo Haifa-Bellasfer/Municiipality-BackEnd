@@ -1,114 +1,63 @@
-<!-- <ion-content [fullscreen]="true">
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>Ajouter une réclamation</ion-card-title>
-    </ion-card-header>
-
-    <ion-card-content>
-      <form>
-        <ion-label position="floating">Description</ion-label>
-        <ion-input type="text" name="description"></ion-input>
-
-        <ion-label position="floating">Localisation</ion-label>
-        <ion-input type="email" name="localisation" required></ion-input>
-        <ion-list>
-          <ion-label>Catégorie</ion-label>
-          <ion-select aria-placeholder="Catégorie">
-            Options for the select input go here
-            <ion-select-option value="option1">Option 1</ion-select-option>
-            <ion-select-option value="option2">Option 2</ion-select-option> 
-            Add more options as needed
-          </ion-select>
-        </ion-list>
-        <div class="camera">
-          <ion-label position="floating">Prendre une image</ion-label>
-
-          <ion-fab-button>
-            <ion-icon name="camera"></ion-icon>
-          </ion-fab-button>
-        </div>
-        <ion-button type="submit">Ajouter</ion-button>
-      </form>
-    </ion-card-content>
-  </ion-card>
-</ion-content>
- -->
 <ion-content>
   <h1 style="text-align: center">Reclamation</h1>
   <!-- <h3>S'inscrire à Baladiti'!</h3> -->
   <form
     #myForm="ngForm"
-    (ngSubmit)="registrationSubmit()"
+    (ngSubmit)="addReclamation()"
     style="margin-top: 30px"
     enctype="multipart/form-data"
   >
     <div class="form-field">
       <ion-label [ngClass]="focused ? 'label-focused' : ''"
-        >Nom utilisateur</ion-label
-      >
-      <ion-input
-        (focus)="focused = true"
-        (blur)="onBlur($event)"
-        name="username"
-        [(ngModel)]="formData.username"
-        type="text"
-        required
-      ></ion-input>
-    </div>
-    <div class="form-field">
-      <ion-label [ngClass]="focused ? 'label-focused' : ''">Email</ion-label>
-      <ion-input
-        (focus)="focused = true"
-        (blur)="onBlur($event)"
-        name="email"
-        [(ngModel)]="formData.email"
-        type="text"
-        required
-      ></ion-input>
-    </div>
-    <div class="form-field">
-      <ion-label [ngClass]="focused ? 'label-focused' : ''"
-        >Mot de passe</ion-label
-      >
-      <ion-input
-        (focus)="focused = true"
-        (blur)="onBlur($event)"
-        name="password"
-        [(ngModel)]="formData.password"
-        type="password"
-        required
-      ></ion-input>
-    </div>
-    <div class="form-field">
-      <ion-label [ngClass]="focused ? 'label-focused' : ''"
-        >Adresse postale</ion-label
-      >
-      <ion-input
-        (focus)="focused = true"
-        (blur)="onBlur($event)"
-        name="addresse"
-        [(ngModel)]="formData.addresse"
-        type="text"
-        required
-      ></ion-input>
-    </div>
-    <div class="form-field">
-      <ion-label [ngClass]="focused ? 'label-focused' : ''"
         >Description</ion-label
       >
+      <ion-textarea
+        labelPlacement="floating"
+        (focus)="focused = true"
+        (blur)="onBlur($event)"
+        name="description"
+        [(ngModel)]="formData.description"
+        required
+      ></ion-textarea>
+    </div>
+    <div class="form-field">
+      <ion-label [ngClass]="focused ? 'label-focused' : ''"
+        >Localisation</ion-label
+      >
       <ion-input
         (focus)="focused = true"
         (blur)="onBlur($event)"
-        name="phone"
-        [(ngModel)]="formData.phone"
+        name="localisation"
+        [(ngModel)]="formData.localisation"
         type="text"
         required
       ></ion-input>
+    </div>
+    <div class="form-field">
+      <!-- <ion-label [ngClass]="focused ? 'label-focused' : ''"
+        >Catégorie</ion-label
+      >
+      <ion-select aria-placeholder="categorie" >
+        *Ng
+        <ion-select-option name="categorie">1</ion-select-option>
+      </ion-select> -->
+      <ion-select
+        [(ngModel)]="categories"
+        placeholder="Choisir une  catégorie"
+        (ionChange)="onChangee($event)"
+      >
+        <ion-select-option
+          *ngFor="let i of categories"
+          [value]="i.value"
+          style="padding-right: 10px"
+        >
+          {{ i.value }}
+        </ion-select-option>
+      </ion-select>
     </div>
     <img *ngIf="selectedFile" [src]="selectedFile" alt="Uploaded File" />
     <input
       name="myImage"
-      style="width: 100px"
       type="file"
       (change)="onFileSelected($event)"
       accept="image/*"
@@ -116,9 +65,16 @@
 
     <!-- Upload Button -->
     <ion-button
-      style="max-width: 100px; margin-top: 10px"
+      fill="outline"
+      style="
+        max-width: 100px;
+        margin-top: 10px;
+        margin-left: 20px;
+        background-color: aliceblue;
+      "
       (click)="uploadFile()"
       >Upload</ion-button
     >
+    <ion-button class="myButton" type="submit">Confirmer</ion-button>
   </form>
 </ion-content>

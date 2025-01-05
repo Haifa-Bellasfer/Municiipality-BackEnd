@@ -8,8 +8,8 @@ import { Observable } from 'rxjs';
 export class ReclamationService {
   constructor(private http: HttpClient) {}
 
-  addReclamation(data: any) {
-    this.http.post('http://localhost:3000/api/reclamation/add', {
+  addReclamation(data: any): Observable<any> {
+    return this.http.post('http://localhost:3000/api/reclamation/add', {
       description: data.description,
       categorie: data.categorie,
       localisation: data.localisation,

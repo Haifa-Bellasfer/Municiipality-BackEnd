@@ -126,4 +126,19 @@ router.get('/listfournisseurReclamation/:id', async (req, res) => {
   }
 });
 
+// Route to count reclamations by category
+router.post('/countByCategory', async (req, res) => {
+  const { category } = req.body;
+
+  try {
+    const numberOfReclamations = await Reclamation.countDocuments({
+      categorie: category,
+    });
+    res.json({ numberOfReclamations });
+  } catch (error) {
+    console.error('Error counting reclamations:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
 module.exports = router;

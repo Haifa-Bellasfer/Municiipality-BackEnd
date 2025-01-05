@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { ReclamationService } from 'src/app/service/reclamation.service';
-import { RegistrationService } from 'src/app/service/registration.service';
 
 @Component({
   selector: 'app-add-reclamation',
@@ -10,14 +8,19 @@ import { RegistrationService } from 'src/app/service/registration.service';
 })
 export class AddReclamationPage implements OnInit {
   selectedFile: string | ArrayBuffer | null = null;
+  categories: { key: number; value: string }[] = [
+    { key: 1, value: 'Eclairage' },
+    { key: 2, value: 'Nettoyage' },
+    { key: 3, value: 'Batiment' },
+    { key: 4, value: 'Autre' },
+  ];
   formData = {
-    username: '',
-    email: '',
-    password: '',
-    addresse: '',
-    phone: '',
-    imageURL: '',
+    description: '',
+    localisation: '',
+    categorie: '',
+    myImage: '',
   };
+
   focused: boolean = true;
 
   onBlur(event: any) {
@@ -28,14 +31,12 @@ export class AddReclamationPage implements OnInit {
     }
   }
 
-  constructor(
-    private registrationService: RegistrationService,
-    private reclamationService: ReclamationService,
-    private router: Router
-  ) {}
+  constructor(private reclamationService: ReclamationService) {}
 
-  ngOnInit() {
-    console.log('ddd');
+  ngOnInit() {}
+  onChangee(event: any) {
+    console.log(event.target.value);
+    this.formData.categorie = event.target.value;
   }
 
   onFileSelected(event: any) {
@@ -71,12 +72,12 @@ export class AddReclamationPage implements OnInit {
       console.warn('No file selected.');
     }
   }
-  registrationSubmit() {
-    console.log('ahawa login', this.formData);
-    this.registrationService
-      .SignUp({ ...this.formData, role: 'Citoyen' })
+  addReclamation() {
+    console.log('reclamaation in form', this.formData);
+    this.reclamationService
+      .addReclamation({ ...this.formData })
       .subscribe((res) => {
-        console.log(res);
+        console.log('reclamation :', res);
       });
   }
 }

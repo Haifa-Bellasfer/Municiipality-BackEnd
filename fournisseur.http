@@ -4,7 +4,7 @@ Content-Type: application/json
 
 {
     "slug": "Steg",
-    "email":"houssem@gmail.com",
+    "email":"haifa@gmail.com",
     "password" : "1234",
     "addresse" : "hamem lif",
     "phone":"56249538",

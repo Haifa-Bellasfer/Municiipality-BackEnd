@@ -11,6 +11,7 @@ export class ReclamationService {
   httpOption = {
     headers: new HttpHeaders({ 'content-Type': 'application/json' }),
   };
+  private apiUrl = 'http://localhost:3000/reclamations/countByCategory';
 
   constructor(private http: HttpClient) {}
 
@@ -60,5 +61,13 @@ export class ReclamationService {
           id
       )
       .pipe(tap((result) => console.log('fournisseur reclamation-->', result)));
+  }
+
+  countReclamationsByCategory(
+    category: string
+  ): Observable<{ numberOfReclamations: number }> {
+    return this.http.post<{ numberOfReclamations: number }>(this.apiUrl, {
+      category,
+    });
   }
 }
