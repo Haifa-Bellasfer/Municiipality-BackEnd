@@ -11,16 +11,9 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatListModule } from '@angular/material/list';
 import { RouterModule } from '@angular/router';
-import { AreaComponent } from './widgets/area/area.component';
-import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
-  declarations: [
-    HeaderComponent,
-    FooterComponent,
-    SidebarComponent,
-    AreaComponent,
-  ],
+  declarations: [HeaderComponent, FooterComponent, SidebarComponent],
   imports: [
     CommonModule,
     MatDividerModule,
@@ -31,8 +24,7 @@ import { ChartsModule } from 'ng2-charts';
     MatMenuModule,
     MatListModule,
     RouterModule,
-    ChartsModule,
   ],
-  exports: [HeaderComponent, FooterComponent, SidebarComponent, AreaComponent],
+  exports: [HeaderComponent, FooterComponent, SidebarComponent],
 })
 export class SharedModule {}
