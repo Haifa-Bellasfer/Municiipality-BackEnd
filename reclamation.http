@@ -3,13 +3,22 @@ POST http://localhost:3000/api/reclamation/add
 Content-Type: application/json
 
 {
-    "description":"  j’ai pu constater l’état de saleté dans lequel se trouve la rue . Cette situation constitue un risque tant pour la sécurité que pour la salubrité des personnes qui empruntent cette voie. ",
+    "description":"  j’ai pu constater l’état d'eclairage dans lequel se trouve la rue . Cette situation constitue un risque tant pour la sécurité que pour la salubrité des personnes qui empruntent cette voie. ",
     "imageURL" : "https://images.ladepeche.fr/api/v1/images/view/5c33f1df8fe56f79e25aa38b/large/image.jpg",
     "localisation":"borg cedria",
-    "categorie" :"Nettoyage",
-    "etat" : "Inprogress",
-    "citoyen" :"6356b4870c29b128b45c8e9c",
-    "municipality" : "62f93509e835472fac78fb4a"
+    "categorie" :"Eclairage",
+    "etat" : "Pending",
+    "citoyen" :"6768761631c026191ca37bf2",
+    "municipality" : "676885d54e50630becfc95fe"
+}
+
+### get count relcmamtion
+POST http://localhost:3000/api/reclamation/countByCategory
+Content-Type: application/json
+
+{
+    "category": "Eclairage"
+
 }
 
 ### Get all reclamations
@@ -27,7 +36,7 @@ Content-Type: application/json
 GET  http://localhost:3000/api/reclamation/list/inprogress
 
 ### Get reclamation by id
-GET  http://localhost:3000/api/reclamation/getReclamationById/635293a05d9c1c37ecad2129
+GET  http://localhost:3000/api/reclamation/getReclamationById/6768761631c026191ca37bf2
 
 ### Get reclamation fournisseur
 GET  http://localhost:3000/api/reclamation/listfournisseurReclamation/62fec68af7d43a186887a637
