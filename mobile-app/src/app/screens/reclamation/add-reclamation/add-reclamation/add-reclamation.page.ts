@@ -70,7 +70,6 @@ export class AddReclamationPage implements OnInit {
   addReclamation() {
     const citoyen = localStorage.getItem('userId');
     this.formData.citoyen = citoyen as string;
-    console.log('reclamation in form', this.formData);
     this.reclamationService
       .addReclamation({ ...this.formData })
       .subscribe((res) => {

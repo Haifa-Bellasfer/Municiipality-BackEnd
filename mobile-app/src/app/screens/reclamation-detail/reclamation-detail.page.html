@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/reclamations"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Reclamation Detail</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding" *ngIf="reclamation">
+  <ion-card-title>{{ reclamation.categorie }}</ion-card-title>
+  <ion-badge [color]="getStatusColor(reclamation.status)">
+    {{ reclamation.status }}
+  </ion-badge>
+
+  <ion-card-content>
+    <ion-item>
+      <ion-label>
+        <h2>Description</h2>
+        <p>{{ reclamation.description }}</p>
+      </ion-label>
+    </ion-item>
+    <div style="margin-top: 60px">
+      <ion-content>
+        <img
+          src="../../../assets/img-677ad8c687cc221d80ca03b1.png"
+          alt="Example Image"
+          style="max-width: 350px; max-height: 300px; object-fit: contain"
+          class="responsive-image"
+        />
+        />
+      </ion-content>
+    </div>
+  </ion-card-content>
+</ion-content>

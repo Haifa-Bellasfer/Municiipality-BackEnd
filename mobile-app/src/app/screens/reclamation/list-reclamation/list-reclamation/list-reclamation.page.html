@@ -1,3 +1,28 @@
-<ion-content [fullscreen]="true">
-  <h1>Hello</h1>
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Mes Reclamations</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item
+      *ngFor="let item of items"
+      [routerLink]="['/reclamation-detail', item.id]"
+    >
+      <ion-label>
+        <h2>{{ item.name }}</h2>
+        <ion-badge [color]="getStatusColor(item.status)">
+          {{ item.status }}
+        </ion-badge>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <!-- Empty state message -->
+  <div class="empty-state" *ngIf="items.length === 0">
+    <ion-text color="medium">
+      <h4>No items found</h4>
+    </ion-text>
+  </div>
 </ion-content>

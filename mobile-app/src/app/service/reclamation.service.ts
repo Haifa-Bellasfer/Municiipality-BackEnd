@@ -15,7 +15,7 @@ export class ReclamationService {
       localisation: data.adresse,
       etat: data.etat,
       imageURL: data.myImage,
-      citoyen: data.citoyenId,
+      citoyen: data.citoyen,
     });
   }
   uploadImage(data: any): Observable<any> {
@@ -24,5 +24,17 @@ export class ReclamationService {
       'multipart/form-data'
     );
     return this.http.post('http://localhost:3000/api/upload/upload', data);
+  }
+
+  getMyReclamations(id: string): Observable<any> {
+    return this.http.get(
+      `http://localhost:3000/api/reclamation/getReclamationByIdCitoyen/${id}`
+    );
+  }
+
+  getReclamation(id: string): Observable<any> {
+    return this.http.get(
+      `http://localhost:3000/api/reclamation/getReclamationById/${id}`
+    );
   }
 }
