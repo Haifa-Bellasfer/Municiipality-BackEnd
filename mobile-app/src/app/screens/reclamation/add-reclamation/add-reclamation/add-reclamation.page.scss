@@ -130,3 +130,32 @@ ion-select {
 ion-select:focus {
   border-color: #61c569;
 }
+.custom-file-upload {
+  display: inline-block;
+  padding: 10px 20px;
+  background: #61c569;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.3s ease;
+}
+
+.custom-file-upload:hover {
+  --background: linear-gradient(
+    90deg,
+    rgb(79, 197, 105) 0%,
+    rgb(142, 245, 159) 100%
+  );
+}
+
+.file-input {
+  display: none;
+}
+.custom-textarea {
+  --padding-top: 10px;
+  --padding-bottom: 10px;
+  --padding-start: 10px;
+  --padding-end: 10px;
+  min-height: 100px;
+}

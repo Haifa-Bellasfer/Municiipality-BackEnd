@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Reclamation } from 'src/app/interface/reclamation';
 import { ReclamationService } from 'src/app/service/reclamation.service';
-
 @Component({
   selector: 'app-add-reclamation',
   templateUrl: './add-reclamation.page.html',
@@ -14,11 +14,12 @@ export class AddReclamationPage implements OnInit {
     { key: 3, value: 'Batiment' },
     { key: 4, value: 'Autre' },
   ];
-  formData = {
+  formData: Reclamation = {
     description: '',
-    localisation: '',
+    adresse: '',
     categorie: '',
     myImage: '',
+    citoyen: '',
   };
 
   focused: boolean = true;
@@ -35,45 +36,41 @@ export class AddReclamationPage implements OnInit {
 
   ngOnInit() {}
   onChangee(event: any) {
-    console.log(event.target.value);
     this.formData.categorie = event.target.value;
   }
 
-  onFileSelected(event: any) {
-    const fileInput = event.target;
-    console.log(event);
+  imagePreview: string | undefined;
 
-    if (fileInput.files && fileInput.files[0]) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        this.selectedFile = e.target?.result as any;
-      };
-      this.reclamationService
-        .uploadImage(event.target.files)
+  async onFileSelected(event: any) {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.imagePreview = reader.result as string;
+    };
+    reader.readAsDataURL(file);
+    const formData = new FormData();
+    formData.append('myImage', file);
+
+    try {
+      const response = this.reclamationService
+        .uploadImage(formData)
         .subscribe((res) => {
+          this.formData.myImage = res.name as any;
           console.log(res);
         });
-      reader.readAsDataURL(fileInput.files[0]);
+
+      console.log('File uploaded successfully', response);
+    } catch (error) {
+      console.error('Error uploading file', error);
     }
   }
 
-  uploadFile() {
-    // Implement the logic to upload the selected file to your backend
-    if (this.selectedFile) {
-      // Perform the upload operation (e.g., using HttpClient)
-      console.log('Uploading file:', this.selectedFile);
-      this.reclamationService
-        .uploadImage(this.selectedFile)
-        .subscribe((res) => {
-          console.log(res);
-        });
-      // Add your upload logic here
-    } else {
-      console.warn('No file selected.');
-    }
-  }
   addReclamation() {
-    console.log('reclamaation in form', this.formData);
+    const citoyen = localStorage.getItem('userId');
+    this.formData.citoyen = citoyen as string;
+    console.log('reclamation in form', this.formData);
     this.reclamationService
       .addReclamation({ ...this.formData })
       .subscribe((res) => {
