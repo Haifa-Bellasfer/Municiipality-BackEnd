@@ -7,6 +7,7 @@ import { ReclamationService } from 'src/app/service/reclamation.service';
   styleUrls: ['./add-reclamation.page.scss'],
 })
 export class AddReclamationPage implements OnInit {
+  imagePreview: string | undefined;
   selectedFile: string | ArrayBuffer | null = null;
   categories: { key: number; value: string }[] = [
     { key: 1, value: 'Eclairage' },
@@ -39,34 +40,26 @@ export class AddReclamationPage implements OnInit {
     this.formData.categorie = event.target.value;
   }
 
-  imagePreview: string | undefined;
+  onFileSelected(event: Event) {
+    const input = event.target as HTMLInputElement;
 
-  async onFileSelected(event: any) {
-    const file = event.target.files[0];
-    if (!file) return;
+    if (input.files && input.files[0]) {
+      const file = input.files[0];
+      const reader = new FileReader();
+      reader.onerror = () => {
+        console.error('Error reading file');
+      };
 
-    const reader = new FileReader();
-    reader.onload = () => {
-      this.imagePreview = reader.result as string;
-    };
-    reader.readAsDataURL(file);
-    const formData = new FormData();
-    formData.append('myImage', file);
+      reader.onload = () => {
+        if (typeof reader.result === 'string') {
+          const base64String = reader.result;
+          this.formData.myImage = base64String;
+        }
+      };
 
-    try {
-      const response = this.reclamationService
-        .uploadImage(formData)
-        .subscribe((res) => {
-          this.formData.myImage = res.name as any;
-          console.log(res);
-        });
-
-      console.log('File uploaded successfully', response);
-    } catch (error) {
-      console.error('Error uploading file', error);
+      reader.readAsDataURL(file);
     }
   }
-
   addReclamation() {
     const citoyen = localStorage.getItem('userId');
     this.formData.citoyen = citoyen as string;

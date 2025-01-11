@@ -8,28 +8,36 @@
 </ion-header>
 
 <ion-content class="ion-padding" *ngIf="reclamation">
-  <ion-card-title>{{ reclamation.categorie }}</ion-card-title>
-  <ion-badge [color]="getStatusColor(reclamation.status)">
-    {{ reclamation.status }}
-  </ion-badge>
+  <ion-card>
+    <ion-card-title>{{ reclamation.description }}</ion-card-title>
+    <ion-badge [color]="getStatusColor(reclamation.status)">
+      {{ reclamation.status }}
+    </ion-badge>
 
-  <ion-card-content>
-    <ion-item>
-      <ion-label>
-        <h2>Description</h2>
-        <p>{{ reclamation.description }}</p>
-      </ion-label>
-    </ion-item>
-    <div style="margin-top: 60px">
-      <ion-content>
+    <ion-card-content>
+      <ion-item>
+        <ion-label>
+          <h2>Details</h2>
+        </ion-label>
+      </ion-item>
+
+      <!-- Image Section -->
+      <div class="image-container" style="margin-top: 20px">
         <img
-          src="../../../assets/img-677ad8c687cc221d80ca03b1.png"
-          alt="Example Image"
-          style="max-width: 350px; max-height: 300px; object-fit: contain"
-          class="responsive-image"
+          [src]="reclamation.imageURL"
+          alt="Reclamation Image"
+          style="max-width: 100%; height: auto; object-fit: contain"
+          (error)="onImageError($event)"
         />
-        />
-      </ion-content>
-    </div>
-  </ion-card-content>
+      </div>
+
+      <!-- For debugging -->
+      <ion-item>
+        <ion-label>
+          <h2>Description</h2>
+          <p>{{ reclamation.description}}</p>
+        </ion-label>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

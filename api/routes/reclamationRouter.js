@@ -5,27 +5,49 @@ const User = require("../model/User");
 const Municipality = require("../model/Municipality");
 const { ObjectId } = require("mongodb");
 
-// Add Reclamation
 router.post("/add", async (req, res) => {
-  const fournisseur = await Fournisseur.findById(req.body.fournisseur);
-  const citoyen = await User.findById(req.body.citoyen);
-  const municipality = await Municipality.findById(req.body.municipality);
-
-  const reclamation = new Reclamation({
-    description: req.body.description,
-    categorie: req.body.categorie,
-    localisation: req.body.localisation,
-    etat: "Pending",
-    imageURL: req.body.imageURL,
-    fournisseur: fournisseur,
-    citoyen: citoyen,
-    municipality: municipality,
-  });
   try {
+    // Input validation
+    if (
+      !req.body.description ||
+      !req.body.categorie ||
+      !req.body.localisation
+    ) {
+      return res.status(400).json({ message: "Missing required fields" });
+    }
+
+    // Clean image data if needed (remove prefix if it exists)
+    let imageData = req.body.imageURL;
+    if (imageData && imageData.includes("base64,")) {
+      imageData = imageData.split("base64,")[1];
+    }
+
+    // Fetch related entities
+    const [fournisseur, citoyen, municipality] = await Promise.all([
+      req.body.fournisseur ? Fournisseur.findById(req.body.fournisseur) : null,
+      User.findById(req.body.citoyen),
+      Municipality.findById(req.body.municipality),
+    ]);
+
+    const reclamation = new Reclamation({
+      description: req.body.description,
+      categorie: req.body.categorie,
+      localisation: req.body.localisation,
+      etat: "Pending",
+      imageURL: imageData,
+      fournisseur: fournisseur,
+      citoyen: citoyen,
+      municipality: municipality,
+    });
+
     const savedReclamation = await reclamation.save();
     res.json(savedReclamation);
   } catch (err) {
-    res.json({ message: err });
+    console.error("Error saving reclamation:", err);
+    res.status(500).json({
+      message: "Error saving reclamation",
+      error: err.message,
+    });
   }
 });
 
@@ -61,12 +83,19 @@ router.put("/updateReclamation/:id", async (req, res) => {
     res.json({ message: err });
   }
 });
-// Get reclamation by id
+
 router.get("/getReclamationById/:id", async (req, res) => {
   try {
     const reclamation = await Reclamation.findById(req.params.id).populate(
       "citoyen"
     );
+
+    // If the image is stored as Buffer in MongoDB
+    if (reclamation.imageURL instanceof Buffer) {
+      // Convert Buffer to base64
+      reclamation.imageURL = reclamation.imageURL.toString("base64");
+    }
+
     res.json(reclamation);
   } catch (err) {
     res.json({ message: err });
