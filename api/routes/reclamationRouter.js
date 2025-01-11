@@ -210,6 +210,32 @@ router.put("/update/:id", async (req, res) => {
   }
 });
 
+
+// Update reclamation to done
+router.put('/updateDone/:id', async (req, res) => {
+  try {
+    const id = req.params.id;
+
+    const options = { new: true };
+    const fournisseur = await Fournisseur.findById(req.body.fournisseur);
+
+    const reclamation = await Reclamation.findByIdAndUpdate(
+      id,
+      {
+        $set: {
+          etat: 'Done',
+          fournisseur: fournisseur,
+        },
+      },
+      options
+    );
+
+    res.json(reclamation);
+  } catch (err) {
+    res.json({ message: err });
+  }
+});
+
 // Get reclamation fournisseur
 router.get("/listfournisseurReclamation/:id", async (req, res) => {
   try {

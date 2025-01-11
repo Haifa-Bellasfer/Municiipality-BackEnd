@@ -11,12 +11,14 @@ import { MatTableDataSource } from '@angular/material/table';
 export class reclamationsComponent implements OnInit {
   reclamations: any;
   reclamationsInprogress: any;
+  reclamationsDone: any;
 
   constructor(public reclamationService: ReclamationService) {}
 
   ngOnInit(): void {
     this.getReclamationsPending();
     this.getReclamationsInprogress();
+    this.getReclamationsDone();
   }
 
   getReclamationsPending() {
@@ -30,6 +32,12 @@ export class reclamationsComponent implements OnInit {
     this.reclamationService.getReclamationsInprogress().subscribe((res) => {
       console.log('progress', res);
       this.reclamationsInprogress = res;
+    });
+  }
+  getReclamationsDone() {
+    this.reclamationService.getReclamationsDone().subscribe((res) => {
+      console.log('done', res);
+      this.reclamationsDone = res;
     });
   }
 }

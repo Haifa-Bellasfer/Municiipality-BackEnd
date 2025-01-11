@@ -77,4 +77,15 @@ export class DetailsReclamComponent implements OnInit {
       this.router.navigateByUrl('/reclamations');
     }, 2000);
   }
+  updateReclamationVerified() {
+    let id = this.route.snapshot.params.id;
+    this.reclamationService
+      .updateReclamationVerified(id, this.selectedValue)
+      .subscribe((res) => {
+        console.log(res);
+      });
+    setTimeout(() => {
+      this.router.navigateByUrl('/reclamations');
+    }, 2000);
+  }
 }
