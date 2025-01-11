@@ -50,20 +50,20 @@
       />
       <div style="flex-grow: 1">
         <h3>Description</h3>
-        <p>
+        <p style="color: #797878">
           {{ reclamation.description }}
         </p>
-        <mat-form-field appearance="fill" style="width: 90%">
-          <mat-label>Select an option</mat-label>
-          <mat-select [(value)]="selectedValue">
-            <mat-option
-              *ngFor="let fournisseur of fournisseurs"
-              [value]="fournisseur._id"
-              [disabled]="fournisseur.active === true"
-              >{{ fournisseur.slug }}</mat-option
-            >
-          </mat-select>
-        </mat-form-field>
+        <h3>Catégorie</h3>
+        <p style="color: #797878">
+          {{ reclamation.categorie }}
+        </p>
+        <h3>Note Responsable</h3>
+        <textarea
+          id="userInput"
+          rows="4"
+          cols="50"
+          placeholder="Tapez ici..."
+        ></textarea>
       </div>
     </div>
     <div style="padding: 1rem">
@@ -103,7 +103,7 @@
         >
 
         <p style="margin-bottom: 0; padding-top: 2px; padding-left: 8px">
-          {{ reclamation.createdAt | date: "yyyy-MM-dd" }}
+          {{ reclamation.createdAt | date : "yyyy-MM-dd" }}
         </p></span
       >
     </div>
@@ -117,9 +117,9 @@
             padding-right: 4px;
             border: 1px solid #639745;
           "
-          (click)="updateReclamation()"
+          (click)="updateReclamationVerified()"
         >
-          Traiter
+          Confirmer
         </p>
       </button>
 

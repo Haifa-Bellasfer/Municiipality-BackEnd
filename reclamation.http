@@ -3,11 +3,11 @@ POST http://localhost:3000/api/reclamation/add
 Content-Type: application/json
 
 {
-    "description":" Il y'a un probleme de nettoyage dans la rue 02 istambul ben arous. ",
+    "description":" Il y'a un probleme de batiment dans la rue 02 istambul riadh . ",
     "imageURL" : "https://images.ladepeche.fr/api/v1/images/view/5c33f1df8fe56f79e25aa38b/large/image.jpg",
-    "localisation":"ben arous",
+    "localisation":"Riadh",
     "categorie" :"Batiment",
-    "etat" : "Pending",
+    "etat" : "Done",
     "citoyen" :"676887bf4e50630becfc9613",
     "municipality" : "676885d54e50630becfc95fe"
 }
@@ -40,13 +40,12 @@ Content-Type: application/json
 }
 
 ### Update reclamation by status
-PUT http://localhost:3000/api/reclamation/update/677aa8349d78ae6fd0d1fe85
+PUT http://localhost:3000/api/reclamation/updateDone/677aa8349d78ae6fd0d1fe85
 Content-Type: application/json
 
 {
     "id" : "62fec68af7d43a186887a637",
-    "noteFournisseur": "notee fournisseur",
-    "etat": "Done"
+
 }
 
 ### Get  reclamations in progress status
