@@ -29,7 +29,7 @@ export class DetailsReclamComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getReclamationByID(this.route.snapshot.params.id);
+    this.loadReclamation(this.route.snapshot.params.id);
     this.getFournisseurs();
   }
   openDialog() {
@@ -42,12 +42,30 @@ export class DetailsReclamComponent implements OnInit {
       this.fournisseurs = res;
     });
   }
-  getReclamationByID(id: string): any {
-    this.reclamationService.getReclamationByID(id).subscribe((res) => {
-      console.log('GETRECLAM', res);
-      this.reclamation = res;
+
+  loadReclamation(id: string) {
+    this.reclamationService.getReclamationByID(id).subscribe({
+      next: (data) => {
+        this.reclamation = { ...data };
+
+        if (this.reclamation.imageURL) {
+          if (!this.reclamation.imageURL.startsWith('data:image')) {
+            this.reclamation.imageURL = `data:image/png;base64,${this.reclamation.imageURL}`;
+          }
+        }
+      },
+      error: (error) => {
+        console.error('Error fetching reclamation:', error);
+      },
     });
   }
+  onImageError(event: any) {
+    console.error('Image failed to load', {
+      src: event.target.src?.substring(0, 100) + '...',
+      error: event,
+    });
+  }
+
   updateReclamation() {
     let id = this.route.snapshot.params.id;
     this.reclamationService

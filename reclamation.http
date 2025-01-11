@@ -22,7 +22,7 @@ Content-Type: application/json
 }
 
 ### Get reclamation by id citoyen
-GET  http://localhost:3000/api/reclamation/getReclamationByIdCitoyen/676887bf4e50630becfc9613
+GET  http://localhost:3000/api/reclamation/getReclamationByIdCitoyen/676033c5d7377c1a6c01c86e
 
 ### Get all reclamations
 GET  http://localhost:3000/api/reclamation/list

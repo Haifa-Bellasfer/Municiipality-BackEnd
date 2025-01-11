@@ -31,6 +31,20 @@ const routes: Routes = [
         (m) => m.SignUppPageModule
       ),
   },
+  {
+    path: 'reclamation-detail',
+    loadChildren: () =>
+      import('./screens/reclamation-detail/reclamation-detail.module').then(
+        (m) => m.ReclamationDetailPageModule
+      ),
+  },
+  {
+    path: 'reclamation-detail/:id',
+    loadChildren: () =>
+      import('./screens/reclamation-detail/reclamation-detail.module').then(
+        (m) => m.ReclamationDetailPageModule
+      ),
+  },
 ];
 
 @NgModule({
