@@ -167,5 +167,66 @@
   right: 1rem;
   font-size: 0.9em;
 }
+.styled-textarea {
+  width: 70%; /* Makes it responsive */
+  max-width: 100%; /* Prevents overflow */
+  min-height: 100px; /* Sets a minimum height */
+  padding: 12px 16px; /* Adds padding inside the textarea */
+  font-size: 16px; /* Improves readability */
+  font-family: 'Arial', sans-serif; /* Sets a clean font */
+  color: #333; /* Text color */
+  background-color: #f9f9f9; /* Light gray background for a modern look */
+  border: 1px solid #ccc; /* Light border */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: inset 0px 2px 4px rgba(0, 0, 0, 0.1); /* Subtle inner shadow */
+  transition: border-color 0.3s, box-shadow 0.3s; /* Smooth focus effect */
+  resize: vertical; /* Allows resizing vertically only */
+}
+
+/* Styles when the textarea is focused */
+.styled-textarea:focus {
+  border-color: #639745; /* Highlight border on focus */
+  box-shadow: 0px 0px 5px rgba(99, 151, 69, 0.5); /* Adds glow effect */
+  outline: none; /* Removes default outline */
+}
+
+/* Placeholder styling */
+.styled-textarea::placeholder {
+  color: #aaa; /* Lighter color for placeholder text */
+  font-style: italic; /* Makes placeholder text italic */
+}
+.styled-form-field {
+  width: 100%; /* Full width for responsiveness */
+  max-width: 100%; /* Prevents overflow */
+  margin: 1rem 0; /* Adds spacing around the form field */
+}
+
+.styled-form-field.mat-form-field {
+  background-color: #f9f9f9; /* Light gray background for the field */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Soft outer shadow */
+}
+
+.styled-form-field .mat-form-field-flex {
+  padding: 0 8px; /* Adds inner padding to the form field */
+}
+
+.styled-form-field.mat-form-field.mat-focused .mat-form-field-outline {
+  border-color: #639745; /* Green border on focus */
+  box-shadow: 0px 0px 5px rgba(99, 151, 69, 0.5); /* Subtle glow effect on focus */
+}
+
+.styled-form-field .mat-select-trigger {
+  font-size: 16px; /* Adjust font size for readability */
+  color: #333; /* Darker text color */
+}
+
+.styled-form-field .mat-option.mat-active {
+  background-color: rgba(99, 151, 69, 0.1); /* Highlight active option */
+}
+
+.styled-form-field .mat-option:hover {
+  background-color: rgba(99, 151, 69, 0.2); /* Subtle hover effect */
+}
 
 

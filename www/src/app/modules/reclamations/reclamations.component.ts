@@ -2,6 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { Reclamation } from 'src/app/entity/reclamation';
 import { ReclamationService } from '../../services/reclamation.service';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatTabChangeEvent } from '@angular/material/tabs';
 
 @Component({
   selector: 'app-posts',
@@ -9,9 +10,10 @@ import { MatTableDataSource } from '@angular/material/table';
   styleUrls: ['./reclamations.component.scss'],
 })
 export class reclamationsComponent implements OnInit {
-  reclamations: any;
-  reclamationsInprogress: any;
-  reclamationsDone: any;
+  PendingReclamations: any;
+  InprogressReclamations: any;
+  DoneReclamations: any;
+  activeTabIndex: number = 0; // Default active tab index
 
   constructor(public reclamationService: ReclamationService) {}
 
@@ -24,20 +26,33 @@ export class reclamationsComponent implements OnInit {
   getReclamationsPending() {
     this.reclamationService.getReclamationsPending().subscribe((res) => {
       console.log('pending', res);
-      this.reclamations = res;
+      this.PendingReclamations = res;
     });
   }
 
   getReclamationsInprogress() {
     this.reclamationService.getReclamationsInprogress().subscribe((res) => {
       console.log('progress', res);
-      this.reclamationsInprogress = res;
+      this.InprogressReclamations = res;
     });
   }
   getReclamationsDone() {
     this.reclamationService.getReclamationsDone().subscribe((res) => {
       console.log('done', res);
-      this.reclamationsDone = res;
+      this.DoneReclamations = res;
     });
+  }
+
+  // Triggered when the tab changes
+  onTabChange(event: any): void {
+    console.log('Tab changed to index:', event.index);
+  }
+
+  // Triggered when the active tab is clicked
+  onActiveTabClick(tabIndex: number): void {
+    if (tabIndex === this.activeTabIndex) {
+      console.log('Active tab clicked:', tabIndex);
+      // Additional logic for active tab click
+    }
   }
 }

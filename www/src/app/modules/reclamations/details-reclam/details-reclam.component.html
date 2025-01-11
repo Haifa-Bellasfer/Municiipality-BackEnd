@@ -48,16 +48,36 @@
           {{ reclamation.description }}
         </p>
         <h3>Catégorie</h3>
-        <p style="color: #797878">
+        <mat-form-field
+          class="styled-form-field"
+          appearance="outline"
+          style="width: 100%"
+          *ngIf="reclamation.etat == 'Pending'"
+        >
+          <mat-label>Choisir un fournisseur</mat-label>
+          <mat-select [(value)]="selectedValue">
+            <mat-option
+              *ngFor="let fournisseur of fournisseurs"
+              [value]="fournisseur._id"
+              [disabled]="fournisseur.active === true"
+              >{{ fournisseur.slug }}</mat-option
+            >
+          </mat-select>
+        </mat-form-field>
+        <p style="color: #797878" *ngIf="reclamation.etat !== 'Pending'">
           {{ reclamation.categorie }}
         </p>
-        <h3>Note Responsable</h3>
-        <textarea
-          id="userInput"
-          rows="4"
-          cols="50"
-          placeholder="Tapez ici..."
-        ></textarea>
+
+        <div *ngIf="reclamation.etat == 'Pending'">
+          <h3>Note Responsable</h3>
+          <textarea
+            id="userInput"
+            rows="4"
+            cols="50"
+            placeholder="Tapez ici..."
+            class="styled-textarea"
+          ></textarea>
+        </div>
       </div>
     </div>
     <div style="padding: 1rem">
@@ -102,7 +122,11 @@
       >
     </div>
     <div style="position: absolute; bottom: 0px; right: 0">
-      <button mat-stroked-button style="background-color: #639745">
+      <button
+        mat-stroked-button
+        style="background-color: #639745"
+        *ngIf="reclamation.etat !== 'Inprogress'"
+      >
         <p
           style="
             color: white;
@@ -111,9 +135,14 @@
             padding-right: 4px;
             border: 1px solid #639745;
           "
-          (click)="updateReclamationVerified()"
         >
-          Confirmer
+          {{
+            reclamation.etat === "Pending"
+              ? "Confirmer"
+              : reclamation.etat === "Done"
+              ? "Vérifier"
+              : ""
+          }}
         </p>
       </button>
 
@@ -122,8 +151,11 @@
         color="green"
         style="margin-left: 3px; border: 1px solid #639745"
         (click)="openDialog()"
+        *ngIf="reclamation.etat !== 'Inprogress'"
       >
-        <p style="color: #639745; margin-bottom: 0">Archiver</p>
+        <p style="color: #639745; margin-bottom: 0">
+          {{ reclamation.etat === "Pending" ? "Abondonner" : "Archiver" }}
+        </p>
       </button>
     </div>
   </div>

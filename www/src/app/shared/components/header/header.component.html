@@ -5,21 +5,5 @@
     </button>
 
     <span> Baladiti </span>
-
-    <div fxFlex fxLayout="row" fxLayoutAlign="flex-end">
-      <ul fxLayout="row" fxLayoutGap="20px">
-        <li>
-          <h1>Upload Image</h1>
-          <form
-            action=" http://localhost:3000/api/upload/upload"
-            enctype="multipart/form-data"
-            method="POST"
-          >
-            <input type="file" name="myImage" accept="image/*" />
-            <input type="submit" value="Upload Photo" />
-          </form>
-        </li>
-      </ul>
-    </div>
   </mat-toolbar-row>
 </mat-toolbar>

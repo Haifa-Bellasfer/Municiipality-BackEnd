@@ -3,12 +3,12 @@ POST http://localhost:3000/api/fournisseur/add
 Content-Type: application/json
 
 {
-    "slug": "Steg",
-    "email":"haifa@gmail.com",
+    "slug": "Baladeya",
+    "email":"haifa1@gmail.com",
     "password" : "1234",
-    "addresse" : "hamem lif",
+    "addresse" : "bardo",
     "phone":"56249538",
-    "categorie" : "Eclairage"
+    "categorie" : "Nettoyage"
 }
 
 
