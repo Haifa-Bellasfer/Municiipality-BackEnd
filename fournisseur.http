@@ -23,7 +23,7 @@ PUT http://localhost:3000/api/fournisseur/update/done/614dfe099530931728154cdf
 Content-Type: application/json
 
 {
-    "id" : "614dfe099530931728154cdf"
+    "id" : "6782c3d32bf8ed119475a0af"
 }
 
 ### desactive fournisseur

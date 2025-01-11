@@ -2,7 +2,6 @@ import { ArchiveService } from './../../../services/archive.service';
 import { FournisseurService } from './../../../services/fournisseur.service';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Reclamation } from 'src/app/entity/reclamation';
 import { ReclamationService } from '../../../services/reclamation.service';
 import { Archive } from 'src/app/entity/archive';
 import { MatDialog } from '@angular/material/dialog';
@@ -18,6 +17,7 @@ export class DetailsReclamComponent implements OnInit {
   fournisseurs: any;
   selectedValue: any = '';
   archived: Archive[] = [];
+  noteResponsable: any;
 
   constructor(
     public reclamationService: ReclamationService,
@@ -66,21 +66,27 @@ export class DetailsReclamComponent implements OnInit {
     });
   }
 
-  updateReclamation() {
+  // update reclaation status
+  UpdateReclamationStatus() {
     let id = this.route.snapshot.params.id;
+    switch (this.reclamation.etat) {
+      case 'Pending': {
+        this.reclamation.etat = 'InProgress';
+        this.reclamation.noteResponsable = this.noteResponsable;
+        break;
+      }
+      case 'InProgress': {
+        this.reclamation.etat = 'Done';
+        break;
+      }
+    }
     this.reclamationService
-      .updateReclamation(id, this.selectedValue)
-      .subscribe((res) => {
-        console.log(res);
-      });
-    setTimeout(() => {
-      this.router.navigateByUrl('/reclamations');
-    }, 2000);
-  }
-  updateReclamationVerified() {
-    let id = this.route.snapshot.params.id;
-    this.reclamationService
-      .updateReclamationVerified(id, this.selectedValue)
+      .updateReclamationVerified(
+        id,
+        this.selectedValue,
+        this.reclamation.etat,
+        this.reclamation.noteResponsable
+      )
       .subscribe((res) => {
         console.log(res);
       });

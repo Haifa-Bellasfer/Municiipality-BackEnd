@@ -18,6 +18,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
 import { DetailsFournisseurComponent } from 'src/app/modules/fournisseur/details-fournisseur/details-fournisseur.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatIconModule,
     MatDialogModule,
     MatFormFieldModule,
+    FormsModule,
   ],
 })
 export class DefaultModule {}
