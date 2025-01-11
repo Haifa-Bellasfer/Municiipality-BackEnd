@@ -19,23 +19,12 @@ export class ReclamationService {
   reclamtionState: any = [];
 
   // Reclamations State InProgress
-  getReclamationsInprogress(): Observable<Reclamation[]> {
+  getReclamationsByStatus(status: string): Observable<Reclamation[]> {
     return this.http
-      .get<any>(' http://localhost:3000/api/reclamation/list/inprogress')
+      .get<any>(' http://localhost:3000/api/reclamation/list/' + status)
       .pipe(tap((result) => console.log('result-->', result)));
   }
-  // Reclamations  state Pending
-  getReclamationsPending(): Observable<Reclamation[]> {
-    return this.http
-      .get<any>(' http://localhost:3000/api/reclamation/list/pending')
-      .pipe(tap((result) => console.log('result-->', result)));
-  }
-  // Reclamations  state Pending
-  getReclamationsDone(): Observable<Reclamation[]> {
-    return this.http
-      .get<any>(' http://localhost:3000/api/reclamation/list/done')
-      .pipe(tap((result) => console.log('result-->', result)));
-  }
+
   //Reclamation By Id
   getReclamationByID(id: string): Observable<Reclamation> {
     return this.http
@@ -61,12 +50,15 @@ export class ReclamationService {
   //Update REclamation to Verified
   updateReclamationVerified(
     id: string,
-    idFournisseur: string
+    fournisseur: string,
+    status: string,
+    noteResponsable?: string
   ): Observable<Reclamation> {
     return this.http
       .put<any>(
         ' http://localhost:3000/api/reclamation/update/' + id,
-        { etat: 'Verified' },
+
+        { fournisseur, etat: status, noteResponsable },
         this.httpOption
       )
       .pipe(tap((result) => console.log('resultUPdate-->', result)));

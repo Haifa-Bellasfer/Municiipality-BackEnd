@@ -76,6 +76,7 @@
             cols="50"
             placeholder="Tapez ici..."
             class="styled-textarea"
+            [(ngModel)]="noteResponsable"
           ></textarea>
         </div>
       </div>
@@ -125,7 +126,8 @@
       <button
         mat-stroked-button
         style="background-color: #639745"
-        *ngIf="reclamation.etat !== 'Inprogress'"
+        *ngIf="reclamation.etat !== 'InProgress'"
+        (click)="UpdateReclamationStatus()"
       >
         <p
           style="
@@ -151,10 +153,10 @@
         color="green"
         style="margin-left: 3px; border: 1px solid #639745"
         (click)="openDialog()"
-        *ngIf="reclamation.etat !== 'Inprogress'"
+        *ngIf="reclamation.etat !== 'InProgress'"
       >
         <p style="color: #639745; margin-bottom: 0">
-          {{ reclamation.etat === "Pending" ? "Abondonner" : "Archiver" }}
+          {{ reclamation.etat === "Pending" ? "Abandonner" : "Archiver" }}
         </p>
       </button>
     </div>

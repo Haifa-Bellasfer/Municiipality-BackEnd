@@ -6,8 +6,8 @@ Content-Type: application/json
     "description":" Il y'a un probleme de batiment dans la rue 02 istambul riadh . ",
     "imageURL" : "https://images.ladepeche.fr/api/v1/images/view/5c33f1df8fe56f79e25aa38b/large/image.jpg",
     "localisation":"Riadh",
-    "categorie" :"Batiment",
-    "etat" : "Done",
+    "categorie" :"Nettoyage",
+    "etat" : "Pending",
     "citoyen" :"676887bf4e50630becfc9613",
     "municipality" : "676885d54e50630becfc95fe"
 }
@@ -28,7 +28,7 @@ GET  http://localhost:3000/api/reclamation/getReclamationByIdCitoyen/676033c5d73
 GET  http://localhost:3000/api/reclamation/list
 
 ### Update reclamation info
-PUT http://localhost:3000/api/reclamation/updateReclamation/677aa8349d78ae6fd0d1fe85
+PUT http://localhost:3000/api/reclamation/updateReclamation/677aa89a9d78ae6fd0d1fe8a
 Content-Type: application/json
 
 {
@@ -40,16 +40,19 @@ Content-Type: application/json
 }
 
 ### Update reclamation by status
-PUT http://localhost:3000/api/reclamation/updateDone/677aa8349d78ae6fd0d1fe85
+PUT http://localhost:3000/api/reclamation/update/6782f4e738aa412b5c94797e
 Content-Type: application/json
 
 {
-    "id" : "62fec68af7d43a186887a637",
+    "fournisseur" : "6782c3d32bf8ed119475a0af",
+    "etat": "Done",
+    "noteFournisseur" : " c fait",
+    "noteResponsable" : " donee"
 
 }
 
 ### Get  reclamations in progress status
-GET  http://localhost:3000/api/reclamation/list/inprogress
+GET  http://localhost:3000/api/reclamation/list/InProgress
 
 ### Get  reclamations pending status
 GET  http://localhost:3000/api/reclamation/list/pending

@@ -24,20 +24,24 @@ export class reclamationsComponent implements OnInit {
   }
 
   getReclamationsPending() {
-    this.reclamationService.getReclamationsPending().subscribe((res) => {
-      console.log('pending', res);
-      this.PendingReclamations = res;
-    });
+    this.reclamationService
+      .getReclamationsByStatus('Pending')
+      .subscribe((res) => {
+        console.log('pending', res);
+        this.PendingReclamations = res;
+      });
   }
 
   getReclamationsInprogress() {
-    this.reclamationService.getReclamationsInprogress().subscribe((res) => {
-      console.log('progress', res);
-      this.InprogressReclamations = res;
-    });
+    this.reclamationService
+      .getReclamationsByStatus('InProgress')
+      .subscribe((res) => {
+        console.log('progress', res);
+        this.InprogressReclamations = res;
+      });
   }
   getReclamationsDone() {
-    this.reclamationService.getReclamationsDone().subscribe((res) => {
+    this.reclamationService.getReclamationsByStatus('Done').subscribe((res) => {
       console.log('done', res);
       this.DoneReclamations = res;
     });
