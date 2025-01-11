@@ -1,0 +1,46 @@
+<!-- <app-explore-container name="Tab 3 page"></app-explore-container> -->
+
+<ion-content class="ion-padding">
+  <h1>Welcome,</h1>
+  <h3>Se connecter à Baladiti!</h3>
+
+  <form #myForm="ngForm" (ngSubmit)="onLogin()">
+    <div class="form-field">
+      <ion-label [ngClass]="focused ? 'label-focused' : ''">Email ID</ion-label>
+      <ion-input
+        (focus)="focused = true"
+        (blur)="onBlur($event)"
+        type="text"
+        [(ngModel)]="loginData.email"
+        name="email"
+        required
+      ></ion-input>
+    </div>
+    <div class="form-field">
+      <ion-label [ngClass]="focused ? 'label-focused' : ''"
+        >Mot de passe</ion-label
+      >
+      <ion-input
+        (focus)="focused"
+        (blur)="onBlur($event)"
+        type="password"
+        [(ngModel)]="loginData.password"
+        name="password"
+        required
+      ></ion-input>
+    </div>
+    <p
+      style="margin-top: 10px; padding-left: 5px; color: brown"
+      *ngIf="errorMessage"
+    >
+      {{errorMessage}}
+    </p>
+
+    <ion-button type="submit">Se connecter</ion-button>
+  </form>
+
+  <p class="footer-text">
+    Créer un nouveau compte,
+    <!-- <a [routerLink]="['/sign-up']">S'inscrire</a> -->
+  </p>
+</ion-content>

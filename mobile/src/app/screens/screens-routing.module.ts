@@ -4,39 +4,34 @@ import { ScreensPage } from './screens.page';
 
 const routes: Routes = [
   {
-    path: 'tabs',
+    path: '',
     component: ScreensPage,
     children: [
       {
-        path: 'tab1',
+        path: 'add-reclamation',
         loadChildren: () =>
-          import('../add-reclamation/add-reclamation.module').then(
+          import('./add-reclamation/add-reclamation.module').then(
             (m) => m.AddReclamationPageModule
           ),
       },
       {
-        path: 'tab2',
+        path: 'list-reclamation',
         loadChildren: () =>
-          import('../list-reclamation/list-reclamation.module').then(
+          import('./list-reclamation/list-reclamation.module').then(
             (m) => m.ListReclamationPageModule
           ),
       },
       {
-        path: 'tab3',
+        path: 'login',
         loadChildren: () =>
-          import('../tab3/tab3.module').then((m) => m.Tab3PageModule),
+          import('./login/login.module').then((m) => m.LoginPageModule),
       },
       {
         path: '',
-        redirectTo: '/tabs/tab1',
+        redirectTo: '/login',
         pathMatch: 'full',
       },
     ],
-  },
-  {
-    path: '',
-    redirectTo: '/tabs/tab1',
-    pathMatch: 'full',
   },
 ];
 

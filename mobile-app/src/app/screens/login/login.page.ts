@@ -25,10 +25,10 @@ export class LoginPage implements OnInit {
 
   ngOnInit() {}
   loginSubmit() {
-    console.log('ahawa login', this.formData);
+    console.log('login', this.formData);
     this.loginService.login(this.formData).subscribe((res) => {
       console.log(res);
-      this.router.navigate(['/reclamation/add-reclamation']);
+      this.router.navigate(['/add-reclamation']);
     });
   }
 }
