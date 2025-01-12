@@ -1,13 +1,140 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>signUp</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content class="ion-padding">
+  <h1 style="padding-left: 20px; margin-top: 20px">Créer un nouveau compte,</h1>
+  <h3 style="padding-left: 20px">S'inscrire à Baladiti'!</h3>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">signUp</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <form #myForm="ngForm" [formGroup]="signUpForm" (ngSubmit)="onSignup()">
+    <div class="form-field">
+      <ion-label [ngClass]="focused ? 'label-focused' : ''"
+        >Nom utilisateur</ion-label
+      >
+      <ion-input
+        (focus)="focused = true"
+        (blur)="onBlur($event)"
+        name="username"
+        [(ngModel)]="signUpInfo.username"
+        type="text"
+        formControlName="username"
+        required
+      ></ion-input>
+    </div>
+    <div
+      class="validation-error"
+      style="margin-bottom: 20px"
+      *ngIf="username?.touched && username?.errors"
+    >
+      <ion-text color="danger" *ngIf="username?.errors?.['required']">
+        Username est obligatoire
+      </ion-text>
+    </div>
+
+    <div class="form-field">
+      <ion-label [ngClass]="focused ? 'label-focused' : ''">Email</ion-label>
+      <ion-input
+        (focus)="focused = true"
+        (blur)="onBlur($event)"
+        name="email"
+        [(ngModel)]="signUpInfo.email"
+        type="text"
+        formControlName="email"
+        required
+      ></ion-input>
+    </div>
+    <div
+      class="validation-error"
+      style="margin-bottom: 20px"
+      *ngIf="email?.touched && email?.errors"
+    >
+      <ion-text color="danger" *ngIf="email?.errors?.['required']">
+        Email est obligatoire
+      </ion-text>
+      <ion-text color="danger" *ngIf="email?.errors?.['email']">
+        Le format n'est pas valide
+      </ion-text>
+    </div>
+
+    <div class="form-field">
+      <ion-label [ngClass]="focused ? 'label-focused' : ''"
+        >Mot de passe</ion-label
+      >
+      <ion-input
+        (focus)="focused = true"
+        (blur)="onBlur($event)"
+        name="password"
+        [(ngModel)]="signUpInfo.password"
+        type="password"
+        formControlName="password"
+        required
+      ></ion-input>
+    </div>
+
+    <div
+      class="validation-error"
+      style="margin-bottom: 20px"
+      *ngIf="password?.touched && password?.errors"
+    >
+      <ion-text color="danger" *ngIf="password?.errors?.['required']">
+        Password est obligatoire
+      </ion-text>
+      <ion-text color="danger" *ngIf="password?.errors?.['minlength']">
+        le mot de passe doit être au minimum 4 characters
+      </ion-text>
+    </div>
+
+    <div class="form-field">
+      <ion-label [ngClass]="focused ? 'label-focused' : ''"
+        >Adresse postale</ion-label
+      >
+      <ion-input
+        (focus)="focused = true"
+        (blur)="onBlur($event)"
+        name="address"
+        [(ngModel)]="signUpInfo.address"
+        type="text"
+        formControlName="address"
+        required
+      ></ion-input>
+    </div>
+
+    <div
+      class="validation-error"
+      style="margin-bottom: 20px"
+      *ngIf="address?.touched && address?.errors"
+    >
+      <ion-text color="danger" *ngIf="address?.errors?.['required']">
+        Adresse est obligatoire
+      </ion-text>
+    </div>
+
+    <div class="form-field">
+      <ion-label [ngClass]="focused ? 'label-focused' : ''"
+        >Téléphone</ion-label
+      >
+      <ion-input
+        (focus)="focused = true"
+        (blur)="onBlur($event)"
+        name="phone"
+        type="text"
+        [(ngModel)]="signUpInfo.phone"
+        required
+        formControlName="phone"
+      ></ion-input>
+    </div>
+
+    <div
+      class="validation-error"
+      style="margin-bottom: 20px"
+      *ngIf="phone?.touched && phone?.errors"
+    >
+      <ion-text color="danger" *ngIf="phone?.errors?.['required']">
+        Téléphone est obligatoire
+      </ion-text>
+    </div>
+
+    <ion-button type="submit" [disabled]="signUpForm.invalid"
+      >Créer un compte</ion-button
+    >
+  </form>
+  <p class="footer-text" style="margin-top: 20px">
+    Je suis un utilisateur, <a [routerLink]="['/login']">Se connecter</a>
+  </p>
 </ion-content>
