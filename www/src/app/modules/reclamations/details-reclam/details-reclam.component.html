@@ -126,7 +126,7 @@
       <button
         mat-stroked-button
         style="background-color: #639745"
-        *ngIf="reclamation.etat !== 'InProgress'"
+        *ngIf="reclamation.etat == 'Pending'"
         (click)="UpdateReclamationStatus()"
       >
         <p
@@ -138,13 +138,7 @@
             border: 1px solid #639745;
           "
         >
-          {{
-            reclamation.etat === "Pending"
-              ? "Confirmer"
-              : reclamation.etat === "Done"
-              ? "Vérifier"
-              : ""
-          }}
+          Confirmer
         </p>
       </button>
 
@@ -156,7 +150,7 @@
         *ngIf="reclamation.etat !== 'InProgress'"
       >
         <p style="color: #639745; margin-bottom: 0">
-          {{ reclamation.etat === "Pending" ? "Abandonner" : "Archiver" }}
+          {{ reclamation.etat === "Pending" ? "Abandonner" : "Vérifier" }}
         </p>
       </button>
     </div>
