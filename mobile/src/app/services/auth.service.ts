@@ -14,7 +14,7 @@ interface AuthResponse {
 })
 export class AuthService {
   private isAuthenticated = new BehaviorSubject<boolean>(false);
-  private apiUrl = 'http://localhost:3000/api/'; // Replace with your actual API URL
+  private apiUrl = 'http://localhost:3000/api/';
 
   constructor(private http: HttpClient) {
     const token = localStorage.getItem('auth_token');
@@ -31,6 +31,7 @@ export class AuthService {
         tap((response) => {
           localStorage.setItem('auth_token', response.accessToken);
           localStorage.setItem('userId', response.user._id);
+          localStorage.setItem('role', response.user.role);
           this.isAuthenticated.next(true);
         })
       )
@@ -54,6 +55,8 @@ export class AuthService {
       .pipe(
         tap((response) => {
           localStorage.setItem('auth_token', response.accessToken);
+          localStorage.setItem('userId', response.user._id);
+          localStorage.setItem('role', response.user.role);
           this.isAuthenticated.next(true);
         })
       )
@@ -66,23 +69,12 @@ export class AuthService {
   }
 
   logout() {
-    // If your API has a logout endpoint, you can call it here
-    return this.http
-      .post(`${this.apiUrl}/logout`, {})
-      .pipe(
-        tap(() => {
-          localStorage.removeItem('auth_token');
-          this.isAuthenticated.next(false);
-        })
-      )
-      .toPromise()
-      .catch((error) => {
-        console.error('Logout error:', error);
-        throw error;
-      });
+    localStorage.removeItem('auth_token');
+    localStorage.removeItem('userId');
+    localStorage.removeItem('role');
+    this.isAuthenticated.next(false);
   }
 
-  // Helper method to get the auth token
   getToken(): string | null {
     return localStorage.getItem('auth_token');
   }

@@ -2,6 +2,7 @@ const router = require("express").Router();
 const User = require("../model/User");
 const bcrypt = require("bcryptjs");
 const authenticateToken = require("../utils/verifyToken");
+const jwt = require("jsonwebtoken");
 
 // Registration: add new user
 router.post("/signUp", async (req, res) => {
@@ -23,7 +24,8 @@ router.post("/signUp", async (req, res) => {
   });
   try {
     const savedUser = await user.save();
-    res.send({ user: user._id, message: "Success regsitration !" });
+    const token = jwt.sign({ _id: savedUser._id }, process.env.TOKEN_SECRET);
+    res.header("accessToken", token).send({ user: user, accessToken: token });
   } catch (err) {
     res.status(400).send(err);
   }

@@ -1,14 +1,156 @@
-<ion-header [translucent]="true">
+<ion-header [translucent]="true" class="custom-header">
   <ion-toolbar>
-    <ion-title> Ajouter Réclamation </ion-title>
+    <ion-buttons slot="start">
+      <ion-img src="assets/logo.png" alt="Logo" style="height: 40px"></ion-img>
+    </ion-buttons>
+
+    <!-- Title in the center -->
+    <ion-title>Baladiti</ion-title>
+
+    <!-- Logout button on the right -->
+    <ion-buttons slot="end">
+      <ion-button (click)="logout()">
+        <ion-icon
+          slot="icon-only"
+          name="log-out-outline"
+          aria-hidden="true"
+        ></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Ajouter Réclamation</ion-title>
-    </ion-toolbar>
-  </ion-header>
-  <!-- <app-explore-container name="Tab 1 page"></app-explore-container> -->
+  <h1 style="text-align: center">Reclamation</h1>
+  <form
+    #myForm="ngForm"
+    (ngSubmit)="onSubmit(myForm)"
+    style="margin-top: 30px"
+    enctype="multipart/form-data"
+  >
+    <div class="form-field" style="padding-top: 50px">
+      <ion-label [ngClass]="focused ? 'label-focused' : ''">Adresse</ion-label>
+      <ion-input
+        #adresseInput="ngModel"
+        (focus)="focused = true"
+        (blur)="onBlur($event)"
+        name="adresse"
+        [(ngModel)]="formData.adresse"
+        type="text"
+        style="padding-right: 10px"
+        required
+        minlength="5"
+      ></ion-input>
+      <div
+        class="error-messages"
+        *ngIf="adresseInput.touched && adresseInput.invalid"
+      >
+        <ion-text color="danger" *ngIf="adresseInput.errors?.['required']">
+          L'adresse est obligatoire
+        </ion-text>
+        <ion-text color="danger" *ngIf="adresseInput.errors?.['minlength']">
+          L'adresse doit contenir au moins 5 caractères
+        </ion-text>
+      </div>
+    </div>
+
+    <div class="form-field" style="margin-top: 30px">
+      <ion-label [ngClass]="focused ? 'label-focused' : ''"
+        >Categorie</ion-label
+      >
+      <ion-select
+        #categorieInput="ngModel"
+        [(ngModel)]="formData.categorie"
+        name="categorie"
+        label="            "
+        label-placement="stacked"
+        (ionChange)="onChangee($event)"
+        required
+      >
+        <ion-select-option
+          *ngFor="let category of categories"
+          [value]="category.value"
+        >
+          {{ category.value }}
+        </ion-select-option>
+      </ion-select>
+      <div
+        class="error-messages"
+        *ngIf="categorieInput.touched && categorieInput.invalid"
+      >
+        <ion-text color="danger" *ngIf="categorieInput.errors?.['required']">
+          La catégorie est obligatoire
+        </ion-text>
+      </div>
+    </div>
+
+    <label class="custom-file-upload" style="margin-top: 10px">
+      <input
+        #imageInput="ngModel"
+        name="myImage"
+        type="file"
+        (change)="onFileSelected($event)"
+        accept="image/*"
+        class="file-input"
+        [(ngModel)]="formData.myImage"
+        required
+      />
+      Choisir une photo
+    </label>
+    <div
+      class="error-messages"
+      *ngIf="imageInput.touched && imageInput.invalid"
+    >
+      <ion-text color="danger" *ngIf="imageInput.errors?.['required']">
+        Une photo est obligatoire
+      </ion-text>
+    </div>
+
+    <div class="form-field" style="margin-top: 20px">
+      <ion-label [ngClass]="focused ? 'label-focused' : ''"
+        >Description</ion-label
+      >
+      <ion-textarea
+        #descriptionInput="ngModel"
+        class="custom-textarea"
+        (focus)="focused = true"
+        (blur)="onBlur($event)"
+        name="description"
+        [(ngModel)]="formData.description"
+        [rows]="4"
+        required
+        minlength="10"
+        maxlength="500"
+      ></ion-textarea>
+      <div
+        class="error-messages"
+        *ngIf="descriptionInput.touched && descriptionInput.invalid"
+      >
+        <ion-text color="danger" *ngIf="descriptionInput.errors?.['required']">
+          La description est obligatoire
+        </ion-text>
+        <ion-text color="danger" *ngIf="descriptionInput.errors?.['minlength']">
+          La description doit contenir au moins 10 caractères
+        </ion-text>
+        <ion-text color="danger" *ngIf="descriptionInput.errors?.['maxlength']">
+          La description ne peut pas dépasser 500 caractères
+        </ion-text>
+      </div>
+    </div>
+
+    <div style="margin-top: 60px">
+      <img
+        *ngIf="selectedFile"
+        [src]="selectedFile"
+        alt="Uploaded File"
+        style="max-width: 350px; max-height: 300px; object-fit: contain"
+      />
+    </div>
+
+    <div style="margin-top: 70px">
+      <ion-button class="myButton" type="submit" [disabled]="!myForm.valid">
+        Confirmer
+      </ion-button>
+    </div>
+  </form>
 </ion-content>

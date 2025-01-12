@@ -21,6 +21,13 @@ const routes: Routes = [
             (m) => m.ListReclamationPageModule
           ),
       },
+      {
+        path: 'reclamation-detail/:id',
+        loadChildren: () =>
+          import('./reclamation-detail/reclamation-detail.module').then(
+            (m) => m.ReclamationDetailPageModule
+          ),
+      },
     ],
   },
   {

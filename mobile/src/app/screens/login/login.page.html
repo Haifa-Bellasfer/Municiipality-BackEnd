@@ -8,7 +8,7 @@
 
   <form [formGroup]="loginForm" #myForm="ngForm" (ngSubmit)="onLogin()">
     <div class="form-field">
-      <ion-label [ngClass]="focused ? 'label-focused' : ''">Email ID</ion-label>
+      <ion-label [ngClass]="focused ? 'label-focused' : ''">Email</ion-label>
       <ion-input
         (focus)="focused = true"
         (blur)="onBlur($event)"
@@ -25,10 +25,10 @@
       *ngIf="email?.touched && email?.errors"
     >
       <ion-text color="danger" *ngIf="email?.errors?.['required']">
-        Email is required
+        Email est obligatoire
       </ion-text>
       <ion-text color="danger" *ngIf="email?.errors?.['email']">
-        Please enter a valid email
+        Le format n'est pas valide
       </ion-text>
     </div>
 
@@ -49,10 +49,10 @@
 
     <div class="validation-error" *ngIf="password?.touched && password?.errors">
       <ion-text color="danger" *ngIf="password?.errors?.['required']">
-        Password is required
+        Password est obligatoire
       </ion-text>
       <ion-text color="danger" *ngIf="password?.errors?.['minlength']">
-        Password must be at least 6 characters
+        le mot de passe doit être au minimum 4 characters
       </ion-text>
     </div>
 

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -12,14 +13,38 @@ export class SignUpPage {
   signUpInfo = {
     username: '',
     email: '',
-    role: 'Citoyen',
     password: '',
     phone: '',
     address: '',
+    role: 'Citoyen',
   };
   focused: boolean = true;
 
-  constructor(private authService: AuthService, private router: Router) {}
+  signUpForm: FormGroup = this.fb.group({
+    username: ['', [Validators.required]],
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', [Validators.required]],
+    phone: ['', [Validators.required]],
+    address: ['', [Validators.required]],
+    role: 'Citoyen',
+  });
+
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private router: Router
+  ) {}
+
+  ngOnInit() {
+    this.signUpForm = this.fb.group({
+      username: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required]],
+      phone: ['', [Validators.required]],
+      address: ['', [Validators.required]],
+      role: 'Citoyen',
+    });
+  }
 
   async onSignup() {
     try {
@@ -38,6 +63,25 @@ export class SignUpPage {
     if (!value) {
       this.focused = false;
     }
+  }
+
+  get username() {
+    return this.signUpForm.get('username');
+  }
+  get email() {
+    return this.signUpForm.get('email');
+  }
+
+  get password() {
+    return this.signUpForm.get('password');
+  }
+
+  get phone() {
+    return this.signUpForm.get('phone');
+  }
+
+  get address() {
+    return this.signUpForm.get('address');
   }
 
   goToLogin() {

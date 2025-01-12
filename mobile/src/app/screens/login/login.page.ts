@@ -29,6 +29,13 @@ export class LoginPage {
     private authService: AuthService
   ) {}
 
+  ngOnInit() {
+    this.loginForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(4)]],
+    });
+  }
+
   onBlur(event: any) {
     const value = event.target.value;
 
@@ -43,13 +50,6 @@ export class LoginPage {
 
   get password() {
     return this.loginForm.get('password');
-  }
-
-  ngOnInit() {
-    this.loginForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(4)]],
-    });
   }
 
   async onLogin() {
