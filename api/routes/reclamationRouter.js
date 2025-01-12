@@ -115,7 +115,6 @@ router.get('/list', async (req, res) => {
 // Get in progress reclamations
 router.get('/list/:etat', async (req, res) => {
   const etat = req.params.etat;
-  console.log(etat);
   if (!etat) throw new Error('etat is required');
   try {
     const reclamation = await Reclamation.find({ etat }).populate('citoyen');
@@ -212,7 +211,7 @@ router.get('/listfournisseurReclamation/:id', async (req, res) => {
   }
 });
 
-// Route to count reclamations by category
+// count reclamations by category
 router.post('/countByCategory', async (req, res) => {
   const { category } = req.body;
 
@@ -223,7 +222,25 @@ router.post('/countByCategory', async (req, res) => {
     res.json({ numberOfReclamations });
   } catch (error) {
     console.error('Error counting reclamations:', error);
-    res.status(500).json({ error: 'Internal Server Error' });
+    res.json({ message: err.message });
+  }
+});
+
+// Count reclamations by status
+router.get('/countByStatus/:etat', async (req, res) => {
+  const status = req.params.etat;
+  console.log(status);
+  try {
+    if (!status) {
+      throw new Error("l'etat invalide !");
+    }
+    const numberOfReclamations = await Reclamation.countDocuments({
+      etat: status,
+    });
+
+    res.json({ numberOfReclamations });
+  } catch (error) {
+    res.json({ message: err.message });
   }
 });
 

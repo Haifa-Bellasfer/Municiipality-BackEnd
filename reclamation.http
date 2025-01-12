@@ -12,15 +12,6 @@ Content-Type: application/json
     "municipality" : "676885d54e50630becfc95fe"
 }
 
-### get count relcmamtion
-POST http://localhost:3000/api/reclamation/countByCategory
-Content-Type: application/json
-
-{
-    "category": "Eclairage"
-
-}
-
 ### Get reclamation by id citoyen
 GET  http://localhost:3000/api/reclamation/getReclamationByIdCitoyen/676033c5d7377c1a6c01c86e
 
@@ -54,21 +45,21 @@ Content-Type: application/json
 ### Get  reclamations in progress status
 GET  http://localhost:3000/api/reclamation/list/InProgress
 
-### Get  reclamations pending status
-GET  http://localhost:3000/api/reclamation/list/pending
-
-### Get  reclamations done  status
-GET  http://localhost:3000/api/reclamation/list/done
-
-### Get  reclamations verified status
-GET  http://localhost:3000/api/reclamation/list/verified
-
-### Get  reclamations discarded status
-GET  http://localhost:3000/api/reclamation/list/discarded
-
 ### Get reclamation by id
 GET  http://localhost:3000/api/reclamation/getReclamationById/677aa8019d78ae6fd0d1fe7c
 
 ### Get reclamation fournisseur
 GET  http://localhost:3000/api/reclamation/listfournisseurReclamation/62fec68af7d43a186887a637
+
+### get count relcmamtion by category
+POST http://localhost:3000/api/reclamation/countByCategory
+Content-Type: application/json
+
+{
+    "category": "Eclairage"
+
+}
+### get count relcmamtion by status
+GET http://localhost:3000/api/reclamation/countByStatus/InProgress
+Content-Type: application/json
 
