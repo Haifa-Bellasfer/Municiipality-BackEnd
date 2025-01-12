@@ -36,7 +36,6 @@ export class reclamationsComponent implements OnInit {
     this.reclamationService
       .getReclamationsByStatus('InProgress')
       .subscribe((res) => {
-        console.log('progress', res);
         this.InprogressReclamations = res;
       });
   }
