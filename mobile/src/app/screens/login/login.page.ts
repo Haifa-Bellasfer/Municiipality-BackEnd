@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -13,10 +14,27 @@ export class LoginPage {
     email: '',
     password: '',
   };
+
+  loginForm: FormGroup = this.fb.group({
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', [Validators.required]],
+  });
+
   focused: boolean = true;
   errorMessage = undefined;
 
-  constructor(private router: Router, private authService: AuthService) {}
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private authService: AuthService
+  ) {}
+
+  ngOnInit() {
+    this.loginForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(4)]],
+    });
+  }
 
   onBlur(event: any) {
     const value = event.target.value;
@@ -26,20 +44,37 @@ export class LoginPage {
     }
   }
 
-  ngOnInit() {}
+  get email() {
+    return this.loginForm.get('email');
+  }
+
+  get password() {
+    return this.loginForm.get('password');
+  }
 
   async onLogin() {
-    try {
-      const success = await this.authService.login(
-        this.loginData.email,
-        this.loginData.password
-      );
-      if (success) {
-        this.router.navigate(['/add-reclamation']);
+    if (this.loginForm.valid) {
+      try {
+        const { email, password } = this.loginForm.value;
+        const success = await this.authService.login(email, password);
+        if (success) {
+          this.router.navigate(['/add-reclamation']);
+        }
+      } catch (error) {
+        console.error('Login failed:', error);
       }
-    } catch (error) {
-      console.error('Login failed:', error);
+    } else {
+      this.markFormGroupTouched(this.loginForm);
     }
+  }
+
+  private markFormGroupTouched(formGroup: FormGroup) {
+    Object.values(formGroup.controls).forEach((control) => {
+      control.markAsTouched();
+      if (control instanceof FormGroup) {
+        this.markFormGroupTouched(control);
+      }
+    });
   }
 
   goToSignup() {

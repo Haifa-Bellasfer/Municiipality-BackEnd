@@ -1,14 +1,14 @@
-const router = require('express').Router();
-const User = require('../model/User');
-const bcrypt = require('bcryptjs');
-const authenticateToken = require('../utils/verifyToken');
+const router = require("express").Router();
+const User = require("../model/User");
+const bcrypt = require("bcryptjs");
+const authenticateToken = require("../utils/verifyToken");
+const jwt = require("jsonwebtoken");
 
 // Registration: add new user
-router.post('/signUp', async (req, res) => {
-  console.log(req.body);
+router.post("/signUp", async (req, res) => {
   //checking if user already exists
   const emailExist = await User.findOne({ email: req.body.email });
-  if (emailExist) return res.status(400).send('Email already exists');
+  if (emailExist) return res.status(400).send("Email already exists");
 
   //hash password
   const salt = await bcrypt.genSalt(10);
@@ -19,19 +19,20 @@ router.post('/signUp', async (req, res) => {
     email: req.body.email,
     role: req.body.role,
     password: hashedPassword,
-    addresse: req.body.addresse,
+    addresse: req.body.address,
     phone: req.body.phone,
   });
   try {
     const savedUser = await user.save();
-    res.send({ user: user._id, message: 'Success regsitration !' });
+    const token = jwt.sign({ _id: savedUser._id }, process.env.TOKEN_SECRET);
+    res.header("accessToken", token).send({ user: user, accessToken: token });
   } catch (err) {
     res.status(400).send(err);
   }
 });
 
 // List all citoyens
-router.get('/list/citoyen', async (req, res) => {
+router.get("/list/citoyen", async (req, res) => {
   try {
     const users = await User.find();
     res.json(users);
@@ -40,9 +41,9 @@ router.get('/list/citoyen', async (req, res) => {
   }
 });
 // List Responsable
-router.get('/list/responsable', async (req, res) => {
+router.get("/list/responsable", async (req, res) => {
   try {
-    const reponsable = await User.find({ role: 'Responsable' });
+    const reponsable = await User.find({ role: "Responsable" });
     res.json(reponsable);
   } catch (err) {
     res.json({ message: err });

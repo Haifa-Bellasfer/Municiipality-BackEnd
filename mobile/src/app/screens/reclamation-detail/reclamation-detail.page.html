@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/reclamations"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Reclamation Detail</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="logout()">
+        <ion-icon
+          slot="icon-only"
+          name="log-out-outline"
+          aria-hidden="true"
+        ></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding" *ngIf="reclamation">
+  <ion-card>
+    <ion-card-title style="padding: 10px"
+      >{{ reclamation.categorie }}</ion-card-title
+    >
+
+    <ion-card-content>
+      <ion-item>
+        <ion-label>
+          <h2>{{reclamation.etat}}</h2>
+        </ion-label>
+      </ion-item>
+
+      <div class="image-container" style="margin-top: 20px">
+        <img
+          [src]="reclamation.imageURL"
+          alt="Reclamation Image"
+          style="max-width: 100%; height: auto; object-fit: contain"
+          (error)="onImageError($event)"
+        />
+      </div>
+
+      <!-- For debugging -->
+      <ion-item>
+        <ion-label>
+          <h2>Description</h2>
+          <p>{{ reclamation.description}}</p>
+        </ion-label>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

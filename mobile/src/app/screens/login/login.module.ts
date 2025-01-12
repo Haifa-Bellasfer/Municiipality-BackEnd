@@ -4,8 +4,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { LoginPage } from './login.page';
 import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
-
-import { Tab3PageRoutingModule } from './login-routing.module';
+import { ReactiveFormsModule } from '@angular/forms';
+import { LoginPageRoutingModule } from './login-routing.module';
 
 @NgModule({
   imports: [
@@ -13,7 +13,8 @@ import { Tab3PageRoutingModule } from './login-routing.module';
     CommonModule,
     FormsModule,
     ExploreContainerComponentModule,
-    Tab3PageRoutingModule,
+    LoginPageRoutingModule,
+    ReactiveFormsModule,
   ],
   declarations: [LoginPage],
 })
