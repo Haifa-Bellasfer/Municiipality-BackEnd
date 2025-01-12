@@ -1,10 +1,12 @@
-<!-- <app-explore-container name="Tab 3 page"></app-explore-container> -->
+<app-explore-container name="Tab 3 page"></app-explore-container>
 
 <ion-content class="ion-padding">
-  <h1>Welcome,</h1>
-  <h3>Se connecter à Baladiti!</h3>
+  <h1>
+    Welcome,
+    <h3>Se connecter à Baladiti!</h3>
+  </h1>
 
-  <form #myForm="ngForm" (ngSubmit)="onLogin()">
+  <form [formGroup]="loginForm" #myForm="ngForm" (ngSubmit)="onLogin()">
     <div class="form-field">
       <ion-label [ngClass]="focused ? 'label-focused' : ''">Email ID</ion-label>
       <ion-input
@@ -13,9 +15,23 @@
         type="text"
         [(ngModel)]="loginData.email"
         name="email"
+        formControlName="email"
         required
       ></ion-input>
     </div>
+    <div
+      class="validation-error"
+      style="margin-bottom: 20px"
+      *ngIf="email?.touched && email?.errors"
+    >
+      <ion-text color="danger" *ngIf="email?.errors?.['required']">
+        Email is required
+      </ion-text>
+      <ion-text color="danger" *ngIf="email?.errors?.['email']">
+        Please enter a valid email
+      </ion-text>
+    </div>
+
     <div class="form-field">
       <ion-label [ngClass]="focused ? 'label-focused' : ''"
         >Mot de passe</ion-label
@@ -26,9 +42,20 @@
         type="password"
         [(ngModel)]="loginData.password"
         name="password"
+        formControlName="password"
         required
       ></ion-input>
     </div>
+
+    <div class="validation-error" *ngIf="password?.touched && password?.errors">
+      <ion-text color="danger" *ngIf="password?.errors?.['required']">
+        Password is required
+      </ion-text>
+      <ion-text color="danger" *ngIf="password?.errors?.['minlength']">
+        Password must be at least 6 characters
+      </ion-text>
+    </div>
+
     <p
       style="margin-top: 10px; padding-left: 5px; color: brown"
       *ngIf="errorMessage"
@@ -36,11 +63,12 @@
       {{errorMessage}}
     </p>
 
-    <ion-button type="submit">Se connecter</ion-button>
+    <ion-button type="submit" [disabled]="loginForm.invalid"
+      >Se connecter</ion-button
+    >
   </form>
 
   <p class="footer-text">
-    Créer un nouveau compte,
-    <!-- <a [routerLink]="['/sign-up']">S'inscrire</a> -->
+    Créer un nouveau compte, <a [routerLink]="['/signup']">S'inscrire</a>
   </p>
 </ion-content>

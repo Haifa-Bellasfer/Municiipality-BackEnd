@@ -89,3 +89,9 @@ ion-button {
   margin-bottom: 0.5rem;
   text-transform: initial;
 }
+
+.validation-error {
+  padding: 5px 15px;
+  color: var(--ion-color-danger);
+  font-size: 14px;
+}

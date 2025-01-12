@@ -14,7 +14,7 @@ interface AuthResponse {
 })
 export class AuthService {
   private isAuthenticated = new BehaviorSubject<boolean>(false);
-  private apiUrl = 'http://localhost:3000/api/auth/'; // Replace with your actual API URL
+  private apiUrl = 'http://localhost:3000/api/'; // Replace with your actual API URL
 
   constructor(private http: HttpClient) {
     const token = localStorage.getItem('auth_token');
@@ -23,7 +23,7 @@ export class AuthService {
 
   login(email: string, password: string): Promise<boolean> {
     return this.http
-      .post<AuthResponse>(`${this.apiUrl}/login`, {
+      .post<AuthResponse>(`${this.apiUrl}auth/login`, {
         email,
         password,
       })
@@ -42,12 +42,15 @@ export class AuthService {
       });
   }
 
-  signup(email: string, password: string): Promise<boolean> {
+  signup(signUpInfo: {
+    username: string;
+    email: string;
+    password: string;
+    phone: string;
+    address: string;
+  }): Promise<boolean> {
     return this.http
-      .post<AuthResponse>(`${this.apiUrl}/signup`, {
-        email,
-        password,
-      })
+      .post<AuthResponse>(`${this.apiUrl}user/signup`, signUpInfo)
       .pipe(
         tap((response) => {
           localStorage.setItem('auth_token', response.accessToken);
