@@ -1,23 +1,30 @@
 const router = require("express").Router();
-const User = require("../model/User");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const Fournisseur = require("../model/Fournisseur");
+const Citoyen = require("../model/Citoyen");
+const Responsable = require("../model/Responsable");
 
 // Login
 router.post("/login", async (req, res) => {
   const role = req.body.role;
-  console.log(role);
-  //checking if email already exists
 
   let user;
-  if (role !== "Fournisseur") {
-    user = await User.findOne({ email: req.body.email });
-    if (!user) return res.send({ message: "Email n'existe pas" });
-  } else {
+  if (role === "Fournisseur") {
     user = await Fournisseur.findOne({ email: req.body.email });
+    if (!user) return res.send({ message: "Email n'existe pas" });
+  }
+
+  if (role === "Citoyen") {
+    user = await Citoyen.findOne({ email: req.body.email });
+    if (!user) return res.send({ message: "Email n'existe pas" });
+  }
+
+  if (role === "Responsable") {
+    user = await Responsable.findOne({ email: req.body.email });
     if (!user) return res.send({ message: "Email fournisseur n'existe pas" });
   }
+
   //chekin password
   const validPass = await bcrypt.compare(req.body.password, user.password);
   if (!validPass) return res.send({ message: "Mot de passe invalide" });
@@ -26,8 +33,5 @@ router.post("/login", async (req, res) => {
   const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET);
   res.header("accessToken", token).send({ user: user, accessToken: token });
 });
-
-// Forgot password
-router.put("/forgot/password", (req, res) => {});
 
 module.exports = router;

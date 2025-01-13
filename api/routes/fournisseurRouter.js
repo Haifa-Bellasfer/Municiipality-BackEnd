@@ -1,35 +1,35 @@
-const router = require('express').Router();
-const Fournisseur = require('../model/Fournisseur');
-const Reclamation = require('../model/Reclamation');
-const Archieve = require('../model/Archieve');
-const User = require('../model/User');
-const bcrypt = require('bcryptjs');
-const sendMail = require('../utils/sendMail');
+const router = require("express").Router();
+const Fournisseur = require("../model/Fournisseur");
+const Reclamation = require("../model/Reclamation");
+const bcrypt = require("bcryptjs");
+const sendMail = require("../utils/sendMail");
 
 // Add frournisseur
-router.post('/add', async (req, res) => {
-  sendMail(
-    req.body.email,
-    `<p> Pour Authentifier a Baladiti </p> <br> <p> Login : ${req.body.email}</p><br> <p> Votre mot de passe : ${req.body.password} </p>`
-  );
-  //hash password
+router.post("/add", async (req, res) => {
   const salt = await bcrypt.genSalt(10);
   const hashedPassword = await bcrypt.hash(req.body.password, salt);
 
   const fournisseur = new Fournisseur({
-    slug: req.body.slug,
+    organization: req.body.organization,
+    nom: req.body.nom,
+    prenom: req.body.prenom,
     email: req.body.email,
+    sexe: req.body.sexe,
     password: hashedPassword,
-    addresse: req.body.addresse,
-    phone: req.body.phone,
-    active: req.body.active,
+    adresse: req.body.adresse,
+    telephone: req.body.telephone,
     categorie: req.body.categorie,
+    active: true,
   });
   try {
     await fournisseur.save();
+    sendMail(
+      req.body.email,
+      `<p> Pour Authentifier a Baladiti </p> <br> <p> Login : ${req.body.email}</p><br> <p> Votre mot de passe : ${req.body.password} </p>`
+    );
     res.send({
-      fournisseur: fournisseur._id,
-      message: 'Success regsitration !',
+      fournisseur: fournisseur,
+      message: "Le fournisseur a été ajouté avec succès.",
     });
   } catch (err) {
     res.status(400).send(err);
@@ -37,7 +37,7 @@ router.post('/add', async (req, res) => {
 });
 
 // List fournisseur
-router.get('/list', async (req, res) => {
+router.get("/list", async (req, res) => {
   try {
     const fournisseur = await Fournisseur.find({});
     res.json(fournisseur);
@@ -46,15 +46,25 @@ router.get('/list', async (req, res) => {
   }
 });
 
+router.get("/:id", async (req, res) => {
+  try {
+    const users = await Fournisseur.findById(req.params.id);
+    res.json(users);
+  } catch (err) {
+    res.json({ message: err });
+  }
+});
+
 // Update fournisseur Password
-router.put('/update/password/:id/:pass', async (req, res) => {
-  console.log(req.params.id);
+router.put("/passwordUpdate/:id", async (req, res) => {
+  const fournisseur = await Fournisseur.findById(req.params.id);
+  if (!fournisseur) return res.send({ message: "fournisseur n'existe pas" });
+
   try {
     const id = req.params.id;
     const options = { new: true };
     const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(req.params.pass, salt);
-
+    const hashedPassword = await bcrypt.hash(req.params.newPassword, salt);
     const fournisseur = await Fournisseur.findByIdAndUpdate(
       id,
       {
@@ -62,59 +72,27 @@ router.put('/update/password/:id/:pass', async (req, res) => {
       },
       options
     );
-
     res.json(fournisseur);
   } catch (err) {
     res.json({ message: err });
   }
 });
 
-// Update reclamation done by fournisseur
-router.put('/update/done/:id', async (req, res) => {
-  try {
-    const id = req.params.id;
-    const options = { new: true };
-
-    const reclamation = await Reclamation.findByIdAndUpdate(
-      id,
-      {
-        $set: { etat: 'Done' },
-      },
-      options
-    );
-    const archieve = new Archieve({
-      description: 'Cette reclamation a été traité',
-      reclamation: reclamation,
-    });
-    const user = await User.findOne(reclamation.citoyen);
-
-    sendMail(
-      user.email,
-
-      `<p>  Cette reclamation a été traité: </p>`
-    );
-    try {
-      const savedArchieve = await archieve.save();
-      res.json(savedArchieve);
-    } catch (err) {
-      res.json({ message: err });
-    }
-    res.json(reclamation);
-  } catch (err) {
-    res.json({ message: err });
-  }
-});
 // Delete fournisseur
-router.delete('/delete/:id', async (req, res) => {
+router.delete("/delete/:id", async (req, res) => {
   try {
     await Reclamation.remove({ _id: req.params.id });
-    res.json({ message: 'successfully deleted' });
+    res.json({ message: "successfully deleted" });
   } catch (err) {
     res.json({ message: err });
   }
 });
+
 //Update active fournisseur
-router.put('/active/:id', async (req, res) => {
+router.put("/active/:id", async (req, res) => {
+  const fournisseur = await Fournisseur.findById(req.params.id);
+  if (!fournisseur) return res.send({ message: "fournisseur n'existe pas" });
+
   try {
     const id = req.params.id;
     const newState = req.body.state;
@@ -126,7 +104,7 @@ router.put('/active/:id', async (req, res) => {
       },
       options
     );
-    res.json({ message: 'fournisseur a ete modifier', activeFrounisseur });
+    res.json({ message: "fournisseur a ete modifier", activeFrounisseur });
   } catch (err) {
     res.json({ message: err });
   }

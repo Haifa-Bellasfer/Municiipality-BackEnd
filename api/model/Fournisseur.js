@@ -1,41 +1,47 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const fournisseurSchema = new mongoose.Schema(
   {
-    slug: {
+    organization: {
       type: String,
       required: true,
-      min: 4,
-      max: 200,
+    },
+    nom: {
+      type: String,
+      required: true,
+    },
+    prenom: {
+      type: String,
+      required: true,
     },
     email: {
       type: String,
       required: true,
-      min: 4,
-      max: 200,
     },
-    addresse: {
+    adresse: {
       type: String,
       required: true,
     },
-    phone: {
+    telephone: {
       type: String,
       required: true,
     },
     password: {
       type: String,
       required: true,
-      min: 4,
-      max: 200,
+    },
+    sexe: {
+      type: String,
+      enum: ["Homme", "Femme"],
     },
     categorie: {
       type: String,
-      enum: ['Eclairage', 'Nettoyage', 'Batiment', 'Autre'],
-      default: 'Eclairage',
+      enum: ["Eclairage", "Nettoyage", "Batiment", "EnvEnvironnement", "Autre"],
+      default: "Eclairage",
     },
     listeReclamation: {
       type: [mongoose.Schema.Types.ObjectId],
-      ref: 'Reclamation',
+      ref: "Reclamation",
     },
     active: {
       type: Boolean,
@@ -47,4 +53,4 @@ const fournisseurSchema = new mongoose.Schema(
   }
 );
 
-module.exports = mongoose.model('Fournisseur', fournisseurSchema);
+module.exports = mongoose.model("Fournisseur", fournisseurSchema);

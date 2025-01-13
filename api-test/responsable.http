@@ -1,0 +1,33 @@
+
+### Add a new user
+POST http://localhost:3000/api/responsable/signUp
+Content-Type: application/json
+
+{
+    "matricule": "BAL345678",
+    "nom":"Haifa",
+    "prenom":"Bellasfer",
+    "sexe":"Femme",
+    "email":"bellasferhaifa95@gmail.com",
+    "role" : "Citoyen",
+    "password":"1234",
+    "adresse" : "14 rue tunis ben Arous",
+    "telephone": "56249538"
+    }
+
+### Login to the application
+POST  http://localhost:3000/api/auth/login
+Content-Type: application/json
+
+{
+    "email":"bellasferhaifa95@gmail.com",
+    "role":"Responsable",
+    "password":"1234"
+}
+
+### List responsable
+GET http://localhost:3000/api/responsable/list
+
+### get responsable by ID
+GET http://localhost:3000/api/responsable/6785776cccc81ac89bf0fa35
+

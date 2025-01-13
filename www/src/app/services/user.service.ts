@@ -18,14 +18,14 @@ export class UserService {
   // Liste fournisseur
   getFournisseurs(): Observable<User[]> {
     this.users = this.http
-      .get<any>(' http://localhost:3000/api/user/list/fournisseur')
+      .get<any>(' http://localhost:3000/api/fournisseur/list')
       .pipe(tap((result) => console.log('fournisseurs-->', result)));
     return this.users;
   }
   // Liste responsable
   getResponable(): Observable<User[]> {
     return this.http
-      .get<any>(' http://localhost:3000/api/user/list/responsable')
+      .get<any>(' http://localhost:3000/api/responsable/list')
       .pipe(tap((result) => console.log('responsable-->', result)));
   }
 }

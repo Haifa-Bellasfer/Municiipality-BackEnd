@@ -1,13 +1,12 @@
 const router = require("express").Router();
 const Fournisseur = require("../model/Fournisseur");
 const Reclamation = require("../model/Reclamation");
-const User = require("../model/User");
 const Municipality = require("../model/Municipality");
 const { ObjectId } = require("mongodb");
+const Citoyen = require("../model/Citoyen");
 
 router.post("/add", async (req, res) => {
   try {
-    // Input validation
     if (
       !req.body.description ||
       !req.body.categorie ||
@@ -16,16 +15,14 @@ router.post("/add", async (req, res) => {
       return res.status(400).json({ message: "Missing required fields" });
     }
 
-    // Clean image data if needed (remove prefix if it exists)
     let imageData = req.body.imageURL;
     if (imageData && imageData.includes("base64,")) {
       imageData = imageData.split("base64,")[1];
     }
 
-    // Fetch related entities
     const [fournisseur, citoyen, municipality] = await Promise.all([
       req.body.fournisseur ? Fournisseur.findById(req.body.fournisseur) : null,
-      User.findById(req.body.citoyen),
+      Citoyen.findById(req.body.citoyen),
       Municipality.findById(req.body.municipality),
     ]);
 
@@ -63,6 +60,7 @@ router.get("/getReclamationByIdCitoyen/:id", async (req, res) => {
     res.json({ message: err });
   }
 });
+
 // Update reclamation Info
 router.put("/updateReclamation/:id", async (req, res) => {
   try {
@@ -90,9 +88,7 @@ router.get("/getReclamationById/:id", async (req, res) => {
       "citoyen"
     );
 
-    // If the image is stored as Buffer in MongoDB
     if (reclamation.imageURL instanceof Buffer) {
-      // Convert Buffer to base64
       reclamation.imageURL = reclamation.imageURL.toString("base64");
     }
 
@@ -147,7 +143,6 @@ router.put("/update/:id", async (req, res) => {
     const update = {};
     if (req.body.fournisseur) {
       const fournisseur = await Fournisseur.findById(req.body.fournisseur);
-      console.log(fournisseur);
       update.fournisseur = fournisseur;
     }
     if (req.body.noteFournisseur) {
@@ -171,31 +166,6 @@ router.put("/update/:id", async (req, res) => {
     res.json(reclamation);
   } catch (err) {
     res.json({ message: err.message });
-  }
-});
-
-// Update reclamation to done
-router.put("/updateDone/:id", async (req, res) => {
-  try {
-    const id = req.params.id;
-
-    const options = { new: true };
-    const fournisseur = await Fournisseur.findById(req.body.fournisseur);
-
-    const reclamation = await Reclamation.findByIdAndUpdate(
-      id,
-      {
-        $set: {
-          etat: "Done",
-          fournisseur: fournisseur,
-        },
-      },
-      options
-    );
-
-    res.json(reclamation);
-  } catch (err) {
-    res.json({ message: err });
   }
 });
 
@@ -229,7 +199,6 @@ router.post("/countByCategory", async (req, res) => {
 // Count reclamations by status
 router.get("/countByStatus/:etat", async (req, res) => {
   const status = req.params.etat;
-  console.log(status);
   try {
     if (!status) {
       throw new Error("l'etat invalide !");

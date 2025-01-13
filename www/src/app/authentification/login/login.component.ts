@@ -12,6 +12,7 @@ export class LoginComponent implements OnInit {
   formGroup = new FormGroup({
     email: new FormControl('', [Validators.required]),
     password: new FormControl('', [Validators.required]),
+    role: new FormControl('Responsable'),
   });
   error = '';
   constructor(private authService: AuthService, private router: Router) {}
@@ -23,7 +24,6 @@ export class LoginComponent implements OnInit {
     }
 
     this.authService.login(this.formGroup.value).subscribe((res) => {
-      console.log(res);
       if (res.user) {
         localStorage.setItem('accessToken', res.accessToken);
         localStorage.setItem('userId', res.user._id);
