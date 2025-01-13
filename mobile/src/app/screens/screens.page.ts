@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-screens',
@@ -6,6 +6,10 @@ import { Component } from '@angular/core';
   styleUrls: ['screens.page.scss'],
   standalone: false,
 })
-export class ScreensPage {
+export class ScreensPage implements OnInit {
+  role: string = '';
   constructor() {}
+  ngOnInit(): void {
+    this.role = localStorage.getItem('role') as string;
+  }
 }

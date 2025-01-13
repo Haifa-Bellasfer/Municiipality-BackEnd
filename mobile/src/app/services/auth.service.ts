@@ -22,16 +22,17 @@ export class AuthService {
   }
 
   login(email: string, password: string): Promise<boolean> {
+    const role = localStorage.getItem('role');
     return this.http
       .post<AuthResponse>(`${this.apiUrl}auth/login`, {
         email,
         password,
+        role,
       })
       .pipe(
         tap((response) => {
           localStorage.setItem('auth_token', response.accessToken);
           localStorage.setItem('userId', response.user._id);
-          localStorage.setItem('role', response.user.role);
           this.isAuthenticated.next(true);
         })
       )

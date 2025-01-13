@@ -25,7 +25,8 @@ export class AddReclamationPage implements OnInit {
     description: '',
     adresse: '',
     categorie: '',
-    myImage: '',
+    imageURL: '',
+    etat: '',
     citoyen: '',
   };
 
@@ -77,7 +78,7 @@ export class AddReclamationPage implements OnInit {
       reader.onload = () => {
         if (typeof reader.result === 'string') {
           const base64String = reader.result;
-          this.formData.myImage = base64String;
+          this.formData.imageURL = base64String;
           this.selectedFile = base64String;
         }
       };
@@ -100,7 +101,7 @@ export class AddReclamationPage implements OnInit {
     if (form.valid) {
       const citoyen = localStorage.getItem('userId');
       this.formData.citoyen = citoyen as string;
-
+      console.log(this.formData.imageURL);
       try {
         const res = await this.reclamationService
           .addReclamation({ ...this.formData })
@@ -114,7 +115,7 @@ export class AddReclamationPage implements OnInit {
         toast.present();
 
         // Redirect or reset form after successful submission
-        this.router.navigate(['/tabs/tab1']); // Adjust the route as needed
+        this.router.navigate([`/reclamation-detail/${res._id}`]); // Adjust the route as needed
       } catch (error) {
         this.showToast("Erreur lors de l'ajout de la réclamation");
       }
@@ -127,6 +128,6 @@ export class AddReclamationPage implements OnInit {
 
   logout() {
     this.authService.logout();
-    this.router.navigate(['/login']);
+    this.router.navigate(['/home']);
   }
 }

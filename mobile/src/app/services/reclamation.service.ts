@@ -9,10 +9,6 @@ export class ReclamationService {
   constructor(private http: HttpClient) {}
 
   addReclamation(data: any): Observable<any> {
-    let imageData = data.myImage;
-    if (imageData && imageData.includes('base64,')) {
-      imageData = imageData.split('base64,')[1];
-    }
     return this.http.post(
       'http://localhost:3000/api/reclamation/add',
       {
@@ -20,7 +16,7 @@ export class ReclamationService {
         categorie: data.categorie,
         localisation: data.adresse,
         etat: data.etat,
-        imageURL: data.myImage,
+        imageURL: data.imageURL,
         citoyen: data.citoyen,
       },
       { headers: { 'Content-Type': 'application/json' } }
@@ -36,7 +32,22 @@ export class ReclamationService {
 
   getMyReclamations(id: string): Observable<any> {
     return this.http.get(
-      `http://localhost:3000/api/reclamation/getReclamationByIdCitoyen/${id}`
+      `http://localhost:3000/api/reclamation/${
+        localStorage.getItem('role') !== 'Fournisseur'
+          ? 'getReclamationByIdCitoyen'
+          : 'getReclamationsByIdFournisseur'
+      }/${id}`
+    );
+  }
+
+  updateReclamationByFournisseur(data: any): Observable<any> {
+    return this.http.put(
+      'http://localhost:3000/api/reclamation/update/' + data.id,
+      {
+        etat: data.etat,
+        noteFournisseur: data.noteFournisseur,
+      },
+      { headers: { 'Content-Type': 'application/json' } }
     );
   }
 

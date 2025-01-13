@@ -87,12 +87,12 @@
     <label class="custom-file-upload" style="margin-top: 10px">
       <input
         #imageInput="ngModel"
-        name="myImage"
+        name="imageURL"
         type="file"
         (change)="onFileSelected($event)"
         accept="image/*"
         class="file-input"
-        [(ngModel)]="formData.myImage"
+        [(ngModel)]="formData.imageURL"
         required
       />
       Choisir une photo

@@ -36,9 +36,13 @@
     </ion-list>
 
     <!-- Empty state message -->
-    <div class="empty-state" *ngIf="items.length === 0">
+    <div
+      class="empty-state"
+      *ngIf="items.length === 0"
+      style="padding-left: 20px"
+    >
       <ion-text color="medium">
-        <h4>No items found</h4>
+        <h4>Aucune reclamation.</h4>
       </ion-text>
     </div>
   </ion-content>

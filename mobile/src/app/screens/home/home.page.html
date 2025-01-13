@@ -1,0 +1,36 @@
+<ion-content class="ion-padding">
+  <h1>
+    Bienvenue,
+    <h3>Se connecter à Baladiti</h3>
+  </h1>
+
+  <div
+    style="
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    "
+  >
+    <div style="margin-top: 100px" (click)="onCitoyenClick()">
+      <div class="image-container" style="margin-top: 20px; cursor: pointer">
+        <img
+          src="../../../assets/fournisseur.png"
+          alt="Reclamation Image"
+          style="max-width: 50%; height: auto; object-fit: contain"
+        />
+      </div>
+      <ion-card-title class="label">Citoyen</ion-card-title>
+    </div>
+
+    <div (click)="onFournisseurClick()">
+      <div class="image-container" style="margin-top: 20px; cursor: pointer">
+        <img
+          src="../../../assets/green.png"
+          alt="Reclamation Image"
+          style="max-width: 50%; height: auto; object-fit: contain"
+        />
+      </div>
+      <ion-card-title class="label">Fournisseur</ion-card-title>
+    </div>
+  </div>
+</ion-content>

@@ -57,8 +57,13 @@ export class LoginPage {
       try {
         const { email, password } = this.loginForm.value;
         const success = await this.authService.login(email, password);
+
         if (success) {
-          this.router.navigate(['/add-reclamation']);
+          if (localStorage.getItem('role') !== 'Fournisseur') {
+            this.router.navigate(['/add-reclamation']);
+          } else {
+            this.router.navigate(['/list-reclamation']);
+          }
         }
       } catch (error) {
         console.error('Login failed:', error);

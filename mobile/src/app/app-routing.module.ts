@@ -16,14 +16,20 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'home',
+    loadChildren: () =>
+      import('./screens/home/home.module').then((m) => m.HomePageModule),
+  },
+  {
     path: '',
     loadChildren: () =>
       import('./screens/screens.module').then((m) => m.ScreensPageModule),
     canActivate: [AuthGuard],
   },
+
   {
     path: '',
-    redirectTo: '/login',
+    redirectTo: '/home',
     pathMatch: 'full',
   },
 ];
