@@ -1,3 +1,4 @@
+import { Fournisseur } from './../../../entity/fournisseur';
 import { FournisseurService } from './../../../services/fournisseur.service';
 import { Reclamation } from './../../../entity/reclamation';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -11,9 +12,11 @@ import { MatTableDataSource } from '@angular/material/table';
   styleUrls: ['./details-fournisseur.component.scss'],
 })
 export class DetailsFournisseurComponent implements OnInit {
-  displayedColumns = ['_id', 'citoyen', 'categorie', 'etat', 'date', 'action'];
   dataSource = new MatTableDataSource<Reclamation>();
-  reclamation: any;
+  reclamations: Reclamation[] = [];
+  fournisseur: Fournisseur | null = null;
+  displayedColumns: string[] = ['username', 'etat'];
+
   desactive: any;
 
   constructor(
@@ -29,20 +32,27 @@ export class DetailsFournisseurComponent implements OnInit {
 
   getReclamationFournisseur(id: string) {
     this.reclamationService.getReclamationFournisseur(id).subscribe((res) => {
-      console.log(res);
-      this.dataSource.data = res;
-      this.reclamation = res[0].fournisseur.slug;
+      this.reclamations = res;
+      this.fournisseur = this.reclamations[0].fournisseur;
     });
   }
 
-  desactiveForunisseur(id: string, active: boolean) {
-    let state = active ? false : true;
-    this.fournisseurService.desactiveFournisseur(id, state).subscribe((res) => {
-      console.log('desactive', res);
-      this.desactive = res;
-      setTimeout(() => {
-        this.router.navigateByUrl('/details-fournisseur/' + id);
-      }, 2000);
-    });
+  desactiveForunisseur() {
+    let state = !this.fournisseur?.active;
+    const fournisseurId = this.fournisseur?._id;
+    if (fournisseurId) {
+      this.fournisseurService
+        .desactiveFournisseur(fournisseurId, state)
+        .subscribe((res) => {
+          console.log('desactive', res);
+          this.desactive = res;
+          setTimeout(() => {
+            // Refresh the page
+            window.location.reload();
+          }, 2000);
+        });
+    } else {
+      console.error('Fournisseur ID is undefined.');
+    }
   }
 }

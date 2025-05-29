@@ -1,5 +1,5 @@
-import { UserService } from './../../../services/user.service';
-import { User } from './../../../entity/user';
+import { ResponsableService } from '../../../services/responsable.service';
+import { Responsable } from '../../../entity/responsable';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -12,7 +12,7 @@ export class SidebarComponent implements OnInit {
   responsable: any;
   responsables: any;
 
-  constructor(private router: Router, public userService: UserService) {}
+  constructor(private router: Router, public userService: ResponsableService) {}
 
   ngOnInit(): void {
     this.getResponsable();

@@ -114,7 +114,9 @@ router.get("/list/:etat", async (req, res) => {
   if (!etat) throw new Error("etat is required");
   try {
     const reclamation = await Reclamation.find({ etat }).populate("citoyen");
+
     res.json(reclamation);
+    console.log(reclamation);
   } catch (err) {
     res.json({ message: err.message });
   }

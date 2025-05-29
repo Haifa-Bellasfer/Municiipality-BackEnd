@@ -8,9 +8,9 @@ const Citoyen = require("../model/Citoyen");
 router.post("/signUp", async (req, res) => {
   //checking if user already exists
   const emailExist = await Citoyen.findOne({ email: req.body.email });
-  if (emailExist)
+  if (emailExist) {
     return res.status(400).send("L'email du citoyen already exists");
-
+  }
   //hash password
   const salt = await bcrypt.genSalt(10);
   const hashedPassword = await bcrypt.hash(req.body.password, salt);

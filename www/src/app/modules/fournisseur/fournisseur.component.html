@@ -1,25 +1,38 @@
 <div style="border-radius: 10px">
-  <button
-    style="
-      border: 0;
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
-      align-items: center;
-      margin-bottom: 10px;
-      cursor: pointer;
-    "
-    (click)="addFournisseur()"
-  >
-    <img
-      src="../../../assets/ajouter.png"
-      style="width: 20px; height: 20px"
-      alt="Ajouter Fournisseur"
-    />
-    <p style="margin-bottom: 0; margin-left: 8px; color: #59b778">
-      Ajouter Fournisseur
-    </p>
-  </button>
+  <div style="display: flex; justify-content: flex-end; margin-bottom: 10px">
+    <button
+      style="
+        border: 0;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        background-color: #fff;
+        box-shadow: 0 2px 8px rgba(99, 151, 69, 0.1);
+        border-radius: 6px;
+        padding: 8px 16px;
+        transition: box-shadow 0.2s;
+      "
+      (click)="addFournisseur()"
+    >
+      <img
+        src="../../../assets/ajouter.png"
+        style="width: 20px; height: 20px"
+        alt="Ajouter Fournisseur"
+      />
+      <p
+        style="
+          margin-bottom: 0;
+          margin-left: 8px;
+          color: #649745;
+          font-weight: bold;
+        "
+      >
+        Ajouter Fournisseur
+      </p>
+    </button>
+  </div>
 
   <table mat-table [dataSource]="dataSource">
     <ng-container matColumnDef="_id">

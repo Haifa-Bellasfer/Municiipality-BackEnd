@@ -1,3 +1,6 @@
+import { Fournisseur } from './fournisseur';
+import { Responsable } from './responsable';
+
 export interface Reclamation {
   _id: string;
   categorie: string;
@@ -5,8 +8,10 @@ export interface Reclamation {
   etat: string;
   imageURL: string;
   description: string;
-  date: Date;
-  fournisseur: {
-    slug: string;
-  };
+  createdAt: string;
+  updatedAt: string;
+  fournisseur: Fournisseur | null;
+  citoyen: Responsable | null;
+  municipality: string | null;
+  noteResponsable: string;
 }

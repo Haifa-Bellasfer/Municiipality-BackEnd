@@ -10,10 +10,10 @@ import { MatTabChangeEvent } from '@angular/material/tabs';
   styleUrls: ['./reclamations.component.scss'],
 })
 export class reclamationsComponent implements OnInit {
-  PendingReclamations: any;
-  InprogressReclamations: any;
-  DoneReclamations: any;
-  activeTabIndex: number = 0; // Default active tab index
+  PendingReclamations: Reclamation[] = [];
+  InprogressReclamations: Reclamation[] = [];
+  DoneReclamations: Reclamation[] = [];
+  activeTabIndex: number = 0;
 
   constructor(public reclamationService: ReclamationService) {}
 

@@ -8,6 +8,7 @@ import { DashboardComponent } from './modules/dashboard/dashboard.component';
 import { FournisseurComponent } from './modules/fournisseur/fournisseur.component';
 import { DetailsReclamComponent } from './modules/reclamations/details-reclam/details-reclam.component';
 import { reclamationsComponent } from './modules/reclamations/reclamations.component';
+import { ResponsableComponent } from './modules/responsable/responsable.component';
 
 export const routes: Routes = [
   {
@@ -29,6 +30,10 @@ export const routes: Routes = [
       {
         path: 'fournisseur',
         component: FournisseurComponent,
+      },
+      {
+        path: 'responsable',
+        component: ResponsableComponent,
       },
       {
         path: 'details-fournisseur/:id',

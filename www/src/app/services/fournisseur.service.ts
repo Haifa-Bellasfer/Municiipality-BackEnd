@@ -40,6 +40,7 @@ export class FournisseurService {
     addresse: string,
     phone: string
   ): Observable<Fournisseur[]> {
+    console.log(slug, email, password, categorie, addresse, phone);
     return this.http
       .post<any>(' http://localhost:3000/api/fournisseur/add', {
         slug: slug,

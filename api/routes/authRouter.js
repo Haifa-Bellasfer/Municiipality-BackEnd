@@ -8,7 +8,7 @@ const Responsable = require("../model/Responsable");
 // Login
 router.post("/login", async (req, res) => {
   const role = req.body.role;
-
+  console.log(req.body);
   let user;
   if (role === "Fournisseur") {
     user = await Fournisseur.findOne({ email: req.body.email });
