@@ -3,11 +3,14 @@ POST http://localhost:3000/api/fournisseur/add
 Content-Type: application/json
 
 {
-    "slug": "Baladeya",
-    "email":"haifa1@gmail.com",
+    "organization": "Baladeya",
+    "nom":"Haifa",
+    "prenom":"Tounsi",
+    "email":"haifa.bellasfer@esprit.tn",
+    "sexe":"Homme",
     "password" : "1234",
-    "addresse" : "bardo",
-    "phone":"56249538",
+    "adresse" : "bardo",
+    "telephone":"56249538",
     "categorie" : "Nettoyage"
 }
 

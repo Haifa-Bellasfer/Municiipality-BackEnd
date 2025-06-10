@@ -10,10 +10,10 @@ import { MatTabChangeEvent } from '@angular/material/tabs';
   styleUrls: ['./reclamations.component.scss'],
 })
 export class reclamationsComponent implements OnInit {
-  PendingReclamations: any;
-  InprogressReclamations: any;
-  DoneReclamations: any;
-  activeTabIndex: number = 0; // Default active tab index
+  PendingReclamations: Reclamation[] = [];
+  InprogressReclamations: Reclamation[] = [];
+  DoneReclamations: Reclamation[] = [];
+  activeTabIndex: number = 0;
 
   constructor(public reclamationService: ReclamationService) {}
 
@@ -24,8 +24,12 @@ export class reclamationsComponent implements OnInit {
   }
 
   getReclamationsPending() {
+    const municipalityId = localStorage.getItem('municipalityId');
     this.reclamationService
-      .getReclamationsByStatus('Pending')
+      .getReclamationsByStatus(
+        'Pending',
+        municipalityId ? municipalityId : undefined
+      )
       .subscribe((res) => {
         console.log('pending', res);
         this.PendingReclamations = res;
@@ -33,17 +37,28 @@ export class reclamationsComponent implements OnInit {
   }
 
   getReclamationsInprogress() {
+    const municipalityId = localStorage.getItem('municipalityId');
     this.reclamationService
-      .getReclamationsByStatus('InProgress')
+      .getReclamationsByStatus(
+        'InProgress',
+        municipalityId ? municipalityId : undefined
+      )
       .subscribe((res) => {
         this.InprogressReclamations = res;
       });
   }
+
   getReclamationsDone() {
-    this.reclamationService.getReclamationsByStatus('Done').subscribe((res) => {
-      console.log('done', res);
-      this.DoneReclamations = res;
-    });
+    const municipalityId = localStorage.getItem('municipalityId');
+    this.reclamationService
+      .getReclamationsByStatus(
+        'Done',
+        municipalityId ? municipalityId : undefined
+      )
+      .subscribe((res) => {
+        console.log('done', res);
+        this.DoneReclamations = res;
+      });
   }
 
   // Triggered when the tab changes

@@ -1,103 +1,61 @@
-<div
-  style="
-    width: 80%;
-    padding: 1rem;
-
-    border-width: 2px;
-    box-shadow: 5px 5px 5px 5px rgb(175, 163, 163);
-    border-radius: 3%;
-    display: flex;
-    margin: auto;
-    flex-direction: column;
-    background-color: white;
-  "
->
-  <div
-    style="display: flex; flex-direction: row; border-bottom: 1px solid #639745"
-  >
-    <img
-      src="../../../assets/utilisateur.png"
+<div class="container">
+  <mat-card class="top-card full-width">
+    <div
       style="
-        height: 50px;
-        width: 50px;
-        margin-bottom: 1rem;
-        border-radius: 50%;
-
-        border: 1px solid #639745;
-        padding: 2px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 20px 10px 0 10px;
       "
-    />
-    <h3 style="margin-left: 20px; padding-top: 1rem">
-      {{ reclamation }}
-    </h3>
-  </div>
+    >
+      <mat-card-title style="margin: 0">
+        {{ fournisseur?.slug }}
+      </mat-card-title>
+      <button
+        mat-raised-button
+        style="background-color: #649745"
+        (click)="desactiveForunisseur()"
+      >
+        {{ fournisseur?.active ? "Activer" : "Désactiver" }}
+      </button>
+    </div>
+    <mat-card-subtitle style="margin: 10px">
+      Categorie: {{ fournisseur?.categorie }}
+    </mat-card-subtitle>
+    <mat-card-subtitle style="margin: 10px">
+      Email: {{ fournisseur?.email }}
+    </mat-card-subtitle>
+    <mat-card-subtitle style="margin: 10px">
+      Telephone: {{ fournisseur?.telephone }}
+    </mat-card-subtitle>
+  </mat-card>
 
-  <div style="position: relative; flex-grow: 1; padding-left: 2px">
-    <table mat-table [dataSource]="dataSource" style="width: 50rem">
-      <ng-container matColumnDef="_id">
+  <ng-container *ngIf="reclamations && reclamations.length > 0">
+    <table
+      mat-table
+      [dataSource]="reclamations"
+      class="mat-elevation-z8 full-width"
+    >
+      <ng-container matColumnDef="username">
         <th mat-header-cell *matHeaderCellDef>
-          <h4 style="font-weight: bolder">Citoyen</h4>
+          <h4>Citoyen</h4>
         </th>
-        <td mat-cell *matCellDef="let element">
-          <img src="../../../../assets/utilisateur.png" style="width: 30px" />
+        <td mat-cell *matCellDef="let reclamation" style="padding-left: 30px">
+          {{ reclamation.citoyen?.username }}
         </td>
-      </ng-container>
-      <ng-container matColumnDef="citoyen">
-        <th mat-header-cell *matHeaderCellDef>
-          <h4 style="font-weight: bolder">name</h4>
-        </th>
-        <td mat-cell *matCellDef="let element">
-          {{ element.citoyen.username }}
-        </td>
-      </ng-container>
-
-      <ng-container matColumnDef="categorie">
-        <th mat-header-cell *matHeaderCellDef>
-          <h4 style="font-weight: bolder">categorie</h4>
-        </th>
-        <td mat-cell *matCellDef="let element">{{ element.categorie }}</td>
       </ng-container>
 
       <ng-container matColumnDef="etat">
         <th mat-header-cell *matHeaderCellDef>
-          <h4 style="font-weight: bolder">etat</h4>
+          <h4>Status</h4>
         </th>
-        <td mat-cell *matCellDef="let element">{{ element.etat }}</td>
-      </ng-container>
-      <ng-container matColumnDef="date">
-        <th mat-header-cell *matHeaderCellDef>
-          <h4 style="font-weight: bolder">date</h4>
-        </th>
-        <td mat-cell *matCellDef="let element">
-          {{ element.createdAt | date: "yyyy-MM-dd" }}
+        <td mat-cell *matCellDef="let reclamation" style="padding-left: 10px">
+          {{ reclamation.etat }}
         </td>
       </ng-container>
-
-      <ng-container matColumnDef="action">
-        <th mat-header-cell *matHeaderCellDef>
-          <h4 style="font-weight: bolder"></h4>
-        </th>
-        <td mat-cell *matCellDef="let element">
-          <button
-            mat-flat-button
-            color="green"
-            style="margin-left: 3px; border: 1px solid #639745"
-            (click)="
-              desactiveForunisseur(
-                element.fournisseur._id,
-                element.fournisseur.active
-              )
-            "
-          >
-            <p style="color: #639745; margin-bottom: 0">
-              {{ element.fournisseur.active ? "Desactiver" : "Activer" }}
-            </p>
-          </button>
-        </td></ng-container
-      >
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
     </table>
-  </div>
+  </ng-container>
 </div>

@@ -84,6 +84,32 @@
       </div>
     </div>
 
+    <div class="form-field" style="margin-top: 30px">
+      <ion-label [ngClass]="focused ? 'label-focused' : ''"
+        >Municipalité</ion-label
+      >
+      <ion-select
+        #municipalityInput="ngModel"
+        [(ngModel)]="formData.Municipalite"
+        name="Municipalite"
+        required
+        label=" "
+        label-placement="stacked"
+      >
+        <ion-select-option *ngFor="let m of municipalities" [value]="m._id">
+          {{ m.region }}
+        </ion-select-option>
+      </ion-select>
+      <div
+        class="error-messages"
+        *ngIf="municipalityInput.touched && municipalityInput.invalid"
+      >
+        <ion-text color="danger" *ngIf="municipalityInput.errors?.['required']">
+          La municipalité est obligatoire
+        </ion-text>
+      </div>
+    </div>
+
     <label class="custom-file-upload" style="margin-top: 10px">
       <input
         #imageInput="ngModel"

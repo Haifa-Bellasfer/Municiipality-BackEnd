@@ -16,7 +16,7 @@
     style="display: flex; flex-direction: row; border-bottom: 1px solid #639745"
   >
     <img
-      src="reclamation.imageURL"
+      src="../../../assets/utilisateur.png"
       style="
         height: 50px;
         width: 50px;
@@ -49,7 +49,6 @@
         </p>
         <h3>Catégorie</h3>
         <mat-form-field
-          class="styled-form-field"
           appearance="outline"
           style="width: 100%"
           *ngIf="reclamation.etat == 'Pending'"
@@ -59,14 +58,24 @@
             <mat-option
               *ngFor="let fournisseur of fournisseurs"
               [value]="fournisseur._id"
-              [disabled]="fournisseur.active === true"
+              [disabled]="fournisseur.active !== true"
               >{{ fournisseur.slug }}</mat-option
             >
           </mat-select>
         </mat-form-field>
+
         <p style="color: #797878" *ngIf="reclamation.etat !== 'Pending'">
           {{ reclamation.categorie }}
         </p>
+        <h3>Fournisseur</h3>
+        <p style="color: #797878" *ngIf="reclamation.etat !== 'Pending'">
+          {{ reclamation.fournisseur.slug }}
+        </p>
+
+        <div *ngIf="reclamation.noteResponsable">
+          <h3>Note Responsable</h3>
+          <p style="color: #797878">{{ reclamation.noteResponsable }}</p>
+        </div>
 
         <div *ngIf="reclamation.etat == 'Pending'">
           <h3>Note Responsable</h3>
@@ -77,6 +86,7 @@
             placeholder="Tapez ici..."
             class="styled-textarea"
             [(ngModel)]="noteResponsable"
+            style="width: 100%; box-sizing: border-box"
           ></textarea>
         </div>
       </div>

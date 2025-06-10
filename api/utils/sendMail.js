@@ -1,30 +1,27 @@
-const nodemailer = require('nodemailer');
+const nodemailer = require("nodemailer");
 
-async function sendMail(reciever, template) {
-  // create reusable transporter object using the default SMTP transport
-  let transporter = nodemailer.createTransport({
-    service: 'hotmail',
-    auth: {
-      user: process.env.EMAIL, // generated ethereal user
-      pass: process.env.PASSWORD, // generated ethereal password
-    },
-  });
+async function sendMail(receiver, template) {
+  try {
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: process.env.EMAIL, // your Gmail address
+        pass: process.env.APP_PASSWORD, // the app password you generated
+      },
+    });
 
-  // send mail with defined transport object
-  await transporter.sendMail(
-    {
-      from: process.env.EMAIL, // sender address
-      to: reciever, // list of receivers
-      subject: 'Notification Baladiti ✔',
+    const info = await transporter.sendMail({
+      from: process.env.EMAIL,
+      to: receiver,
+      subject: "Notification Baladiti ✔",
       html: template,
-    },
-    function (err, info) {
-      if (err) {
-        console.log(err);
-        return;
-      }
-      console.log(info);
-    }
-  );
+    });
+
+    return info;
+  } catch (error) {
+    console.error("Error sending email:", error);
+    throw error;
+  }
 }
+
 module.exports = sendMail;

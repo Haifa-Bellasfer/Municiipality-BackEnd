@@ -1,0 +1,33 @@
+
+### Add a new citoyen
+POST http://localhost:3000/api/citoyen/signUp
+Content-Type: application/json
+
+{
+    "username": "sabrin",
+    "nom":"Sabrine",
+    "prenom":"Hanbli",
+    "sexe":"Femme",
+    "email":"sabrina@gmail.com",
+    "role" : "Citoyen",
+    "password":"1234",
+    "adresse" : "14 rue istanbul ben arous",
+    "telephone": "56249538"
+    }
+
+### Login to the application
+POST http://localhost:3000/api/auth/login
+Content-Type: application/json
+
+{
+    "email":"sabrina@gmail.com",
+    "role":"Citoyen",
+    "password":"1234"
+}
+
+### List responsable
+GET http://localhost:3000/api/citoyen/list
+
+### Get responsable by ID
+GET http://localhost:3000/api/citoyen/6785735a735fedafa8ce93fb
+

@@ -1,3 +1,4 @@
+import { Municipalite } from './../../../../www/src/app/entity/municipalite';
 export interface Reclamation {
   description: string;
   adresse: string;
@@ -7,4 +8,5 @@ export interface Reclamation {
   etat: string;
   noteResponsable?: string;
   noteFournisseur?: string;
+  Municipalite: Municipalite | string;
 }

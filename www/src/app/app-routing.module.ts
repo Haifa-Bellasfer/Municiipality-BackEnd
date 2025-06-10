@@ -8,6 +8,9 @@ import { DashboardComponent } from './modules/dashboard/dashboard.component';
 import { FournisseurComponent } from './modules/fournisseur/fournisseur.component';
 import { DetailsReclamComponent } from './modules/reclamations/details-reclam/details-reclam.component';
 import { reclamationsComponent } from './modules/reclamations/reclamations.component';
+import { ResponsableComponent } from './modules/responsable/responsable.component';
+import { MunicipalityComponent } from './modules/municipality/municipality.component';
+import { MunicipalityDetailsComponent } from './modules/municipality/municipality-details/municipality-details.component';
 
 export const routes: Routes = [
   {
@@ -31,12 +34,24 @@ export const routes: Routes = [
         component: FournisseurComponent,
       },
       {
+        path: 'municipality',
+        component: MunicipalityComponent,
+      },
+      {
+        path: 'responsable',
+        component: ResponsableComponent,
+      },
+      {
         path: 'details-fournisseur/:id',
         component: DetailsFournisseurComponent,
       },
       {
         path: 'archive',
         component: ArchiveComponent,
+      },
+      {
+        path: 'municipality-details/:id',
+        component: MunicipalityDetailsComponent,
       },
     ],
   },

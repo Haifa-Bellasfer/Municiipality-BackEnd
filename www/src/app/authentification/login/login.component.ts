@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-login',
@@ -12,6 +13,7 @@ export class LoginComponent implements OnInit {
   formGroup = new FormGroup({
     email: new FormControl('', [Validators.required]),
     password: new FormControl('', [Validators.required]),
+    role: new FormControl('Responsable'),
   });
   error = '';
   constructor(private authService: AuthService, private router: Router) {}
@@ -27,6 +29,17 @@ export class LoginComponent implements OnInit {
       if (res.user) {
         localStorage.setItem('accessToken', res.accessToken);
         localStorage.setItem('userId', res.user._id);
+
+        // Save municipalityId if not super admin
+        if (
+          res.user._id !== environment.SUPERADMINID &&
+          res.user.municipality
+        ) {
+          localStorage.setItem('municipalityId', res.user.municipality);
+        } else {
+          localStorage.removeItem('municipalityId');
+        }
+
         this.router.navigate(['/dashboard']);
       } else {
         this.error = res.message;

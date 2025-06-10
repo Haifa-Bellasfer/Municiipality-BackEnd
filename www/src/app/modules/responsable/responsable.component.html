@@ -1,0 +1,119 @@
+<div style="border-radius: 10px">
+  <div style="display: flex; justify-content: flex-end; margin-bottom: 10px">
+    <button
+      style="
+        border: 0;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        background-color: #fff;
+        box-shadow: 0 2px 8px rgba(99, 151, 69, 0.1);
+        border-radius: 6px;
+        padding: 8px 16px;
+        transition: box-shadow 0.2s;
+      "
+      (click)="openDialog()"
+    >
+      <img
+        src="../../../assets/ajouter.png"
+        style="width: 20px; height: 20px"
+        alt="Ajouter Responsable"
+      />
+      <p
+        style="
+          margin-bottom: 0;
+          margin-left: 8px;
+          color: #649745;
+          font-weight: bold;
+        "
+      >
+        Ajouter Responsable
+      </p>
+    </button>
+  </div>
+
+  <table
+    mat-table
+    [dataSource]="dataSource"
+    class="mat-elevation-z8"
+    style="width: 100%"
+  >
+    <ng-container matColumnDef="matricule">
+      <th mat-header-cell *matHeaderCellDef>Matricule</th>
+      <td mat-cell *matCellDef="let element">{{ element.matricule }}</td>
+    </ng-container>
+    <!-- Nom Column -->
+    <ng-container matColumnDef="nom">
+      <th mat-header-cell *matHeaderCellDef>Nom</th>
+      <td mat-cell *matCellDef="let element">{{ element.nom }}</td>
+    </ng-container>
+    <!-- Prenom Column -->
+    <ng-container matColumnDef="prenom">
+      <th mat-header-cell *matHeaderCellDef>Prénom</th>
+      <td mat-cell *matCellDef="let element">{{ element.prenom }}</td>
+    </ng-container>
+    <!-- Email Column -->
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef>Email</th>
+      <td mat-cell *matCellDef="let element">{{ element.email }}</td>
+    </ng-container>
+    <!-- Sexe Column -->
+    <ng-container matColumnDef="sexe">
+      <th mat-header-cell *matHeaderCellDef>Sexe</th>
+      <td mat-cell *matCellDef="let element">{{ element.sexe }}</td>
+    </ng-container>
+    <!-- Adresse Column -->
+    <ng-container matColumnDef="adresse">
+      <th mat-header-cell *matHeaderCellDef>Adresse</th>
+      <td mat-cell *matCellDef="let element">{{ element.adresse }}</td>
+    </ng-container>
+    <!-- Telephone Column -->
+    <ng-container matColumnDef="telephone">
+      <th mat-header-cell *matHeaderCellDef>Téléphone</th>
+      <td mat-cell *matCellDef="let element">{{ element.telephone }}</td>
+    </ng-container>
+
+    <!-- CreatedAt Column -->
+    <ng-container matColumnDef="createdAt">
+      <th mat-header-cell *matHeaderCellDef>Créé le</th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.createdAt | date : "short" }}
+      </td>
+    </ng-container>
+    <!-- UpdatedAt Column -->
+    <ng-container matColumnDef="municipality">
+      <th mat-header-cell *matHeaderCellDef>Modifié le</th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.municipality?.region || "N/A" }}
+      </td>
+    </ng-container>
+    <!-- Actions Column -->
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef>Actions</th>
+      <td mat-cell *matCellDef="let element">
+        <button
+          mat-stroked-button
+          style="background-color: #639745"
+          (click)="removeResponsable(element._id)"
+        >
+          <p
+            style="
+              color: white;
+              margin-bottom: 0;
+              padding-left: 4px;
+              padding-right: 4px;
+              border: 1px solid #639745;
+            "
+          >
+            Supprimer
+          </p>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+</div>

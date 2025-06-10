@@ -1,0 +1,53 @@
+### Add a new fournisseur
+POST http://localhost:3000/api/fournisseur/add
+Content-Type: application/json
+
+{
+    "organization": "Baladeya",
+    "nom":"Haifa",
+    "prenom":"Tounsi",
+    "email":"haifa.bellasfer@esprit.tn",
+    "sexe":"Homme",
+    "password" : "1234",
+    "adresse" : "bardo",
+    "telephone":"56249538",
+    "categorie" : "Nettoyage"
+
+}
+
+### login 
+POST  http://localhost:3000/api/auth/login
+Content-Type: application/json
+
+{
+    "email":"sabrina@gmail.com",
+    "role":"Citoyen",
+    "password":"1234"
+}
+
+### List all fournisseur 
+GET http://localhost:3000/api/fournisseur/list
+
+### Get fournisseur by ID
+GET http://localhost:3000/api/fournisseur/6782c3a02bf8ed119475a0a0
+
+### Update fournisseur password
+PUT http://localhost:3000/api/fournisseur/passwordUpdate/6782c3a02bf8ed119475a0a0
+
+{
+    "password":"1234",
+    "newPassword":"12345"
+}
+
+### desactive fournisseur
+PUT http://localhost:3000/api/fournisseur/active/6782c3a02bf8ed119475a0a0
+Content-Type: application/json
+
+{
+    "state" : false
+}
+
+### delete fournisseur
+DELETE  http://localhost:3000/api/fournisseur/delete/67858b6c408593408351deba
+
+

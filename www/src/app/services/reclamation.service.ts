@@ -19,9 +19,16 @@ export class ReclamationService {
   reclamtionState: any = [];
 
   // Reclamations State InProgress
-  getReclamationsByStatus(status: string): Observable<Reclamation[]> {
+  getReclamationsByStatus(
+    status: string,
+    municipalityId?: string
+  ): Observable<Reclamation[]> {
+    let url = 'http://localhost:3000/api/reclamation/list/' + status;
+    if (municipalityId) {
+      url += `?municipalityId=${encodeURIComponent(municipalityId)}`;
+    }
     return this.http
-      .get<any>(' http://localhost:3000/api/reclamation/list/' + status)
+      .get<Reclamation[]>(url)
       .pipe(tap((result) => console.log('result-->', result)));
   }
 
@@ -67,8 +74,8 @@ export class ReclamationService {
   //fournisseur reclamation
   getReclamationFournisseur(id: string): Observable<Reclamation[]> {
     return this.http
-      .get<any>(
-        ' http://localhost:3000/api/reclamation/listfournisseurReclamation/' +
+      .get<Reclamation[]>(
+        ' http://localhost:3000/api/reclamation/getReclamationsByIdFournisseur/' +
           id
       )
       .pipe(tap((result) => console.log('fournisseur reclamation-->', result)));
@@ -77,9 +84,14 @@ export class ReclamationService {
   countReclamationsByStatus(
     statue: string
   ): Observable<{ numberOfReclamations: number }> {
+    const municipalityId = localStorage.getItem('municipalityId');
+    let url = 'http://localhost:3000/api/reclamation/countByStatus/' + statue;
+    if (municipalityId) {
+      url += `?municipalityId=${encodeURIComponent(municipalityId)}`;
+    }
     return this.http
-      .get<any>('http://localhost:3000/api/reclamation/countByStatus/' + statue)
-      .pipe(tap((result) => console.log('number of  reclamation -->', result)));
+      .get<any>(url)
+      .pipe(tap((result) => console.log('number of reclamation -->', result)));
   }
   countReclamationsByCategory(
     category: string

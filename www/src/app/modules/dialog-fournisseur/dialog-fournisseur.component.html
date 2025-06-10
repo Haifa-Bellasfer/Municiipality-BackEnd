@@ -1,27 +1,17 @@
-<div
-  style="
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    width: 30rem;
-    height: 30rem;
-    justify-content: center;
-    align-items: center;
-  "
->
-  <mat-form-field appearance="fill" style="width: 25rem">
+<div class="dialog-fournisseur-container">
+  <mat-form-field appearance="fill">
     <mat-label>Slug</mat-label>
     <input matInput (change)="getSlug($event)" required />
   </mat-form-field>
-  <mat-form-field appearance="fill" style="width: 25rem">
+  <mat-form-field appearance="fill">
     <mat-label>Email</mat-label>
     <input matInput (change)="getEmail($event)" required />
   </mat-form-field>
-  <mat-form-field appearance="fill" style="width: 25rem">
+  <mat-form-field appearance="fill">
     <mat-label>Mot de passe</mat-label>
-    <input matInput (change)="getPassword($event)" required />
+    <input matInput type="password" (change)="getPassword($event)" required />
   </mat-form-field>
-  <mat-form-field appearance="fill" style="width: 25rem">
+  <mat-form-field appearance="fill">
     <mat-label>Categorie</mat-label>
     <mat-select [(value)]="categorie">
       <mat-option value="Nettoyage">Nettoyage</mat-option>
@@ -30,48 +20,50 @@
       <mat-option value="Autre">Autre</mat-option>
     </mat-select>
   </mat-form-field>
-  <mat-form-field appearance="fill" style="width: 25rem">
+  <mat-form-field *ngIf="categorie === 'Autre'" appearance="fill">
+    <mat-label>Précisez la catégorie</mat-label>
+    <input matInput (change)="getCategorieAutre($event)" required />
+  </mat-form-field>
+  <mat-form-field appearance="fill">
     <mat-label>Adresse</mat-label>
     <input matInput (change)="getAdresse($event)" required />
   </mat-form-field>
-  <mat-form-field appearance="fill" style="width: 25rem">
+  <mat-form-field appearance="fill">
     <mat-label>Telephone</mat-label>
     <input matInput (change)="getPhone($event)" required />
   </mat-form-field>
-  <div
-    style="
-      margin-bottom: 0;
-      margin-right: 2px;
-
-      width: 100%;
-    "
-  >
+  <mat-form-field appearance="fill">
+    <mat-label>Municipalité</mat-label>
+    <mat-select [(value)]="selectedMunicipalite">
+      <mat-option *ngFor="let m of municipalites" [value]="m._id">
+        {{ m.region }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Description</mat-label>
+    <textarea
+      matInput
+      rows="3"
+      (change)="getDescription($event)"
+      required
+    ></textarea>
+  </mat-form-field>
+  <div class="dialog-fournisseur-actions">
     <button
       mat-stroked-button
-      style="background-color: #639745; margin-right: 4px; margin-left: 270px"
+      style="background-color: #639745; color: #fff; border: 1px solid #639745"
       (click)="ajoutFournisseur()"
       mat-dialog-close
     >
-      <p
-        style="
-          color: white;
-          margin-bottom: 0;
-          padding-left: 4px;
-          padding-right: 4px;
-          border: 1px solid #639745;
-        "
-      >
-        Ajouter
-      </p>
+      Ajouter
     </button>
     <button
       mat-flat-button
-      color="green"
-      style="margin-left: 3px; border: 1px solid #639745"
+      style="color: #649745; border: 1px solid #639745; background: #f5f5f5"
       mat-dialog-close
-      style="color: #639745; margin-bottom: 0; border: solid 1px #639745"
     >
-      <p style="color: #639745; margin-bottom: 0">Annuler</p>
+      Annuler
     </button>
   </div>
 </div>

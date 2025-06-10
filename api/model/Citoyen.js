@@ -1,34 +1,25 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
-const userSchema = new mongoose.Schema(
+const citoyenSchema = new mongoose.Schema(
   {
     username: {
       type: String,
       required: true,
-      min: 4,
-      max: 200,
     },
+
     email: {
       type: String,
       required: true,
-      min: 4,
-      max: 200,
-    },
-    role: {
-      type: String,
-      enum: ['Citoyen', 'Responsable'],
     },
     password: {
       type: String,
       required: true,
-      min: 4,
-      max: 200,
     },
-    addresse: {
+    adresse: {
       type: String,
       required: true,
     },
-    phone: {
+    telephone: {
       type: String,
       required: true,
     },
@@ -38,4 +29,4 @@ const userSchema = new mongoose.Schema(
   }
 );
 
-module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.model("Citoyen", citoyenSchema);

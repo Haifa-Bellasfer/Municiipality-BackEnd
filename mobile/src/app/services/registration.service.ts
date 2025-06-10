@@ -9,6 +9,13 @@ export class RegistrationService {
   constructor(private http: HttpClient) {}
 
   SignUp(data: any): Observable<any> {
-    return this.http.post('http://localhost:3000/api/user/signUp', data);
+    if (localStorage.getItem('role') === 'Citoyen') {
+      return this.http.post('http://localhost:3000/api/citoyen/signUp', data);
+    } else {
+      return this.http.post(
+        'http://localhost:3000/api/fournisseur/signUp',
+        data
+      );
+    }
   }
 }

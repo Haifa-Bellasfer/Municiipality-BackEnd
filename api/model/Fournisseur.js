@@ -1,41 +1,49 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
+const Municipality = require("./Municipality");
 
 const fournisseurSchema = new mongoose.Schema(
   {
     slug: {
       type: String,
       required: true,
-      min: 4,
-      max: 200,
+      unique: true,
     },
     email: {
       type: String,
       required: true,
-      min: 4,
-      max: 200,
+      unique: true,
+    },
+    descritpion: {
+      type: String,
+      required: false,
     },
     addresse: {
       type: String,
       required: true,
     },
-    phone: {
+    telephone: {
       type: String,
       required: true,
     },
     password: {
       type: String,
       required: true,
-      min: 4,
-      max: 200,
     },
+    listeReclamation: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Reclamation",
+      },
+    ],
     categorie: {
       type: String,
-      enum: ['Eclairage', 'Nettoyage', 'Batiment', 'Autre'],
-      default: 'Eclairage',
+      enum: ["Eclairage", "Nettoyage", "Batiment", "EnvEnvironnement", "Autre"],
+      default: "Eclairage",
     },
-    listeReclamation: {
-      type: [mongoose.Schema.Types.ObjectId],
-      ref: 'Reclamation',
+    municipality: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Municipality",
+      required: true,
     },
     active: {
       type: Boolean,
@@ -47,4 +55,4 @@ const fournisseurSchema = new mongoose.Schema(
   }
 );
 
-module.exports = mongoose.model('Fournisseur', fournisseurSchema);
+module.exports = mongoose.model("Fournisseur", fournisseurSchema);

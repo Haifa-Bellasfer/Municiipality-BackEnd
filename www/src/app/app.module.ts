@@ -20,18 +20,21 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { routes } from './app-routing.module';
-import { UserService } from './services/user.service';
+import { ResponsableService } from './services/responsable.service';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDialogModule } from '@angular/material/dialog';
 import { DialogComponent } from './modules/dialog/dialog.component';
 import { DialogFournisseurComponent } from './modules/dialog-fournisseur/dialog-fournisseur.component';
-
+import { DialogResponsableComponent } from './modules/dialog-responsable/dialog-responsable.component';
+import { MunicipalityDetailsComponent } from './modules/municipality/municipality-details/municipality-details.component';
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     DialogComponent,
     DialogFournisseurComponent,
+    DialogResponsableComponent,
+    MunicipalityDetailsComponent,
   ],
   imports: [
     BrowserModule,
@@ -41,6 +44,7 @@ import { DialogFournisseurComponent } from './modules/dialog-fournisseur/dialog-
     HttpClientModule,
     MatInputModule,
     MatCheckboxModule,
+    MatTableModule,
     MatIconModule,
     MatFormFieldModule,
     MatTabsModule,
@@ -55,7 +59,7 @@ import { DialogFournisseurComponent } from './modules/dialog-fournisseur/dialog-
     RouterModule.forRoot(routes),
   ],
   exports: [RouterModule],
-  providers: [ReclamationService, UserService],
+  providers: [ReclamationService, ResponsableService],
   bootstrap: [AppComponent],
   entryComponents: [DialogComponent, DialogFournisseurComponent],
 })

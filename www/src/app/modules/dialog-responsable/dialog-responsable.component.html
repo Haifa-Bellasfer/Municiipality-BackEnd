@@ -1,0 +1,62 @@
+<div class="dialog-fournisseur-container">
+  <mat-form-field appearance="fill">
+    <mat-label>Nom</mat-label>
+    <input matInput (change)="getNom($event)" required />
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Prénom</mat-label>
+    <input matInput (change)="getPrenom($event)" required />
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Email</mat-label>
+    <input matInput (change)="getEmail($event)" required />
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Sexe</mat-label>
+    <mat-select (selectionChange)="getSexe($event)" required>
+      <mat-option value="Homme">Homme</mat-option>
+      <mat-option value="Femme">Femme</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Adresse</mat-label>
+    <input matInput (change)="getAdresse($event)" required />
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Téléphone</mat-label>
+    <input matInput (change)="getPhone($event)" required />
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Matricule</mat-label>
+    <input matInput (change)="getMatricule($event)" required />
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Mot de passe</mat-label>
+    <input matInput type="password" (change)="getPassword($event)" required />
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Municipalité</mat-label>
+    <mat-select [(value)]="selectedMunicipalite">
+      <mat-option *ngFor="let m of municipalites" [value]="m._id">
+        {{ m.region }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <div class="dialog-fournisseur-actions">
+    <button
+      mat-stroked-button
+      style="background-color: #639745; color: #fff; border: 1px solid #639745"
+      (click)="ajoutResponsable()"
+      mat-dialog-close
+    >
+      Ajouter
+    </button>
+    <button
+      mat-flat-button
+      style="color: #649745; border: 1px solid #639745; background: #f5f5f5"
+      mat-dialog-close
+    >
+      Annuler
+    </button>
+  </div>
+</div>

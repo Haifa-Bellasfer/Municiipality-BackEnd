@@ -30,6 +30,7 @@
     routerLinkActive="list-item-active"
     routerLink="/reclamations"
     class="list-group-item"
+    *ngIf="!isSuperAdmin"
   >
     <mat-icon aria-hidden="false" aria-label="format_list_bulleted"
       >account_circle</mat-icon
@@ -45,14 +46,40 @@
   >
     <mat-icon aria-hidden="false" aria-label="format_list_bulleted"
       >format_list_bulleted</mat-icon
-    >Fournisseur
+    >List Fournisseurs
   </a>
+  <a
+    mat-list-item
+    routerLinkActive="list-item-active"
+    routerLink="/municipality"
+    class="list-group-item"
+    *ngIf="isSuperAdmin"
+  >
+    <mat-icon aria-hidden="false" aria-label="format_list_bulleted"
+      >format_list_bulleted</mat-icon
+    >List Municipalités
+  </a>
+  <a
+    mat-list-item
+    routerLinkActive="list-item-active"
+    routerLink="/responsable"
+    class="list-group-item"
+    *ngIf="isSuperAdmin"
+  >
+    <mat-icon aria-hidden="false" aria-label="format_list_bulleted"
+      >format_list_bulleted</mat-icon
+    >
+    Liste Responsables</a
+  >
+
   <a
     mat-list-item
     routerLinkActive="list-item-active"
     routerLink="/archive"
     class="list-group-item"
-    ><mat-icon aria-hidden="false" aria-label="format_list_bulleted"
+    *ngIf="!isSuperAdmin"
+  >
+    <mat-icon aria-hidden="false" aria-label="format_list_bulleted"
       >archive</mat-icon
     >
     Archive</a
