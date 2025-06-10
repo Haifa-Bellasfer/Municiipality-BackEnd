@@ -84,9 +84,10 @@ router.put("/updateReclamation/:id", async (req, res) => {
 
 router.get("/getReclamationById/:id", async (req, res) => {
   try {
-    const reclamation = await Reclamation.findById(req.params.id).populate(
-      "citoyen"
-    );
+    const reclamation = await Reclamation.findById(req.params.id).populate([
+      "fournisseur",
+      "citoyen",
+    ]);
 
     if (reclamation.imageURL instanceof Buffer) {
       reclamation.imageURL = reclamation.imageURL.toString("base64");
@@ -111,12 +112,17 @@ router.get("/list", async (req, res) => {
 // Get in progress reclamations
 router.get("/list/:etat", async (req, res) => {
   const etat = req.params.etat;
-  if (!etat) throw new Error("etat is required");
-  try {
-    const reclamation = await Reclamation.find({ etat }).populate("citoyen");
+  const municipalityId = req.query.municipalityId;
+  if (!etat) return res.status(400).json({ message: "etat is required" });
 
-    res.json(reclamation);
-    console.log(reclamation);
+  const filter = { etat };
+  if (municipalityId) {
+    filter.municipality = municipalityId;
+  }
+
+  try {
+    const reclamations = await Reclamation.find(filter).populate("citoyen");
+    res.json(reclamations);
   } catch (err) {
     res.json({ message: err.message });
   }
@@ -201,16 +207,19 @@ router.post("/countByCategory", async (req, res) => {
 // Count reclamations by status
 router.get("/countByStatus/:etat", async (req, res) => {
   const status = req.params.etat;
+  const municipalityId = req.query.municipalityId;
   try {
     if (!status) {
       throw new Error("l'etat invalide !");
     }
-    const numberOfReclamations = await Reclamation.countDocuments({
-      etat: status,
-    });
+    const filter = { etat: status };
+    if (municipalityId) {
+      filter.municipality = municipalityId;
+    }
+    const numberOfReclamations = await Reclamation.countDocuments(filter);
 
     res.json({ numberOfReclamations });
-  } catch (error) {
+  } catch (err) {
     res.json({ message: err.message });
   }
 });

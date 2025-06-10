@@ -12,7 +12,6 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./fournisseur.component.scss'],
 })
 export class FournisseurComponent implements OnInit {
-  // columns we will show on the table
   public displayedColumns = [
     '_id',
     'slug',
@@ -22,7 +21,6 @@ export class FournisseurComponent implements OnInit {
     'action',
   ];
 
-  //the source where we will get the data
   public dataSource = new MatTableDataSource<Fournisseur>();
 
   constructor(

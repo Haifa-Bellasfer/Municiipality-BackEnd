@@ -1,5 +1,8 @@
 const router = require("express").Router();
 const Municipality = require("../model/Municipality");
+const Reclamation = require("../model/Reclamation");
+const Fournisseur = require("../model/Fournisseur");
+const Responsable = require("../model/Responsable");
 
 //Add Municipality
 router.post("/add", async (req, res) => {
@@ -49,6 +52,38 @@ router.delete("/delete/:id", async (req, res) => {
     res.json({ message: "successfully deleted" });
   } catch (err) {
     res.json({ message: err });
+  }
+});
+
+// Get fournisseurs and reclamations by municipality ID
+// Get all reclamations for a municipality, including fournisseur and responsable details
+router.get("/details/:id", async (req, res) => {
+  try {
+    // Find all reclamations where municipality matches the given id
+    const reclamations = await Reclamation.find({ municipality: req.params.id })
+      .populate("fournisseur")
+      .populate({
+        path: "municipality",
+        populate: { path: "responsable" },
+      });
+
+    // Get all responsables for this municipality
+    const responsables = await Responsable.find({
+      municipality: req.params.id,
+    });
+
+    // Get all fournisseurs for this municipality
+    const fournisseurs = await Fournisseur.find({
+      municipality: req.params.id,
+    });
+
+    res.json({
+      reclamations,
+      responsables,
+      fournisseurs,
+    });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
   }
 });
 

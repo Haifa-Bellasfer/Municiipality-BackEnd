@@ -22,18 +22,26 @@ export class DetailsFournisseurComponent implements OnInit {
   constructor(
     public reclamationService: ReclamationService,
     public route: ActivatedRoute,
-    public fournisseurService: FournisseurService,
-    private router: Router
+    public fournisseurService: FournisseurService
   ) {}
 
   ngOnInit(): void {
     this.getReclamationFournisseur(this.route.snapshot.params.id);
+    this.getFournisseur();
   }
 
   getReclamationFournisseur(id: string) {
     this.reclamationService.getReclamationFournisseur(id).subscribe((res) => {
       this.reclamations = res;
       this.fournisseur = this.reclamations[0].fournisseur;
+    });
+  }
+
+  getFournisseur() {
+    const id = this.route.snapshot.params.id;
+    this.fournisseurService.getFournisseur(id).subscribe((res) => {
+      this.fournisseur = res;
+      console.log('Fournisseur details:', this.fournisseur);
     });
   }
 

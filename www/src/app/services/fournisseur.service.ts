@@ -17,8 +17,13 @@ export class FournisseurService {
 
   // Liste fournisseur
   getFournisseurs(): Observable<Fournisseur[]> {
+    const municipalityId = localStorage.getItem('municipalityId');
+    let url = ' http://localhost:3000/api/fournisseur/list';
+    if (municipalityId) {
+      url += `?municipalityId=${encodeURIComponent(municipalityId)}`;
+    }
     return this.http
-      .get<any>(' http://localhost:3000/api/fournisseur/list')
+      .get<any>(url)
       .pipe(tap((result) => console.log('result-->', result)));
   }
   // Desactive fournisseur
@@ -38,9 +43,19 @@ export class FournisseurService {
     password: string,
     categorie: string,
     addresse: string,
-    phone: string
-  ): Observable<Fournisseur[]> {
-    console.log(slug, email, password, categorie, addresse, phone);
+    phone: string,
+    municipality: string,
+    description: string
+  ): Observable<Fournisseur> {
+    console.log(
+      slug,
+      email,
+      password,
+      categorie,
+      addresse,
+      phone,
+      municipality
+    );
     return this.http
       .post<any>(' http://localhost:3000/api/fournisseur/add', {
         slug: slug,
@@ -49,7 +64,14 @@ export class FournisseurService {
         categorie: categorie,
         addresse: addresse,
         phone: phone,
+        municipality: municipality,
+        description: description,
       })
+      .pipe(tap((result) => console.log('result-->', result)));
+  }
+  getFournisseur(id: string): Observable<Fournisseur> {
+    return this.http
+      .get<any>(' http://localhost:3000/api/fournisseur/' + id)
       .pipe(tap((result) => console.log('result-->', result)));
   }
 }

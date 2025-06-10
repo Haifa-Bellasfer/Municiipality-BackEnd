@@ -19,6 +19,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { DetailsFournisseurComponent } from 'src/app/modules/fournisseur/details-fournisseur/details-fournisseur.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
+import { ResponsableComponent } from 'src/app/modules/responsable/responsable.component';
+import { MunicipalityComponent } from 'src/app/modules/municipality/municipality.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +31,8 @@ import { FormsModule } from '@angular/forms';
     FournisseurComponent,
     DetailsFournisseurComponent,
     ArchiveComponent,
+    ResponsableComponent,
+    MunicipalityComponent,
   ],
   imports: [
     CommonModule,

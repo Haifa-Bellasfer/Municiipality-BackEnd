@@ -32,7 +32,7 @@
               flex-direction: column;
               background-color: white;
             "
-            *ngFor="let reclamProgress of PendingReclamations"
+            *ngFor="let pendingReclamation of PendingReclamations"
           >
             <div
               style="
@@ -53,8 +53,12 @@
                   padding: 2px;
                 "
               />
-              <h3 style="margin-left: 20px; padding-top: 1rem">
-                {{ reclamProgress.citoyen?.username }}
+              <h3
+                style="margin-left: 20px; padding-top: 1rem"
+                *ngIf="pendingReclamation.citoyen?.username"
+                ç
+              >
+                {{ pendingReclamation.citoyen?.username }}
               </h3>
             </div>
             <div style="height: 60%; position: relative; flex-grow: 1">
@@ -75,7 +79,7 @@
                       padding-left: 8px;
                     "
                   >
-                    {{ reclamProgress.localisation }}
+                    {{ pendingReclamation.localisation }}
                   </p></span
                 >
                 <span
@@ -94,7 +98,7 @@
                       padding-left: 8px;
                     "
                   >
-                    {{ reclamProgress.categorie }}
+                    {{ pendingReclamation.categorie }}
                   </p></span
                 >
                 <span
@@ -113,13 +117,13 @@
                       padding-left: 8px;
                     "
                   >
-                    {{ reclamProgress.createdAt | date : "yyyy-MM-dd" }}
+                    {{ pendingReclamation.createdAt | date : "yyyy-MM-dd" }}
                   </p></span
                 >
               </div>
               <div style="position: absolute; bottom: 0px; right: 0">
                 <a
-                  [routerLink]="['/details', reclamProgress._id]"
+                  [routerLink]="['/details', pendingReclamation._id]"
                   routerLinkActive="active"
                 >
                   <button
@@ -190,7 +194,10 @@
                 padding: 2px;
               "
             />
-            <h3 style="margin-left: 20px; padding-top: 1rem">
+            <h3
+              style="margin-left: 20px; padding-top: 1rem"
+              *ngIf="reclamDone.citoyen?.username"
+            >
               {{ reclamDone.citoyen?.username }}
             </h3>
           </div>
@@ -309,7 +316,10 @@
                 padding: 2px;
               "
             />
-            <h3 style="margin-left: 20px; padding-top: 1rem">
+            <h3
+              style="margin-left: 20px; padding-top: 1rem"
+              *ngIf="reclamDone.citoyen?.username"
+            >
               {{ reclamDone.citoyen?.username }}
             </h3>
           </div>

@@ -1,24 +1,23 @@
 const mongoose = require("mongoose");
+const Municipality = require("./Municipality");
 
 const fournisseurSchema = new mongoose.Schema(
   {
-    organization: {
+    slug: {
       type: String,
       required: true,
-    },
-    nom: {
-      type: String,
-      required: true,
-    },
-    prenom: {
-      type: String,
-      required: true,
+      unique: true,
     },
     email: {
       type: String,
       required: true,
+      unique: true,
     },
-    adresse: {
+    descritpion: {
+      type: String,
+      required: false,
+    },
+    addresse: {
       type: String,
       required: true,
     },
@@ -30,18 +29,21 @@ const fournisseurSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    sexe: {
-      type: String,
-      enum: ["Homme", "Femme"],
-    },
+    listeReclamation: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Reclamation",
+      },
+    ],
     categorie: {
       type: String,
       enum: ["Eclairage", "Nettoyage", "Batiment", "EnvEnvironnement", "Autre"],
       default: "Eclairage",
     },
-    listeReclamation: {
-      type: [mongoose.Schema.Types.ObjectId],
-      ref: "Reclamation",
+    municipality: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Municipality",
+      required: true,
     },
     active: {
       type: Boolean,

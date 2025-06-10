@@ -12,6 +12,7 @@ Content-Type: application/json
     "adresse" : "bardo",
     "telephone":"56249538",
     "categorie" : "Nettoyage"
+
 }
 
 ### login 

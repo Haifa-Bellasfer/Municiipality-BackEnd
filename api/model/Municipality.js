@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const municipalitySchema = new mongoose.Schema(
   {
@@ -14,15 +14,15 @@ const municipalitySchema = new mongoose.Schema(
     },
     responsable: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'User',
+      ref: "Responsable",
     },
     reclamations: {
       type: [mongoose.Schema.Types.ObjectId],
-      ref: 'Reclamation',
+      ref: "Reclamation",
     },
     fournisseurs: {
       type: [mongoose.Schema.Types.ObjectId],
-      ref: 'Fournisseur',
+      ref: "Fournisseur",
     },
   },
   {
@@ -30,4 +30,4 @@ const municipalitySchema = new mongoose.Schema(
   }
 );
 
-module.exports = mongoose.model('Municipality', municipalitySchema);
+module.exports = mongoose.model("Municipality", municipalitySchema);

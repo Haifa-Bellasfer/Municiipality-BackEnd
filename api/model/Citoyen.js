@@ -6,21 +6,10 @@ const citoyenSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    nom: {
-      type: String,
-      required: true,
-    },
-    prenom: {
-      type: String,
-      required: true,
-    },
+
     email: {
       type: String,
       required: true,
-    },
-    sexe: {
-      type: String,
-      enum: ["Homme", "Femme"],
     },
     password: {
       type: String,

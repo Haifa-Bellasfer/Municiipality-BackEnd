@@ -30,6 +30,7 @@ export class DetailsReclamComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadReclamation(this.route.snapshot.params.id);
+    console.log(this.reclamation);
     this.getFournisseurs();
   }
   openDialog() {

@@ -1,36 +1,38 @@
 <div class="dialog-fournisseur-container">
   <mat-form-field appearance="fill">
-    <mat-label>Slug</mat-label>
-    <input matInput (change)="getSlug($event)" required />
+    <mat-label>Nom</mat-label>
+    <input matInput (change)="getNom($event)" required />
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Prénom</mat-label>
+    <input matInput (change)="getPrenom($event)" required />
   </mat-form-field>
   <mat-form-field appearance="fill">
     <mat-label>Email</mat-label>
     <input matInput (change)="getEmail($event)" required />
   </mat-form-field>
   <mat-form-field appearance="fill">
-    <mat-label>Mot de passe</mat-label>
-    <input matInput type="password" (change)="getPassword($event)" required />
-  </mat-form-field>
-  <mat-form-field appearance="fill">
-    <mat-label>Categorie</mat-label>
-    <mat-select [(value)]="categorie">
-      <mat-option value="Nettoyage">Nettoyage</mat-option>
-      <mat-option value="Eclairage">Eclairage</mat-option>
-      <mat-option value="Batiment">Batiment</mat-option>
-      <mat-option value="Autre">Autre</mat-option>
+    <mat-label>Sexe</mat-label>
+    <mat-select (selectionChange)="getSexe($event)" required>
+      <mat-option value="Homme">Homme</mat-option>
+      <mat-option value="Femme">Femme</mat-option>
     </mat-select>
-  </mat-form-field>
-  <mat-form-field *ngIf="categorie === 'Autre'" appearance="fill">
-    <mat-label>Précisez la catégorie</mat-label>
-    <input matInput (change)="getCategorieAutre($event)" required />
   </mat-form-field>
   <mat-form-field appearance="fill">
     <mat-label>Adresse</mat-label>
     <input matInput (change)="getAdresse($event)" required />
   </mat-form-field>
   <mat-form-field appearance="fill">
-    <mat-label>Telephone</mat-label>
+    <mat-label>Téléphone</mat-label>
     <input matInput (change)="getPhone($event)" required />
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Matricule</mat-label>
+    <input matInput (change)="getMatricule($event)" required />
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Mot de passe</mat-label>
+    <input matInput type="password" (change)="getPassword($event)" required />
   </mat-form-field>
   <mat-form-field appearance="fill">
     <mat-label>Municipalité</mat-label>
@@ -40,20 +42,11 @@
       </mat-option>
     </mat-select>
   </mat-form-field>
-  <mat-form-field appearance="fill">
-    <mat-label>Description</mat-label>
-    <textarea
-      matInput
-      rows="3"
-      (change)="getDescription($event)"
-      required
-    ></textarea>
-  </mat-form-field>
   <div class="dialog-fournisseur-actions">
     <button
       mat-stroked-button
       style="background-color: #639745; color: #fff; border: 1px solid #639745"
-      (click)="ajoutFournisseur()"
+      (click)="ajoutResponsable()"
       mat-dialog-close
     >
       Ajouter

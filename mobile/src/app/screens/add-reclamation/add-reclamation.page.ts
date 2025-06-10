@@ -5,6 +5,8 @@ import { ToastController } from '@ionic/angular';
 import { Reclamation } from 'src/app/interface/Reclamation';
 import { AuthService } from 'src/app/services/auth.service';
 import { ReclamationService } from 'src/app/services/reclamation.service';
+import { HttpClient } from '@angular/common/http';
+import { MunicipaliteService } from 'src/app/services/municipalite.service';
 
 @Component({
   selector: 'app-add-reclamation',
@@ -28,18 +30,24 @@ export class AddReclamationPage implements OnInit {
     imageURL: '',
     etat: '',
     citoyen: '',
+    Municipalite: '',
   };
-
+  municipalities: any[] = [];
   focused: boolean = true;
+  selectedMunicipalite: string = '';
 
   constructor(
     private reclamationService: ReclamationService,
     private toastController: ToastController,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private http: HttpClient,
+    private municipaliteService: MunicipaliteService
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.loadMunicipalites();
+  }
 
   onBlur(event: any) {
     const value = event.target.value;
@@ -129,5 +137,13 @@ export class AddReclamationPage implements OnInit {
   logout() {
     this.authService.logout();
     this.router.navigate(['/home']);
+  }
+  loadMunicipalites() {
+    this.municipaliteService.getMunicipalites().subscribe((data: any[]) => {
+      this.municipalities = data;
+      if (data.length > 0) {
+        this.selectedMunicipalite = data[0]._id; // Set default to first
+      }
+    });
   }
 }

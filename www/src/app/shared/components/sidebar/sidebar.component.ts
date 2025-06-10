@@ -1,6 +1,6 @@
+import { Component } from '@angular/core';
+import { environment } from 'src/environments/environment';
 import { ResponsableService } from '../../../services/responsable.service';
-import { Responsable } from '../../../entity/responsable';
-import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -8,11 +8,15 @@ import { Router } from '@angular/router';
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss'],
 })
-export class SidebarComponent implements OnInit {
+export class SidebarComponent {
   responsable: any;
   responsables: any;
+  isSuperAdmin: boolean = false;
 
-  constructor(private router: Router, public userService: ResponsableService) {}
+  constructor(private router: Router, public userService: ResponsableService) {
+    const userId = localStorage.getItem('userId');
+    this.isSuperAdmin = userId === environment.SUPERADMINID;
+  }
 
   ngOnInit(): void {
     this.getResponsable();

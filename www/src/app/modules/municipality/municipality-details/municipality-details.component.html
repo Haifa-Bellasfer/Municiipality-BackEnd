@@ -1,0 +1,82 @@
+<div
+  style="
+    max-width: 900px;
+    margin: 32px auto;
+    background: #fff;
+    border-radius: 10px;
+    padding: 24px;
+  "
+>
+  <h2 style="color: #649745">Détails de la Municipalité</h2>
+
+  <mat-tab-group>
+    <mat-tab label="Fournisseurs">
+      <table
+        *ngIf="fournisseurs.length > 0"
+        style="width: 100%; margin-bottom: 2rem"
+      >
+        <tr>
+          <th>Slug</th>
+          <th>Email</th>
+          <th>Catégorie</th>
+          <th>Adresse</th>
+          <th>Téléphone</th>
+          <th>Active</th>
+        </tr>
+        <tr *ngFor="let f of fournisseurs">
+          <td>{{ f.slug }}</td>
+          <td>{{ f.email }}</td>
+          <td>{{ f.categorie }}</td>
+          <td>{{ f.addresse }}</td>
+          <td>{{ f.telephone }}</td>
+          <td>{{ f.active ? "Oui" : "Non" }}</td>
+        </tr>
+      </table>
+      <p *ngIf="fournisseurs.length === 0">Aucun fournisseur.</p>
+    </mat-tab>
+
+    <mat-tab label="Réclamations">
+      <table *ngIf="reclamations.length > 0" style="width: 100%">
+        <tr>
+          <th>Sujet</th>
+          <th>Description</th>
+          <th>Catégorie</th>
+          <th>État</th>
+          <th>Date</th>
+        </tr>
+        <tr *ngFor="let r of reclamations">
+          <td>{{ r.sujet || r.categorie }}</td>
+          <td>{{ r.description }}</td>
+          <td>{{ r.categorie }}</td>
+          <td>{{ r.etat }}</td>
+          <td>{{ r.createdAt | date : "short" }}</td>
+        </tr>
+      </table>
+      <p *ngIf="reclamations.length === 0">Aucune réclamation.</p>
+    </mat-tab>
+
+    <mat-tab label="Responsables">
+      <table *ngIf="responsables.length > 0" style="width: 100%">
+        <tr>
+          <th>Nom</th>
+          <th>Prénom</th>
+          <th>Email</th>
+          <th>Sexe</th>
+          <th>Adresse</th>
+          <th>Téléphone</th>
+          <th>Matricule</th>
+        </tr>
+        <tr *ngFor="let resp of responsables">
+          <td>{{ resp.nom }}</td>
+          <td>{{ resp.prenom }}</td>
+          <td>{{ resp.email }}</td>
+          <td>{{ resp.sexe }}</td>
+          <td>{{ resp.adresse }}</td>
+          <td>{{ resp.telephone }}</td>
+          <td>{{ resp.matricule }}</td>
+        </tr>
+      </table>
+      <p *ngIf="responsables.length === 0">Aucun responsable.</p>
+    </mat-tab>
+  </mat-tab-group>
+</div>

@@ -1,3 +1,4 @@
+import { MunicipaliteService } from 'src/app/services/municipalite.service';
 import { Fournisseur } from './../../entity/fournisseur';
 import { FournisseurService } from './../../services/fournisseur.service';
 import { Component, OnInit } from '@angular/core';
@@ -15,14 +16,20 @@ export class DialogFournisseurComponent implements OnInit {
   phone: string = '';
   addresse: string = '';
   categorie: string = '';
-  fournisseur: Fournisseur[] = [];
+  categorieAutre: string = '';
+  description: string = '';
+  fournisseur: Fournisseur | null = null;
+  municipalites: any[] = [];
+  selectedMunicipalite: string = '';
 
   constructor(
     public fournisseurService: FournisseurService,
-    private router: Router
+    private municipaliteService: MunicipaliteService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.loadMunicipalites();
+  }
   getSlug(event: any) {
     this.slug = event.target.value;
   }
@@ -42,15 +49,15 @@ export class DialogFournisseurComponent implements OnInit {
     this.categorie = event.target.value;
     console.log(event.target.value);
   }
+  getCategorieAutre(event: Event) {
+    const input = event.target as HTMLInputElement;
+    this.categorieAutre = input.value;
+  }
+  getDescription(event: Event) {
+    const input = event.target as HTMLTextAreaElement;
+    this.description = input.value;
+  }
   ajoutFournisseur(): any {
-    console.log(
-      this.slug,
-      this.email,
-      this.password,
-      this.categorie,
-      this.addresse,
-      this.phone
-    );
     this.fournisseurService
       .addFournisseur(
         this.slug,
@@ -58,12 +65,22 @@ export class DialogFournisseurComponent implements OnInit {
         this.password,
         this.categorie,
         this.addresse,
-        this.phone
+        this.phone,
+        this.selectedMunicipalite,
+        this.description
       )
       .subscribe((res) => {
         console.log('add fournisseur', res);
         this.fournisseur = res;
       });
     window.location.reload();
+  }
+  loadMunicipalites() {
+    this.municipaliteService.getMunicipalites().subscribe((data: any[]) => {
+      this.municipalites = data;
+      if (data.length > 0) {
+        this.selectedMunicipalite = data[0]._id; // Set default to first
+      }
+    });
   }
 }

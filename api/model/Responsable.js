@@ -34,6 +34,11 @@ const responsableSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    municipality: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Municipality",
+      required: true,
+    },
   },
   {
     timestamps: true,

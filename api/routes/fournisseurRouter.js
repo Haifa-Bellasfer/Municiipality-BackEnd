@@ -2,45 +2,79 @@ const router = require("express").Router();
 const Fournisseur = require("../model/Fournisseur");
 const Reclamation = require("../model/Reclamation");
 const bcrypt = require("bcryptjs");
+const Municipality = require("../model/Municipality");
+
 const sendMail = require("../utils/sendMail");
 
 // Add frournisseur
 router.post("/add", async (req, res) => {
-  console.log(req.body);
-  const salt = await bcrypt.genSalt(10);
-  const hashedPassword = await bcrypt.hash(req.body.password, salt);
-
-  const fournisseur = new Fournisseur({
-    organization: req.body.organization,
-    nom: req.body.nom,
-    prenom: req.body.prenom,
-    email: req.body.email,
-    sexe: req.body.sexe,
-    password: hashedPassword,
-    adresse: req.body.adresse,
-    telephone: req.body.telephone,
-    categorie: req.body.categorie,
-    active: true,
-  });
   try {
+    // Validate input
+    const {
+      slug,
+      email,
+      password,
+      addresse,
+      phone,
+      categorie,
+      municipality,
+      descritpion,
+    } = req.body;
+    if (!email || !password || !municipality) {
+      return res.status(400).send({ message: "Invalid input data" });
+    }
+
+    // Hash password
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
+
+    // Validate municipality
+    const municipalityDoc = await Municipality.findById(municipality);
+    if (!municipalityDoc) {
+      return res.status(400).send({ message: "Municipality not found" });
+    }
+
+    // Create fournisseur
+    const fournisseur = new Fournisseur({
+      slug,
+      email,
+      descritpion: descritpion,
+      password: hashedPassword,
+      addresse: addresse,
+      telephone: phone,
+      categorie,
+      municipality: municipalityDoc,
+      active: true,
+    });
+
+    // Save to DB
     await fournisseur.save();
+
+    // Send email asynchronously
     sendMail(
-      req.body.email,
-      `<p> Pour Authentifier a Baladiti </p> <br> <p> Login : ${req.body.email}</p><br> <p> Votre mot de passe : ${req.body.password} </p>`
-    );
+      email,
+      `<p>Pour Authentifier a Baladiti</p><br><p>Login: ${email}</p><br><p>Votre mot de passe: ${password}</p>`
+    ).catch((emailErr) => console.error("Email sending failed:", emailErr));
+
+    // Respond to client
     res.send({
-      fournisseur: fournisseur,
+      fournisseur,
       message: "Le fournisseur a été ajouté avec succès.",
     });
   } catch (err) {
-    res.status(400).send(err);
+    console.error("Error in /add:", err);
+    res.status(500).send({ message: "Internal Server Error", error: err });
   }
 });
 
 // List fournisseur
 router.get("/list", async (req, res) => {
   try {
-    const fournisseur = await Fournisseur.find({});
+    const filter = {};
+    if (req.query.municipalityId) {
+      filter.municipality = req.query.municipalityId;
+    }
+    const fournisseur = await Fournisseur.find(filter);
     res.json(fournisseur);
   } catch (err) {
     res.json({ message: err });

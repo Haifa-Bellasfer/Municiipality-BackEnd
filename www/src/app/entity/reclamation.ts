@@ -1,5 +1,5 @@
+import { Citoyen } from './citoyen';
 import { Fournisseur } from './fournisseur';
-import { Responsable } from './responsable';
 
 export interface Reclamation {
   _id: string;
@@ -11,7 +11,7 @@ export interface Reclamation {
   createdAt: string;
   updatedAt: string;
   fournisseur: Fournisseur | null;
-  citoyen: Responsable | null;
+  citoyen: Citoyen | null;
   municipality: string | null;
   noteResponsable: string;
 }
